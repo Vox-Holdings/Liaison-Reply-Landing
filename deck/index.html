@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Liaison Reply · Read the room faster.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-deep: #05070d;
+    --bg-navy: #0f1b33;
+    --bg-card: rgba(15, 27, 51, 0.72);
+    --border-subtle: rgba(46, 197, 216, 0.22);
+    --cyan: #2ec5d8;
+    --white: #ffffff;
+    --body: #a8c0d8;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: #020306;
+    color: var(--white);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 32px 16px;
+  }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-navy) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 56px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(46, 197, 216, 0.15);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  }
+
+  /* Decorative cyan speech-bubble motif kept clear of text */
+  .bubble-motif {
+    position: absolute;
+    right: -40px;
+    bottom: -40px;
+    width: 240px;
+    height: 180px;
+    border: 2px solid rgba(46, 197, 216, 0.12);
+    border-radius: 36px 36px 36px 4px;
+    pointer-events: none;
+  }
+
+  /* Unboxed logo directly on the navy background: real mark (SVG) + wordmark */
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: transparent;
+  }
+
+  .logo svg {
+    display: block;
+    flex: none;
+  }
+
+  .logo-liaison {
+    color: var(--white);
+  }
+
+  .logo-reply {
+    color: var(--cyan);
+  }
+
+  .eyebrow {
+    color: var(--cyan);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .slide-footer {
+    font-size: 15px;
+    color: var(--body);
+    opacity: 0.8;
+  }
+
+  h1 {
+    font-size: 68px;
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--white);
+  }
+
+  h2 {
+    font-size: 46px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  p.lead {
+    font-size: 28px;
+    line-height: 1.48;
+    color: var(--body);
+    max-width: 960px;
+  }
+
+  .hook {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cyan);
+  }
+
+  /* Grids & Cards */
+  .grid-3x2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 26px 28px;
+  }
+
+  .card h3 {
+    font-size: 23px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--body);
+  }
+
+  .step-tag {
+    color: var(--cyan);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* Bullet Lists */
+  .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .bullet-list li {
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--body);
+    padding-left: 34px;
+    position: relative;
+  }
+
+  .bullet-list li::before {
+    content: "•";
+    color: var(--cyan);
+    font-size: 32px;
+    position: absolute;
+    left: 4px;
+    top: -4px;
+  }
+
+  /* Worked Example */
+  .incoming-bubble {
+    background: rgba(255, 255, 255, 0.06);
+    border-left: 4px solid var(--cyan);
+    padding: 22px 28px;
+    border-radius: 4px 18px 18px 18px;
+    margin-bottom: 24px;
+  }
+
+  .incoming-label {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  .incoming-text {
+    font-size: 25px;
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .badge {
+    display: inline-block;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  /* Pricing */
+  .price-amount {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--cyan);
+    margin: 8px 0 14px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--cyan);
+    color: var(--bg-deep);
+    font-weight: 800;
+    font-size: 22px;
+    padding: 16px 34px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .footnote {
+    font-size: 16px;
+    color: var(--body);
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:28px; max-width:980px;">
+    <h1>Read the room faster.</h1>
+    <p class="lead">Liaison Reply drafts replies for difficult messages. Paste the message you're stuck on, choose the relationship context, and get a set of reply options to edit and send yourself.</p>
+    <div class="hook">Free to start. No app download. It runs in your browser.</div>
+  </div>
+  <div></div>
+</section>
+
+<!-- SLIDE 2: THE PROBLEM -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">THE PROBLEM</div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:26px; max-width:980px;">
+    <h2>The message you don't know how to answer.</h2>
+    <p class="lead">Everyone has one sitting in their inbox. The tense note from a boss, the loaded text from a partner, the client email that could go wrong.</p>
+    <p class="lead" style="color:var(--white); font-weight:600;">Liaison Reply is built for that moment.</p>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 3: WHO IT'S FOR -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">WHO IT'S FOR</div>
+  </div>
+  <div>
+    <h2>When the reply carries consequences.</h2>
+    <div class="grid-3x2">
+      <div class="card">
+        <h3>A difficult boss</h3>
+        <p>When an abrupt message from management puts you on the spot.</p>
+      </div>
+      <div class="card">
+        <h3>A partner mid-argument</h3>
+        <p>When emotions are high and the wrong phrasing makes things worse.</p>
+      </div>
+      <div class="card">
+        <h3>A client you can't afford to lose</h3>
+        <p>When expectations shift and the relationship is on the line.</p>
+      </div>
+      <div class="card">
+        <h3>Family tension</h3>
+        <p>When long history makes a simple boundary hard to state cleanly.</p>
+      </div>
+      <div class="card">
+        <h3>Dating and mixed signals</h3>
+        <p>When you can't tell what the tone means or how direct to be.</p>
+      </div>
+      <div class="card">
+        <h3>Anyone whose messages carry consequences</h3>
+        <p>When leaving it on read isn't an option and every word counts.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 4: HOW IT WORKS -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">HOW IT WORKS</div>
+  </div>
+  <div>
+    <h2>Three steps from stuck to sent.</h2>
+    <div class="grid-3">
+      <div class="card">
+        <span class="step-tag">Step 1: Paste the message</span>
+        <p>Drop in the text you don't know how to answer.</p>
+      </div>
+      <div class="card">
+        <span class="step-tag">Step 2: Pick the relationship context</span>
+        <p>The app asks you to select a relationship context before it generates anything, so the drafts fit the actual situation.</p>
+      </div>
+      <div class="card">
+        <span class="step-tag">Step 3: Choose, edit, send</span>
+        <p>Review the reply options, tweak the wording, and copy the one you want back into your own conversation. Liaison Reply doesn't send anything for you. You stay in control.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 5: WORKED EXAMPLE -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">EXAMPLE</div>
+  </div>
+  <div>
+    <span class="badge">Example · Relationship</span>
+    <div class="incoming-bubble">
+      <div class="incoming-label">Incoming Message</div>
+      <div class="incoming-text">"Wow. Okay. So you saw my message at 9 and just decided not to answer. Good to know where I stand."</div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <span class="step-tag">De-escalate</span>
+        <p>"You're right to call that out. I saw it while I was driving and it slipped my mind after. That's on me. Can we reset tonight?"</p>
+      </div>
+      <div class="card">
+        <span class="step-tag">Connect</span>
+        <p>"You do matter to me, and I hate that you felt ignored today. Work swallowed me whole and I shut down. Tell me what you needed earlier. I'm here now."</p>
+      </div>
+      <div class="card">
+        <span class="step-tag">Hold your ground</span>
+        <p>"I get that you're frustrated, but I can't always answer the minute a message lands. I was working. I'm not okay with being scored on my response time."</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 6: WORKED EXAMPLE (CLIENT) -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">EXAMPLE</div>
+  </div>
+  <div>
+    <span class="badge">Example · Client</span>
+    <div class="incoming-bubble">
+      <div class="incoming-label">Incoming Message</div>
+      <div class="incoming-text">"We're not seeing the value for what we're paying. I'm pausing the contract while we review our options."</div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <span class="step-tag">De-escalate</span>
+        <p>"I appreciate you telling me directly instead of going quiet. Before you pause, give me one meeting. I'll bring a clear breakdown of what your spend has produced and where it's headed."</p>
+      </div>
+      <div class="card">
+        <span class="step-tag">Connect</span>
+        <p>"That's fair feedback, and I'd rather hear it from you than lose you silently. Can I ask what you expected to see by now that isn't there? I want to fix the right thing."</p>
+      </div>
+      <div class="card">
+        <span class="step-tag">Hold your ground</span>
+        <p>"I understand the need to review. I do want to note the results so far line up with what we agreed in March. I'm happy to walk through the numbers together before anything is paused."</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 7: WHAT IT DOES -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">WHAT IT DOES</div>
+  </div>
+  <div>
+    <h2>What Liaison Reply does.</h2>
+    <ul class="bullet-list">
+      <li>Generates a set of reply options for each message you paste. Pick the direction that fits: de-escalate, connect, or hold your ground.</li>
+      <li>Calibrates drafts to the relationship context you select.</li>
+      <li>Shows your remaining free credits live in the app as you go.</li>
+      <li>Your threads are private to you. Only you can read, edit, or delete them.</li>
+      <li>Billing and subscription changes are handled by you, directly through Stripe.</li>
+    </ul>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 8: WHAT IT DOESN'T DO -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">WHAT IT DOESN'T DO</div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:28px;">
+    <h2>Clear boundaries by design.</h2>
+    <ul class="bullet-list">
+      <li>It doesn't send messages for you.</li>
+      <li>It's not a chatbot you converse with. It's a drafting tool for messages you already received.</li>
+    </ul>
+    <div style="font-size:32px; font-weight:800; color:var(--cyan); margin-top:8px;">You stay in control.</div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 9: PRICING -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">PRICING</div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:20px;">
+    <h2>Simple, transparent pricing.</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Free</h3>
+        <div class="price-amount">$0</div>
+        <p>Start free. The app shows your remaining free credits as you use it.</p>
+      </div>
+      <div class="card" style="border-color:var(--cyan);">
+        <span class="step-tag">Most Popular</span>
+        <h3>Pro Monthly</h3>
+        <div class="price-amount">$7.99/mo</div>
+        <p>Full access from day one, no credit counter to watch. Billed monthly through Stripe Checkout.</p>
+      </div>
+    </div>
+    <div class="footnote">Cancel anytime from your Stripe billing page, no need to call anyone. Charged in the last 14 days? We'll refund it, no questions asked.</div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 10: FAQ -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">FAQ</div>
+  </div>
+  <div>
+    <h2>Questions before you start.</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Is Liaison Reply a chatbot?</h3>
+        <p>No. It's a drafting tool: you paste a message, get reply options, edit if needed, and copy the one you want back into your real conversation.</p>
+      </div>
+      <div class="card">
+        <h3>How do I cancel Pro?</h3>
+        <p>Through your Stripe billing page, anytime. Your cancellation takes effect at the end of the current billing period.</p>
+      </div>
+      <div class="card">
+        <h3>Can I get a refund?</h3>
+        <p>Amounts already paid are non-refundable unless applicable law requires otherwise. See the Terms for details.</p>
+      </div>
+      <div class="card">
+        <h3>Where do I use it?</h3>
+        <p>In your browser at app.liaisonreply.com, sign-in required.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 11: WHY GO PRO -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">WHY GO PRO</div>
+  </div>
+  <div>
+    <h2>Free to start. Full access when you're ready.</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Free</h3>
+        <ul class="bullet-list" style="margin-top:16px;">
+          <li>Try it on real messages.</li>
+          <li>Credits shown live in the app.</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:var(--cyan);">
+        <h3>Pro</h3>
+        <ul class="bullet-list" style="margin-top:16px;">
+          <li>Full access from day one.</li>
+          <li>12 rewrites per reply.</li>
+          <li>Monthly or annual.</li>
+          <li>Cancel anytime in Stripe.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 12: FINAL CTA -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+    <div class="eyebrow">GET STARTED</div>
+  </div>
+  <div style="display:flex; flex-direction:column; align-items:flex-start; gap:24px;">
+    <h1>Read the room faster.</h1>
+    <span class="cta-btn">Try it free</span>
+    <div class="hook">Free to start. No app download. It runs in your browser.</div>
+    <div style="font-size:48px; font-weight:800; color:var(--cyan); letter-spacing:-0.02em;">app.liaisonreply.com</div>
+  </div>
+  <div class="slide-footer">Liaison Reply · liaisonreply.com</div>
+</section>
+
+<!-- SLIDE 13: CLOSING -->
+<section class="slide">
+  <div class="bubble-motif"></div>
+  <div class="slide-header">
+    <div class="logo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg><span class="logo-liaison">Liaison</span><span class="logo-reply">Reply</span></div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:24px;">
+    <h1>Read the room faster.</h1>
+    <p class="lead">Your threads are private to you. Only you can read, edit, or delete them.</p>
+  </div>
+  <div style="font-size:20px; color:var(--body);">
+    © 2026 Liaison Reply. All rights reserved. Support: support@liaisonreply.com
+  </div>
+</section>
+
+</body>
+</html>

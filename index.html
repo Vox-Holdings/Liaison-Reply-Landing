@@ -162,6 +162,13 @@
       ]
     }
     </script>
+      <style>
+      .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s ease; }
+      .reveal.in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
+      }
+    </style>
   </head>
   <body class="bg-[#05070d] text-white antialiased overflow-x-hidden">
     <!-- Google Tag Manager (noscript) -->
@@ -193,7 +200,7 @@
       </nav>
 
       <!-- HERO -->
-      <section class="relative mx-auto max-w-6xl px-6 pt-16 pb-32 overflow-hidden">
+      <section id="hero" class="relative mx-auto max-w-6xl px-6 pt-16 pb-32 overflow-hidden">
         <div class="absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-sky-500/10 blur-[120px]" aria-hidden="true"></div>
           <div class="relative grid grid-cols-1 gap-16 md:grid-cols-2 md:items-center">
           <div class="min-w-0">
@@ -218,7 +225,7 @@
               data-session-path="/chat"
               class="mt-10 block w-full text-center rounded-2xl bg-sky-500 px-10 py-5 text-lg font-bold text-black shadow-[0_0_40px_rgba(56,189,248,0.35)] hover:bg-sky-400 hover:shadow-[0_0_60px_rgba(56,189,248,0.5)] active:scale-[0.98] transition-all duration-200 sm:inline-block sm:w-auto"
             >Join the Waitlist</a>
-            <p class="mt-4 text-sm text-white/50">Free to start. No app download. It runs in your browser.</p>
+            <p class="mt-4 text-sm text-white/50">Your first 15 generations are free. No card. It runs in your browser.</p>
           </div>
 
           <!-- Real app screenshot -->
@@ -238,8 +245,30 @@
         </div>
       </section>
 
+      <!-- THE MOMENT -->
+      <section class="mx-auto max-w-6xl px-6 py-24" data-reveal>
+        <p class="text-center text-sm font-bold uppercase tracking-widest text-sky-400">The moment</p>
+        <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">Some messages stop you cold.</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">You know you should answer. You just do not know what to say yet, and the wrong words will cost you. That is the moment Liaison Reply is built for.</p>
+        <div class="mt-16">
+          <div class="relative mx-auto w-full" style="max-width:300px">
+            <div class="rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+              <img
+                src="assets/previews/hero-story-01-incoming.png"
+                alt="A difficult incoming message shown in Liaison Reply"
+                width="390"
+                height="844"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[390/844] object-cover rounded-[1.75rem] border border-white/5"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- HOW IT WORKS -->
-      <section id="workflow" class="mx-auto max-w-6xl px-6 py-24">
+      <section id="workflow" class="mx-auto max-w-6xl px-6 py-24" data-reveal>
         <h2 class="text-center text-3xl font-black md:text-4xl">How it works</h2>
         <div class="mt-16 grid gap-8 md:grid-cols-3">
           <!-- Step 1 -->
@@ -263,10 +292,36 @@
               <p class="mt-3 text-sm leading-relaxed text-white/60">Review the reply options, tweak the wording, and copy the one you want back into your own conversation. Liaison Reply doesn&rsquo;t send anything for you. You stay in control.</p>
           </div>
         </div>
+        <div class="mt-16 grid gap-8 md:grid-cols-3" data-reveal>
+          <div>
+            <div class="relative mx-auto w-full" style="max-width:210px">
+              <div class="rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+                <img src="assets/previews/reply-flow-step-01-heated-message.png" alt="The difficult message you received, inside Liaison Reply" width="390" height="844" loading="lazy" decoding="async" class="w-full aspect-[390/844] object-cover rounded-[1.75rem] border border-white/5" />
+              </div>
+            </div>
+            <p class="mt-4 text-center text-sm text-white/50">Step 1 · The message lands</p>
+          </div>
+          <div>
+            <div class="relative mx-auto w-full" style="max-width:210px">
+              <div class="rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+                <img src="assets/previews/reply-flow-step-02-context-and-intent.png" alt="Picking the relationship context and the direction for the reply" width="390" height="844" loading="lazy" decoding="async" class="w-full aspect-[390/844] object-cover rounded-[1.75rem] border border-white/5" />
+              </div>
+            </div>
+            <p class="mt-4 text-center text-sm text-white/50">Step 2 · You set the direction</p>
+          </div>
+          <div>
+            <div class="relative mx-auto w-full" style="max-width:210px">
+              <div class="rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+                <img src="assets/previews/reply-flow-step-05-generated-replies.png" alt="Three reply options drafted for the message" width="390" height="844" loading="lazy" decoding="async" class="w-full aspect-[390/844] object-cover rounded-[1.75rem] border border-white/5" />
+              </div>
+            </div>
+            <p class="mt-4 text-center text-sm text-white/50">Step 3 · Pick, edit, send</p>
+          </div>
+        </div>
       </section>
 
       <!-- SEE IT WORK -->
-      <section id="examples" class="mx-auto max-w-6xl px-6 py-24">
+      <section id="examples" class="mx-auto max-w-6xl px-6 py-24" data-reveal>
         <p class="text-center text-sm font-bold uppercase tracking-widest text-sky-400">See it work</p>
         <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">One hard message. Three ways to answer it.</h2>
         <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">Two of the moments Liaison Reply is built for. Paste the message, pick a direction, and the wording stays yours to edit.</p>
@@ -314,10 +369,50 @@
             </div>
           </div>
         </div>
+        <div class="mt-16" data-reveal>
+          <h3 class="text-center text-3xl font-black md:text-4xl">Then polish it until it sounds like you.</h3>
+          <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">Every draft can be rewritten, tightened, or softened. You approve the final words. Nothing sends itself.</p>
+          <div class="mt-16 grid gap-8 md:grid-cols-2">
+            <div>
+              <div class="relative mx-auto w-full" style="max-width:260px">
+            <div class="rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+              <img
+                src="assets/previews/reply-flow-step-06-polish-in-progress.png"
+                alt="Liaison Reply polishing a draft reply"
+                width="390"
+                height="844"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[390/844] object-cover rounded-[1.75rem] border border-white/5"
+              />
+            </div>
+          </div>
+              <p class="mt-4 text-center text-sm text-white/50">Polishing</p>
+            </div>
+            <div>
+              <div class="relative mx-auto w-full" style="max-width:260px">
+            <div class="rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+              <img
+                src="assets/previews/reply-flow-step-07-polished-reply.png"
+                alt="The polished reply, ready to copy and send"
+                width="390"
+                height="844"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[390/844] object-cover rounded-[1.75rem] border border-white/5"
+              />
+            </div>
+          </div>
+              <p class="mt-4 text-center text-sm text-white/50">Polished, and ready</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- WHAT IT DOES / DOESN'T DO -->
-      <section class="border-y border-white/5 bg-white/[0.015] py-24">
+
+<!-- WHAT IT DOES / DOESN'T DO -->
+      <section class="border-y border-white/5 bg-white/[0.015] py-24" data-reveal>
         <div class="mx-auto max-w-6xl px-6">
           <h2 class="text-center text-3xl font-black md:text-4xl">What it does, and what it doesn&rsquo;t</h2>
           <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -377,14 +472,102 @@
         </div>
       </section>
 
-      <!-- WHAT PRO ADDS -->
-      <section id="pro" class="border-y border-white/5 bg-white/[0.015] py-24">
+      <!-- MEMORY -->
+      <section class="mx-auto max-w-6xl px-6 py-24" data-reveal>
+        <div class="grid grid-cols-1 gap-16 md:grid-cols-2 md:items-center">
+          <div class="min-w-0">
+            <p class="text-sm font-bold uppercase tracking-widest text-sky-400">Memory</p>
+            <h2 class="mt-3 text-3xl font-black md:text-4xl">The conversation does not reset.</h2>
+            <p class="mt-4 leading-relaxed text-white/60">Every thread keeps its history, so your drafts know what was said last week, not just the last message. On Pro, threads are never summarized down. The full conversation stays in play.</p>
+            <div class="faq-item mt-8 border-t border-b border-white/10">
+              <button class="faq-toggle flex w-full items-center justify-between py-5 text-left group" aria-expanded="false">
+                <span class="text-base font-medium text-white group-hover:text-sky-300 transition-colors">What are linked threads?</span>
+                <svg class="faq-icon h-5 w-5 text-white/40 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+              <div class="faq-panel overflow-hidden transition-all duration-300 ease-out" style="max-height:0;opacity:0">
+                <p class="text-sm leading-relaxed text-white/60 pb-5">Some situations live in more than one conversation: the same problem with your partner, your manager, and your client. Link the threads, and Pro drafts draw on all of them, so the reply fits the whole situation instead of one slice of it.</p>
+              </div>
+            </div>
+          </div>
+          <div class="relative mx-auto w-full" style="max-width:300px">
+            <div class="rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+              <img
+                src="assets/previews/hero-mobile-dashboard-real.png"
+                alt="Your conversation threads, kept in Liaison Reply"
+                width="390"
+                height="844"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[390/844] object-cover rounded-[1.75rem] border border-white/5"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COACHING -->
+      <section class="border-y border-white/5 bg-white/[0.015] py-24" data-reveal>
         <div class="mx-auto max-w-6xl px-6">
-          <p class="text-center text-sm font-bold uppercase tracking-widest text-amber-400">Liaison Reply Pro</p>
-          <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">What Pro adds</h2>
-          <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">Free gives you the full drafting loop, and your first 15 generations are on us. Pro removes the limits and adds the deeper tools.</p>
-          <div class="mt-16 rounded-2xl border border-white/10 p-8">
-            <ul class="grid grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
+          <div class="grid grid-cols-1 gap-16 md:grid-cols-2 md:items-center">
+            <div class="min-w-0">
+              <p class="text-sm font-bold uppercase tracking-widest text-amber-400">Pro coaching</p>
+              <h2 class="mt-3 text-3xl font-black md:text-4xl">A coach reads the thread with you.</h2>
+              <p class="mt-4 leading-relaxed text-white/60">Drafts are the words. Coaching is the read behind them. With Pro, a coaching panel sits beside your drafts and shows you what the other person is really saying, what to lead with, and what to leave out, before you send a thing.</p>
+            </div>
+            <div class="relative mx-auto w-full" style="max-width:300px">
+            <div class="rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+              <img
+                src="assets/previews/reply-flow-step-08-live-coaching.png"
+                alt="Live coaching beside a draft in Liaison Reply Pro"
+                width="390"
+                height="844"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[390/844] object-cover rounded-[1.75rem] border border-white/5"
+              />
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHAT PRO ADDS -->
+      <section id="pro" class="mx-auto max-w-6xl px-6 py-24" data-reveal>
+        <p class="text-center text-sm font-bold uppercase tracking-widest text-amber-400">Liaison Reply Pro</p>
+        <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">What Pro adds</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">Free gives you the full drafting loop, and your first 15 generations are on us. Pro removes the limits and adds the deeper tools.</p>
+        <div class="mx-auto mt-16 max-w-3xl rounded-2xl border border-white/10 p-8">
+          <ul class="space-y-4">
+              <li class="flex items-start gap-3 text-white/80">
+                <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm"><strong class="font-bold text-white">Unlimited generations.</strong> No credit counting, ever.</span>
+              </li>
+              <li class="flex items-start gap-3 text-white/80">
+                <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm"><strong class="font-bold text-white">Live reply coaching.</strong> A coach reads the thread with you while you draft.</span>
+              </li>
+              <li class="flex items-start gap-3 text-white/80">
+                <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm"><strong class="font-bold text-white">Full conversation memory.</strong> Never summarized down. The whole thread stays in play.</span>
+              </li>
+          </ul>
+          <div class="faq-item mt-8 border-t border-white/10">
+            <button class="faq-toggle flex w-full items-center justify-between py-5 text-left group" aria-expanded="false">
+              <span class="text-base font-medium text-white group-hover:text-sky-300 transition-colors">See everything Pro includes</span>
+              <svg class="faq-icon h-5 w-5 text-white/40 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+            <div class="faq-panel overflow-hidden transition-all duration-300 ease-out" style="max-height:0;opacity:0">
+              <ul class="space-y-4 pb-5">
               <li class="flex items-start gap-3 text-white/80">
                 <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -427,13 +610,27 @@
                 </svg>
                 <span class="text-sm"><strong class="font-bold text-white">Unlimited voice dictation.</strong> Talk instead of typing, as much as you want.</span>
               </li>
-            </ul>
+              </ul>
+            </div>
           </div>
+        </div>
+        <div class="mt-10 text-center">
+          <a
+            href="https://liaisonreply.com/waitlist.html"
+            data-session-primary
+            data-cta-surface="pro-section"
+            data-cta-label="Try it free"
+            data-auth-text="Join the Waitlist"
+            data-session-text="Open Liaison Reply"
+            data-auth-path="https://liaisonreply.com/waitlist.html"
+            data-session-path="/chat"
+            class="block w-full text-center rounded-2xl bg-sky-500 px-10 py-5 text-lg font-bold text-black shadow-[0_0_40px_rgba(56,189,248,0.35)] hover:bg-sky-400 hover:shadow-[0_0_60px_rgba(56,189,248,0.5)] active:scale-[0.98] transition-all duration-200 sm:inline-block sm:w-auto"
+          >Join the Waitlist</a>
         </div>
       </section>
 
       <!-- PRICING -->
-      <section id="plans" class="mx-auto max-w-6xl px-6 py-24" data-pricing-section>
+      <section id="plans" class="mx-auto max-w-6xl px-6 py-24" data-pricing-section data-reveal>
         <h2 class="text-center text-3xl font-black md:text-4xl">Pricing</h2>
         <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 md:items-center">
           <!-- Free -->
@@ -484,19 +681,7 @@
                 <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="text-sm">Live reply coaching while you draft.</span>
-              </li>
-              <li class="flex items-start gap-3 text-white/80">
-                <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <span class="text-sm">Full conversation memory, never summarized.</span>
-              </li>
-              <li class="flex items-start gap-3 text-white/80">
-                <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <span class="text-sm">Linked threads, every premium persona, 12 rewrites per reply, unlimited voice dictation.</span>
+                <span class="text-sm">Live coaching, full memory, linked threads.</span>
               </li>
               <li class="flex items-start gap-3 text-white/80">
                 <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -537,19 +722,7 @@
                 <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="text-sm">Live reply coaching while you draft.</span>
-              </li>
-              <li class="flex items-start gap-3 text-white/80">
-                <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <span class="text-sm">Full conversation memory, never summarized.</span>
-              </li>
-              <li class="flex items-start gap-3 text-white/80">
-                <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <span class="text-sm">Linked threads, every premium persona, 12 rewrites per reply, unlimited voice dictation.</span>
+                <span class="text-sm">Live coaching, full memory, linked threads.</span>
               </li>
               <li class="flex items-start gap-3 text-white/80">
                 <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -578,7 +751,7 @@
       </section>
 
       <!-- FAQ -->
-      <section id="faq" class="mx-auto max-w-3xl px-6 py-24">
+      <section id="faq" class="mx-auto max-w-3xl px-6 py-24" data-reveal>
         <h2 class="text-center text-3xl font-black md:text-4xl">Questions before you start</h2>
         <div class="mt-12">
           <div class="faq-item border-b border-white/10">
@@ -656,7 +829,7 @@
       </section>
 
       <!-- FINAL CTA -->
-      <section class="mx-auto max-w-4xl px-6 py-24 text-center">
+      <section class="mx-auto max-w-4xl px-6 py-24 text-center" data-reveal>
         <h2 class="text-4xl font-black md:text-5xl">Read the room faster.</h2>
         <p class="mt-4 text-white/50">Start free. No app download, it runs in your browser.</p>
         <a
@@ -724,6 +897,47 @@
       </div>
     </aside>
 
+        <!-- Sticky mobile CTA -->
+    <div id="sticky-cta" style="position:fixed;left:0;right:0;bottom:0;z-index:40;padding:0 1rem 1rem;transform:translateY(110%);transition:transform 0.45s ease" class="sm:hidden">
+      <a
+        href="https://liaisonreply.com/waitlist.html"
+        data-session-primary
+        data-cta-surface="sticky-mobile"
+        data-cta-label="Try it free"
+        data-auth-text="Join the Waitlist"
+        data-session-text="Open Liaison Reply"
+        data-auth-path="https://liaisonreply.com/waitlist.html"
+        data-session-path="/chat"
+        class="block w-full text-center rounded-2xl bg-sky-500 px-6 py-4 font-bold text-black shadow-2xl"
+      >Join the Waitlist</a>
+    </div>
+
+    <script>
+      (function () {
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var targets = document.querySelectorAll("[data-reveal]");
+        if (!reduce && "IntersectionObserver" in window && targets.length) {
+          targets.forEach(function (el) { el.classList.add("reveal"); });
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+            });
+          }, { threshold: 0.1 });
+          targets.forEach(function (el) { io.observe(el); });
+        }
+        var bar = document.getElementById("sticky-cta");
+        var hero = document.getElementById("hero");
+        if (bar && hero && "IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              bar.style.transform = e.isIntersecting ? "translateY(110%)" : "translateY(0)";
+            });
+          }, { threshold: 0.05 }).observe(hero);
+        } else if (bar) {
+          bar.style.transform = "translateY(0)";
+        }
+      })();
+    </script>
     <script src="./site.js"></script>
   </body>
 </html>

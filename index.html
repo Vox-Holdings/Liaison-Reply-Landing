@@ -1056,7 +1056,7 @@
             const result = await joinUpdates(email);
             if (result.ok) {
               if (typeof window.gtag === "function") {
-                window.gtag("event", "vanguard_signup", { method: "email" });
+                window.gtag("event", "generate_lead", { method: "product_updates_form" });
               }
               renderSuccess();
               return;

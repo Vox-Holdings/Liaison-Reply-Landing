@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TS479PZV");
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Clarity tracking code for https://liaisonreply.com/ -->
+    <script>
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "xi5oly3huc");
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/liaison-icon-180.png" />
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      function readLiaisonConsent() {
+        const storageKey = "liaison_cookie_consent";
+        let raw = "";
+
+        try {
+          raw = window.localStorage.getItem(storageKey) || "";
+        } catch {
+          raw = "";
+        }
+
+        if (!raw) {
+          const cookie = document.cookie
+            .split("; ")
+            .find((entry) => entry.startsWith(`${storageKey}=`));
+          raw = cookie
+            ? decodeURIComponent(cookie.split("=").slice(1).join("="))
+            : "";
+        }
+
+        if (!raw) {
+          return null;
+        }
+
+        try {
+          return JSON.parse(raw);
+        } catch {
+          return null;
+        }
+      }
+
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        wait_for_update: 500,
+      });
+      gtag("set", "ads_data_redaction", true);
+      gtag("set", "url_passthrough", true);
+
+      const liaisonConsent = readLiaisonConsent();
+      if (liaisonConsent) {
+        gtag("consent", "update", {
+          ad_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+          analytics_storage: liaisonConsent.continuity ? "granted" : "denied",
+        });
+      }
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FMVPQNPPDD"
+    ></script>
+    <script>
+      gtag("js", new Date());
+      gtag("config", "G-FMVPQNPPDD");
+    </script>
+    <title>Data Retention Schedule | Liaison Reply</title>
+    <meta name="description" content="How long Liaison Reply keeps each kind of data, where it is stored, and when it is removed." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://liaisonreply.com/retention-schedule.html" />
+    <link rel="stylesheet" href="./site.css" />
+  </head>
+  <body class="utility-page">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TS479PZV"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a
+          class="brand-lockup"
+          href="./index.html"
+          aria-label="Liaison Reply home"
+        >
+          <img
+            src="./assets/liaison-wordmark-dark.png"
+            alt="Liaison Reply"
+            class="brand-wordmark"
+          />
+        </a>
+        <div class="cta-row cta-row-compact">
+          <a
+            class="button button-ghost"
+            href="https://app.liaisonreply.com/auth/login"
+          >Login</a>
+          <a
+            class="button button-secondary"
+            href="https://app.liaisonreply.com/auth/register"
+            data-session-primary
+            data-auth-text="Start Free & Try a Reply"
+            data-session-text="Open Liaison Reply"
+            data-auth-path="/auth/register"
+            data-session-path="/chat"
+          >Start Free &amp; Try a Reply</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="utility-main" id="main-content">
+      <div class="shell utility-shell">
+        <section class="utility-hero">
+          <div class="utility-hero-copy">
+            <span class="utility-kicker">Privacy</span>
+            <h1>How long we keep each kind of data.</h1>
+            <p>
+              Our <a class="utility-link" href="./privacy.html">Privacy Policy</a>
+              says we keep personal data for as long as reasonably necessary to
+              fulfill the purposes described in the policy, comply with legal
+              obligations, resolve disputes, enforce agreements, and maintain
+              business records. This schedule explains, for each kind of data,
+              where it is kept and when it is removed.
+            </p>
+          </div>
+        </section>
+
+        <section class="utility-meta" aria-label="Retention overview">
+          <article class="utility-meta-card">
+            <span class="utility-meta-label">Last updated</span>
+            <p>October 23, 2026.</p>
+          </article>
+          <article class="utility-meta-card">
+            <span class="utility-meta-label">Your controls</span>
+            <p>
+              You can delete any thread in the app at any time, and you can
+              delete your account in the app to remove your profile and your
+              threads.
+            </p>
+          </article>
+          <article class="utility-meta-card">
+            <span class="utility-meta-label">Key principle</span>
+            <p>
+              Where this schedule gives a trigger instead of a date, the
+              trigger is what controls removal.
+            </p>
+          </article>
+        </section>
+
+        <section class="utility-grid">
+          <div class="utility-stack">
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Your account</span>
+                <h2>Account profile details</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Stored with your account in Supabase, our database provider.</li>
+                <li><strong>How long it is kept:</strong> Kept while your account exists. When you delete your account, your profile is removed.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Your content</span>
+                <h2>Conversation threads, messages, and drafts</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Stored with your account in Supabase.</li>
+                <li><strong>How long it is kept:</strong> Kept while your account exists, so the app can keep the history of each conversation. You can delete any thread yourself in the app at any time, and deleting your account removes all of your threads.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Your content</span>
+                <h2>Screenshots you share for drafting</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Sent to our AI provider so it can read the conversation in the image.</li>
+                <li><strong>How long it is kept:</strong> The text read from a screenshot becomes part of the thread it belongs to, and follows the same rule as threads above.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Your content</span>
+                <h2>Requests sent to the AI provider</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Processed by Google (Gemini), or by OpenAI or Anthropic when a request is routed to them.</li>
+                <li><strong>How long it is kept:</strong> We send this text only to produce the reply or coaching you asked for, and the output is saved to your thread. How long a provider keeps request data is governed by that provider's own policies.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Money</span>
+                <h2>Payment and subscription records</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Held by Stripe, our payment provider. Liaison Reply does not store raw payment card data.</li>
+                <li><strong>How long it is kept:</strong> Stripe keeps payment records under its own policies and legal obligations. We keep your subscription status and billing details with your account while your account exists.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Staying in touch</span>
+                <h2>Product updates email list</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Stored in Supabase when you join the list through the form on liaisonreply.com.</li>
+                <li><strong>How long it is kept:</strong> Kept until you ask us to remove it. Email privacy@liaisonreply.com and we will remove your address from the list.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Staying in touch</span>
+                <h2>Support emails</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Held in our support mailbox, provided by IONOS. Some service emails are delivered through Resend.</li>
+                <li><strong>How long it is kept:</strong> Kept for as long as reasonably necessary to handle your request and to maintain business records.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Measuring and fixing</span>
+                <h2>App usage analytics</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Recorded by PostHog.</li>
+                <li><strong>How long it is kept:</strong> Kept for as long as reasonably necessary to run and improve the app. You can opt out of optional analytics through the settings and controls described in the Privacy Policy.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Measuring and fixing</span>
+                <h2>Website analytics</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Recorded by Google Analytics and Microsoft Clarity for liaisonreply.com.</li>
+                <li><strong>How long it is kept:</strong> Collection runs only with the consent choices you make in the cookie settings, and the records are held by Google and Microsoft under their own retention settings. You can change your choices at any time on the cookie settings page.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Measuring and fixing</span>
+                <h2>Error reports</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>Where it is kept:</strong> Recorded by Sentry.</li>
+                <li><strong>How long it is kept:</strong> Kept for as long as reasonably necessary to find and fix the problem the report describes.</li>
+              </ul>
+            </article>
+            </div>
+
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Your rights</span>
+                <h2>Asking us to remove your data</h2>
+              </div>
+              <p>
+                You can request access, correction, or deletion of your
+                personal data at any time. The fastest routes are in the app:
+                delete a thread, or delete your account. For anything else,
+                contact
+                <a class="utility-link" href="mailto:privacy@liaisonreply.com">privacy@liaisonreply.com</a>
+                and we will handle your request under the Privacy Policy. Which
+                providers hold which data is listed in our
+                <a class="utility-link" href="./service-provider-disclosure.html">Service Provider Disclosure</a>.
+              </p>
+            </article>
+          </div>
+
+          <aside class="utility-aside">
+            <div>
+              <span class="utility-aside-eyebrow">At a glance</span>
+              <h2>Removing your data</h2>
+            </div>
+            <ul class="utility-fact-list">
+              <li>Delete any thread in the app at any time.</li>
+              <li>
+                Delete your account in the app to remove your profile and all
+                of your threads.
+              </li>
+              <li>
+                Ask us to remove you from the product updates list at any time.
+              </li>
+              <li>
+                Card details are held by Stripe, not by Liaison Reply.
+              </li>
+            </ul>
+            <div class="cta-row cta-row-compact">
+              <a class="button button-secondary" href="mailto:privacy@liaisonreply.com">Privacy support</a>
+              <a class="button button-ghost" href="./privacy.html">Privacy Policy</a>
+            </div>
+          </aside>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-inner">
+        <div>
+          <p class="footer-brand">Liaison Reply</p>
+          <p class="footer-copy">
+            Privacy language aligned across liaisonreply.com and
+            app.liaisonreply.com.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="./index.html">Home</a>
+          <a href="./terms.html">Terms</a>
+          <a href="./cookies.html">Cookies</a>
+          <a href="./support.html">Support</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="./site.js"></script>
+  </body>
+</html>

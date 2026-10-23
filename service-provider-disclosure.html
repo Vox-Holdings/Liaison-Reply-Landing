@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TS479PZV");
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Clarity tracking code for https://liaisonreply.com/ -->
+    <script>
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "xi5oly3huc");
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/liaison-icon-180.png" />
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      function readLiaisonConsent() {
+        const storageKey = "liaison_cookie_consent";
+        let raw = "";
+
+        try {
+          raw = window.localStorage.getItem(storageKey) || "";
+        } catch {
+          raw = "";
+        }
+
+        if (!raw) {
+          const cookie = document.cookie
+            .split("; ")
+            .find((entry) => entry.startsWith(`${storageKey}=`));
+          raw = cookie
+            ? decodeURIComponent(cookie.split("=").slice(1).join("="))
+            : "";
+        }
+
+        if (!raw) {
+          return null;
+        }
+
+        try {
+          return JSON.parse(raw);
+        } catch {
+          return null;
+        }
+      }
+
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        wait_for_update: 500,
+      });
+      gtag("set", "ads_data_redaction", true);
+      gtag("set", "url_passthrough", true);
+
+      const liaisonConsent = readLiaisonConsent();
+      if (liaisonConsent) {
+        gtag("consent", "update", {
+          ad_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+          analytics_storage: liaisonConsent.continuity ? "granted" : "denied",
+        });
+      }
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FMVPQNPPDD"
+    ></script>
+    <script>
+      gtag("js", new Date());
+      gtag("config", "G-FMVPQNPPDD");
+    </script>
+    <title>Service Provider Disclosure | Liaison Reply</title>
+    <meta name="description" content="The companies that help run Liaison Reply, what each one does, and what information it receives." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://liaisonreply.com/service-provider-disclosure.html" />
+    <link rel="stylesheet" href="./site.css" />
+  </head>
+  <body class="utility-page">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TS479PZV"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a
+          class="brand-lockup"
+          href="./index.html"
+          aria-label="Liaison Reply home"
+        >
+          <img
+            src="./assets/liaison-wordmark-dark.png"
+            alt="Liaison Reply"
+            class="brand-wordmark"
+          />
+        </a>
+        <div class="cta-row cta-row-compact">
+          <a
+            class="button button-ghost"
+            href="https://app.liaisonreply.com/auth/login"
+          >Login</a>
+          <a
+            class="button button-secondary"
+            href="https://app.liaisonreply.com/auth/register"
+            data-session-primary
+            data-auth-text="Start Free & Try a Reply"
+            data-session-text="Open Liaison Reply"
+            data-auth-path="/auth/register"
+            data-session-path="/chat"
+          >Start Free &amp; Try a Reply</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="utility-main" id="main-content">
+      <div class="shell utility-shell">
+        <section class="utility-hero">
+          <div class="utility-hero-copy">
+            <span class="utility-kicker">Privacy</span>
+            <h1>The companies that help run Liaison Reply.</h1>
+            <p>
+              Our <a class="utility-link" href="./privacy.html">Privacy Policy</a>
+              explains that we share personal data only as reasonably necessary
+              to host the service, authenticate users, process payments, provide
+              requested outputs, deliver support communications, run analytics,
+              and prevent fraud. This page names the providers we use, what each
+              one does for Liaison Reply, and what information it receives.
+            </p>
+          </div>
+        </section>
+
+        <section class="utility-meta" aria-label="Disclosure overview">
+          <article class="utility-meta-card">
+            <span class="utility-meta-label">Last updated</span>
+            <p>October 23, 2026.</p>
+          </article>
+          <article class="utility-meta-card">
+            <span class="utility-meta-label">Scope</span>
+            <p>
+              This page covers liaisonreply.com and app.liaisonreply.com, the
+              same services as the Privacy Policy.
+            </p>
+          </article>
+          <article class="utility-meta-card">
+            <span class="utility-meta-label">Key principle</span>
+            <p>
+              Each provider receives only the information it needs to do its
+              job, and handles that information under its own privacy policy.
+            </p>
+          </article>
+        </section>
+
+        <section class="utility-grid">
+          <div class="utility-stack">
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Accounts and backend</span>
+                <h2>Supabase</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Supabase runs our sign-in, our account database, and the backend functions that power the app.</li>
+                <li><strong>What it receives:</strong> Your email address and account details, the conversations, threads, and drafts you save, your settings, and your subscription status.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Payments</span>
+                <h2>Stripe</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Stripe processes payments and manages Pro subscriptions, renewals, and cancellations.</li>
+                <li><strong>What it receives:</strong> The payment details you enter at checkout, your email address, and subscription and billing information. Card details go directly to Stripe, and Liaison Reply does not store raw payment card data.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">App hosting</span>
+                <h2>Vercel</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Vercel hosts the Liaison Reply app at app.liaisonreply.com and delivers it to your browser or phone.</li>
+                <li><strong>What it receives:</strong> The requests the app makes as you use it, along with standard technical details such as your IP address and browser information.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">AI provider</span>
+                <h2>Google (Gemini)</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Google's Gemini models are the main AI behind Liaison Reply. They generate your reply options and coaching, and they read the conversation screenshots you upload so the app can rebuild the thread.</li>
+                <li><strong>What it receives:</strong> The conversation text you paste or the screenshots you upload, the relationship context and direction you choose, and the draft text you are editing when you use coaching.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">AI provider</span>
+                <h2>OpenAI</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> OpenAI is an additional AI provider. The app can route a generation request to OpenAI when needed, in the same way it uses Google.</li>
+                <li><strong>What it receives:</strong> The same conversation text, context, and draft text needed for that request.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">AI provider</span>
+                <h2>Anthropic</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Anthropic is an additional AI provider. The app can route a generation request to Anthropic when needed, in the same way it uses Google.</li>
+                <li><strong>What it receives:</strong> The same conversation text, context, and draft text needed for that request.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Product analytics</span>
+                <h2>PostHog</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> PostHog records how the app is used, so we can see which features work, which do not, and where people get stuck.</li>
+                <li><strong>What it receives:</strong> Usage events from the app, such as features used and actions taken, your plan type, and technical details about your device and browser.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Error reports</span>
+                <h2>Sentry</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Sentry collects error reports from the app so we can find and fix crashes and bugs.</li>
+                <li><strong>What it receives:</strong> Error details, technical information about your device and browser, and information about what the app was doing when the error happened.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Website analytics</span>
+                <h2>Google Analytics</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Google Analytics measures visits to liaisonreply.com, including page views, sessions, and referral patterns.</li>
+                <li><strong>What it receives:</strong> Website usage information and device-level details. Analytics storage stays off unless you allow it in the cookie settings.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Website analytics</span>
+                <h2>Microsoft Clarity</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Microsoft Clarity helps us understand how visitors use liaisonreply.com, so we can improve the site.</li>
+                <li><strong>What it receives:</strong> How you interact with the site, such as pages viewed, clicks, and scrolling, plus device and browser details, subject to the same cookie settings.</li>
+              </ul>
+            </article>
+            </div>
+            <div class="utility-card-columns">
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Website hosting</span>
+                <h2>GitHub Pages</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> GitHub Pages hosts liaisonreply.com, including this page.</li>
+                <li><strong>What it receives:</strong> Standard web server logs for your visit, such as your IP address and browser details.</li>
+              </ul>
+            </article>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Email delivery</span>
+                <h2>Resend</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> Resend sends service emails on our behalf, such as account and billing related messages.</li>
+                <li><strong>What it receives:</strong> Your email address and the content of the emails we send you.</li>
+              </ul>
+            </article>
+            </div>
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Support email and domain</span>
+                <h2>IONOS</h2>
+              </div>
+              <ul class="utility-fact-list">
+                <li><strong>What it does:</strong> IONOS provides our domain services and hosts the mailboxes for addresses such as support@liaisonreply.com.</li>
+                <li><strong>What it receives:</strong> The emails you send to our support addresses, including your email address and the content of your message.</li>
+              </ul>
+            </article>
+
+            <article class="utility-card">
+              <div class="utility-card-header">
+                <span class="utility-card-eyebrow">Questions</span>
+                <h2>How this page fits with the Privacy Policy</h2>
+              </div>
+              <p>
+                This disclosure is part of our privacy documentation. The
+                <a class="utility-link" href="./privacy.html">Privacy Policy</a>
+                explains why we collect and share data, and the
+                <a class="utility-link" href="./retention-schedule.html">Data Retention Schedule</a>
+                explains how long each kind of data is kept. Questions about
+                any provider on this page can be sent to
+                <a class="utility-link" href="mailto:privacy@liaisonreply.com">privacy@liaisonreply.com</a>.
+              </p>
+            </article>
+          </div>
+
+          <aside class="utility-aside">
+            <div>
+              <span class="utility-aside-eyebrow">At a glance</span>
+              <h2>The short version</h2>
+            </div>
+            <ul class="utility-fact-list">
+              <li>
+                Every provider on this page is here because the service needs
+                it to work.
+              </li>
+              <li>
+                Your card details go directly to Stripe. Liaison Reply does
+                not store raw payment card data.
+              </li>
+              <li>
+                The conversation text you submit is sent to the AI provider
+                only to create the drafts and coaching you asked for.
+              </li>
+              <li>
+                You can request access, correction, deletion, or privacy
+                support at
+                <a class="utility-link" href="mailto:privacy@liaisonreply.com">privacy@liaisonreply.com</a>.
+              </li>
+            </ul>
+            <div class="cta-row cta-row-compact">
+              <a class="button button-secondary" href="mailto:privacy@liaisonreply.com">Privacy support</a>
+              <a class="button button-ghost" href="./privacy.html">Privacy Policy</a>
+            </div>
+          </aside>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-inner">
+        <div>
+          <p class="footer-brand">Liaison Reply</p>
+          <p class="footer-copy">
+            Privacy language aligned across liaisonreply.com and
+            app.liaisonreply.com.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="./index.html">Home</a>
+          <a href="./terms.html">Terms</a>
+          <a href="./cookies.html">Cookies</a>
+          <a href="./support.html">Support</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="./site.js"></script>
+  </body>
+</html>

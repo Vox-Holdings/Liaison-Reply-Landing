@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<!-- Google Tag Manager -->
+<script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-TS479PZV");
+</script>
+<!-- End Google Tag Manager -->
+<!-- Clarity tracking code for https://liaisonreply.com/ -->
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xi5oly3huc");
+</script>
+<!-- Google tag (gtag.js) with Consent Mode v2 -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  function readLiaisonConsent() {
+    const storageKey = "liaison_cookie_consent";
+    let raw = "";
+
+    try {
+      raw = window.localStorage.getItem(storageKey) || "";
+    } catch {
+      raw = "";
+    }
+
+    if (!raw) {
+      const cookie = document.cookie
+        .split("; ")
+        .find((entry) => entry.startsWith(`${storageKey}=`));
+      raw = cookie
+        ? decodeURIComponent(cookie.split("=").slice(1).join("="))
+        : "";
+    }
+
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  }
+
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+    wait_for_update: 500,
+  });
+  gtag("set", "ads_data_redaction", true);
+  gtag("set", "url_passthrough", true);
+
+  const liaisonConsent = readLiaisonConsent();
+  if (liaisonConsent) {
+    gtag("consent", "update", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: liaisonConsent.continuity ? "granted" : "denied",
+    });
+  }
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMVPQNPPDD"></script>
+<script>
+  gtag("js", new Date());
+  gtag("config", "G-FMVPQNPPDD");
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing · Liaison Reply</title>
+<meta name="description" content="Liaison Reply pricing. Start free with 15 generations, no card. Pro is $79.99/year (about $6.67 a month) or $7.99/month, with a 14-day no-questions refund." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://liaisonreply.com/pricing" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/liaison-icon-180.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://liaisonreply.com/pricing" />
+<meta property="og:site_name" content="Liaison Reply" />
+<meta property="og:title" content="Pricing · Liaison Reply" />
+<meta property="og:description" content="Liaison Reply pricing. Start free with 15 generations, no card. Pro is $79.99/year (about $6.67 a month) or $7.99/month, with a 14-day no-questions refund." />
+<meta property="og:image" content="https://liaisonreply.com/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Liaison Reply · reply options for difficult messages." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Pricing · Liaison Reply" />
+<meta name="twitter:description" content="Liaison Reply pricing. Start free with 15 generations, no card. Pro is $79.99/year (about $6.67 a month) or $7.99/month, with a 14-day no-questions refund." />
+<meta name="twitter:image" content="https://liaisonreply.com/assets/og-image.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Liaison Reply",
+      "url": "https://liaisonreply.com",
+      "logo": "https://liaisonreply.com/assets/liaison-icon.svg"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Liaison Reply",
+      "applicationCategory": "CommunicationApplication",
+      "operatingSystem": "Web",
+      "url": "https://liaisonreply.com",
+      "description": "Liaison Reply drafts replies for difficult messages. Paste the message you're stuck on, choose the relationship context, and get a set of reply options to edit and send yourself.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro (annual)",
+          "price": "79.99",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro (monthly)",
+          "price": "7.99",
+          "priceCurrency": "USD"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#05070d; --panel:rgba(255,255,255,.02); --panel-2:rgba(255,255,255,.04);
+    --line:rgba(255,255,255,.10); --muted:rgba(255,255,255,.60); --faint:rgba(255,255,255,.45);
+    --sky:#0ea5e9; --sky-300:#7dd3fc; --sky-400:#38bdf8; --amber:#fcd34d; --brand:#2ec5d8;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:#fff;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+  ::selection{background:rgba(14,165,233,.3)}
+  a{color:inherit}
+  .wrap{max-width:72rem;margin:0 auto;padding:0 1.5rem}
+  .skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.5rem 1rem;border-radius:.5rem;z-index:10}
+
+  /* Top bar */
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;padding-top:1.5rem;padding-bottom:1.5rem}
+  .logo{display:inline-flex;align-items:center;gap:.5rem;font-size:1.125rem;font-weight:900;letter-spacing:-.025em;text-decoration:none}
+  .nav{display:flex;align-items:center;gap:1.25rem;font-size:.875rem}
+  .nav a.link{color:var(--muted);text-decoration:none}.nav a.link:hover{color:#fff}
+  .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-weight:600;text-decoration:none;transition:background-color .15s,border-color .15s;cursor:pointer;border:0}
+  .btn-sky{background:var(--sky);color:#000}.btn-sky:hover{background:var(--sky-400)}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid var(--line)}.btn-ghost:hover{border-color:rgba(56,189,248,.5);background:var(--panel-2)}
+  .btn-sm{padding:.5rem 1.25rem;font-size:.875rem}
+  .btn-lg{padding:.9rem 1.5rem;font-size:1rem;width:100%}
+
+  /* Hero */
+  .hero{position:relative;text-align:center;padding:3.5rem 0 2.5rem;overflow:hidden}
+  .glow{position:absolute;top:-10rem;left:50%;transform:translateX(-50%);width:34rem;height:34rem;border-radius:999px;background:rgba(14,165,233,.10);filter:blur(120px);pointer-events:none}
+  .eyebrow{font-size:.875rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--sky-400);margin:0}
+  h1{position:relative;font-size:2.75rem;line-height:1.05;font-weight:900;letter-spacing:-.025em;margin:.75rem 0 0}
+  .grad{background:linear-gradient(to right,var(--sky-400),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{position:relative;max-width:40rem;margin:1.25rem auto 0;font-size:1.125rem;color:var(--muted)}
+
+  /* Toggle */
+  .toggle{position:relative;display:inline-flex;margin-top:2rem;padding:.3rem;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+  .toggle button{font:inherit;font-size:.875rem;font-weight:600;color:var(--muted);background:transparent;border:0;border-radius:999px;padding:.55rem 1.1rem;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem}
+  .toggle button[aria-pressed="true"]{background:#fff;color:#000}
+  .save{font-size:.7rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#000;background:var(--amber);border-radius:999px;padding:.15rem .5rem}
+
+  /* Plans */
+  .plans{display:grid;grid-template-columns:1fr;gap:1.5rem;max-width:56rem;margin:2.5rem auto 0}
+  .card{position:relative;border:1px solid var(--line);background:var(--panel);border-radius:1rem;padding:2rem;display:flex;flex-direction:column}
+  .card.pro{border-color:rgba(56,189,248,.45);background:linear-gradient(to bottom,rgba(14,165,233,.08),rgba(255,255,255,.02));box-shadow:0 25px 50px -12px rgba(14,165,233,.18)}
+  .badge{position:absolute;top:-.8rem;left:2rem;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--sky);color:#000;border-radius:999px;padding:.25rem .75rem}
+  .plan-name{font-size:.875rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--sky-400);margin:0}
+  .price{display:flex;align-items:baseline;gap:.35rem;margin-top:.75rem}
+  .price .amt{font-size:3rem;font-weight:900;letter-spacing:-.03em;line-height:1}
+  .price .per{color:var(--muted);font-weight:600}
+  .billing{margin:.5rem 0 0;font-size:.9rem;color:var(--muted);min-height:1.4em}
+  .billing strike{color:var(--faint)}
+  .desc{margin:1.25rem 0 0;font-size:.95rem;color:var(--muted)}
+  ul.ticks{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:.7rem;font-size:.95rem}
+  ul.ticks li{display:flex;gap:.65rem;align-items:flex-start}
+  ul.ticks svg{flex:none;margin-top:.2rem}
+  ul.ticks li span b{font-weight:700}
+  .cta-block{margin-top:auto;padding-top:1.75rem}
+  .refund{display:flex;gap:.6rem;align-items:flex-start;margin-top:.9rem;padding:.75rem .9rem;border-radius:.75rem;background:rgba(252,211,77,.07);border:1px solid rgba(252,211,77,.25);font-size:.85rem;color:rgba(255,255,255,.8)}
+  .refund svg{flex:none;margin-top:.1rem}
+  .fine{margin:.75rem 0 0;font-size:.8rem;color:var(--faint);text-align:center}
+
+  /* Section */
+  section.block{padding:5rem 0 0}
+  h2{font-size:1.875rem;font-weight:900;letter-spacing:-.02em;text-align:center;margin:.75rem 0 0}
+  .sub{max-width:40rem;margin:1rem auto 0;text-align:center;color:var(--muted)}
+
+  /* Compare table */
+  .table-wrap{max-width:56rem;margin:2.5rem auto 0;border:1px solid var(--line);border-radius:1rem;overflow:hidden;background:var(--panel)}
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  th,td{padding:1rem 1.25rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  thead th{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);background:rgba(255,255,255,.03)}
+  thead th.pro-col{color:var(--sky-400)}
+  td:first-child{color:rgba(255,255,255,.85);font-weight:600}
+  td:nth-child(2){color:var(--muted)}
+  td.pro-col{color:#fff;background:rgba(14,165,233,.05)}
+  .yes{color:var(--sky-400);font-weight:700}
+  .no{color:var(--faint)}
+
+  /* Promise strip */
+  .promise{max-width:56rem;margin:2.5rem auto 0;display:grid;grid-template-columns:1fr;gap:1rem}
+  .promise div{border:1px solid var(--line);border-radius:1rem;padding:1.25rem 1.4rem;background:var(--panel)}
+  .promise h3{margin:0;font-size:1rem;font-weight:700}
+  .promise p{margin:.4rem 0 0;font-size:.9rem;color:var(--muted)}
+
+  /* FAQ */
+  .faq{max-width:48rem;margin:2.5rem auto 0;display:grid;gap:.75rem}
+  details{border:1px solid var(--line);border-radius:1rem;background:var(--panel);padding:0 1.4rem;transition:border-color .2s}
+  details[open]{border-color:rgba(56,189,248,.35);background:var(--panel-2)}
+  summary{list-style:none;cursor:pointer;padding:1.15rem 0;font-weight:700;display:flex;justify-content:space-between;gap:1rem}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--sky-400);font-weight:800;font-size:1.25rem;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{margin:0 0 1.2rem;color:var(--muted);font-size:.95rem}
+
+  /* Final CTA */
+  .final{text-align:center;padding:5rem 0}
+  .final .row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+  .final .btn{width:auto;padding:.9rem 1.75rem}
+  footer{border-top:1px solid var(--line);padding:2rem 0;font-size:.85rem;color:var(--faint)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+  footer nav{display:flex;gap:1.25rem;flex-wrap:wrap}
+  footer a{text-decoration:none}footer a:hover{color:#fff}
+  :focus-visible{outline:2px solid var(--sky-400);outline-offset:2px}
+
+  @media (min-width:768px){
+    h1{font-size:4rem}
+    h2{font-size:2.25rem}
+    .plans{grid-template-columns:1fr 1.15fr}
+    .promise{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:767px){ .card.pro{order:-1} }
+  @media (max-width:520px){
+    th,td{padding:.8rem .75rem;font-size:.875rem}
+    .card{padding:1.5rem}
+    .nav a.link{display:none}
+  }
+</style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS479PZV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<a class="skip" href="#plans">Skip to plans</a>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="https://liaisonreply.com/" aria-label="Liaison Reply home">
+      <svg width="26" height="26" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="11" stroke="#2ec5d8" stroke-width="4"/><path d="M19 15v18h15" stroke="#2ec5d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="18" r="3.4" fill="#2ec5d8"/></svg>
+      <span>Liaison <span style="color:#2ec5d8">Reply</span></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a class="link" href="https://liaisonreply.com/#workflow">How it works</a>
+      <a class="link" href="#faq">FAQ</a>
+      <a class="btn btn-sky btn-sm" href="https://app.liaisonreply.com/auth/login?utm_source=pricing" data-cta-surface="pricing-page-topbar-signin">Sign In</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="eyebrow">Pricing</p>
+      <h1>Read the room <span class="grad">before you hit send.</span></h1>
+      <p class="lede">Start free with 15 generations and no card. When the hard messages keep coming, Pro removes the limits and keeps the whole conversation in play.</p>
+
+      <div class="toggle" role="group" aria-label="Billing period">
+        <button type="button" id="btn-year" aria-pressed="true">Annual <span class="save">Save 17%</span></button>
+        <button type="button" id="btn-month" aria-pressed="false">Monthly</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="plans" id="plans">
+      <!-- FREE -->
+      <article class="card" aria-labelledby="free-name">
+        <p class="plan-name" id="free-name">Free</p>
+        <div class="price"><span class="amt">$0</span></div>
+        <p class="billing">No card required</p>
+        <p class="desc">The full drafting loop. Try it on the message you are stuck on right now.</p>
+        <ul class="ticks">
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>15 generations</b>, credits shown live as you go</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Three reply options per message</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Paste text or upload a screenshot</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Strategic coaching and draft polishing</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Threads that keep their history</span></li>
+        </ul>
+        <div class="cta-block">
+          <a class="btn btn-ghost btn-lg" href="https://app.liaisonreply.com/auth/register?utm_source=pricing" data-cta-surface="pricing-page-free">Start Free</a>
+          <p class="fine">Runs in your browser. Nothing to install.</p>
+        </div>
+      </article>
+
+      <!-- PRO -->
+      <article class="card pro" aria-labelledby="pro-name">
+        <span class="badge" id="pro-badge">Best value</span>
+        <p class="plan-name" id="pro-name">Pro</p>
+        <div class="price"><span class="amt" id="pro-amt">$79.99</span><span class="per" id="pro-per">/year</span></div>
+        <p class="billing" id="pro-billing">About <b style="color:#fff">$6.67 a month</b>, billed once a year <span style="color:rgba(255,255,255,.45);white-space:nowrap">· <s>$95.88</s> if paid monthly</span></p>
+        <p class="desc">For when the hard messages are not a one-off. No counting, no limits, the whole situation in view.</p>
+        <ul class="ticks">
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#fcd34d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Unlimited generations.</b> No credit counting, ever.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#fcd34d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Full conversation memory.</b> Threads are never summarized down.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#fcd34d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Linked threads.</b> Drafts draw on every related conversation.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#fcd34d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>All four premium personas</b>, each with its own voice.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3 3 7-7" stroke="#fcd34d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>12 rewrites per reply</b> and <b>unlimited voice dictation</b>.</span></li>
+        </ul>
+        <div class="cta-block">
+          <a class="btn btn-sky btn-lg" id="pro-cta" href="https://app.liaisonreply.com/auth/register?utm_source=pricing" data-billing-interval="year" data-cta-surface="pricing-page-pro-annual">Go Pro, billed yearly</a>
+          <div class="refund" role="note">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z" stroke="#fcd34d" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><b style="color:#fff">14-day refund, no questions asked.</b> Charged in the last 14 days? Email support@liaisonreply.com and we refund it in full.</span>
+          </div>
+          <p class="fine">Secure checkout through Stripe. Cancel anytime from your Stripe billing page.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Compare -->
+  <section class="block" aria-labelledby="compare-h">
+    <div class="wrap">
+      <p class="eyebrow" style="text-align:center">Free vs Pro</p>
+      <h2 id="compare-h">Free is the full loop. Pro removes the ceiling.</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col" class="pro-col">Pro</th></tr></thead>
+          <tbody>
+            <tr><td>Generations</td><td>15, shown live</td><td class="pro-col"><span class="yes">Unlimited</span></td></tr>
+            <tr><td>Three reply options per message</td><td><span class="yes">✓</span></td><td class="pro-col"><span class="yes">✓</span></td></tr>
+            <tr><td>Paste text or upload a screenshot</td><td><span class="yes">✓</span></td><td class="pro-col"><span class="yes">✓</span></td></tr>
+            <tr><td>Relationship context and direction</td><td><span class="yes">✓</span></td><td class="pro-col"><span class="yes">✓</span></td></tr>
+            <tr><td>Strategic coaching and draft polishing</td><td><span class="yes">✓</span></td><td class="pro-col"><span class="yes">✓</span></td></tr>
+            <tr><td>Thread memory</td><td>History kept</td><td class="pro-col"><span class="yes">Full, never summarized</span></td></tr>
+            <tr><td>Linked threads</td><td><span class="no">Not included</span></td><td class="pro-col"><span class="yes">✓</span></td></tr>
+            <tr><td>Premium personas</td><td>Standard set, 5 premium tries a day</td><td class="pro-col"><span class="yes">All four premium</span></td></tr>
+            <tr><td>Rewrites per reply</td><td><span class="no">Limited</span></td><td class="pro-col"><span class="yes">12</span></td></tr>
+            <tr><td>Voice dictation</td><td>5 free tries a day</td><td class="pro-col"><span class="yes">Unlimited</span></td></tr>
+            <tr><td>Price</td><td>$0, no card</td><td class="pro-col">$79.99/year or $7.99/month</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="promise">
+        <div><h3>It never sends for you</h3><p>You copy the reply you pick and send it yourself. You approve every word.</p></div>
+        <div><h3>No inbox access, ever</h3><p>It never asks for your inbox, contacts, or messaging accounts. Nothing is read until you paste it.</p></div>
+        <div><h3>Built for the hard ones</h3><p>The boss. The partner. The client. Your mother.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <p class="eyebrow" style="text-align:center">Questions</p>
+      <h2 id="faq-h">Before you upgrade</h2>
+      <div class="faq">
+        <details open>
+          <summary>Why not just use ChatGPT?</summary>
+          <p>You can, but you will be writing the prompt every time. Liaison Reply is a drafting tool built for one job: answering a hard message. You pick the relationship context and a direction (De-escalate, Set a boundary, Buy time, Get clarity, Close the loop, Keep momentum) and get three reply options. Strategic coaching flags risky wording while you edit, and each thread keeps its history, so the next draft knows what was said last week. On Pro, threads are never summarized down and you can link related conversations. It is not a chatbot you talk to. It is the read on the room, then the words.</p>
+        </details>
+        <details>
+          <summary>What happens to the messages I paste in?</summary>
+          <p>Your threads are private to you. Only you can read, edit, or delete them. Liaison Reply never asks for access to your inbox, contacts, or messaging accounts, and it reads nothing until you paste it or share a screenshot. It never sends anything for you. Full details are in our <a href="https://liaisonreply.com/privacy.html" style="color:#38bdf8">Privacy Policy</a>.</p>
+        </details>
+        <details>
+          <summary>What happens when my 15 free generations run out?</summary>
+          <p>Your threads stay where they are. To keep generating, earn bonus credits or upgrade to Pro for unlimited generations. You will find your referral code in Settings, under Invite &amp; Earn Credits. When a friend joins with your code and verifies their email, you get 5 extra credits and they get 2 extra credits. Bonus credits add on top of your 15. The app shows your remaining credits live, so it is never a surprise.</p>
+        </details>
+        <details>
+          <summary>Can I get a refund?</summary>
+          <p>Yes. If you were charged in the last 14 days, email support@liaisonreply.com and we will refund that charge in full, no questions asked. After 14 days, amounts already paid are non-refundable unless applicable law requires otherwise. See the <a href="https://liaisonreply.com/terms.html" style="color:#38bdf8">Terms</a>.</p>
+        </details>
+        <details>
+          <summary>How do I cancel?</summary>
+          <p>From your Stripe billing page, anytime. No need to call anyone. Cancellation takes effect at the end of your current billing period.</p>
+        </details>
+        <details>
+          <summary>Monthly or annual?</summary>
+          <p>Annual is $79.99/year, about $6.67 a month, which saves about 17% versus paying $7.99/month. Both billing options include everything in Pro and the same 14-day refund.</p>
+        </details>
+        <details>
+          <summary>Where do I use it?</summary>
+          <p>In your browser at app.liaisonreply.com. Nothing to download.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Read the room faster.</h2>
+      <p class="sub">Start with 15 free generations, or go Pro and stop counting.</p>
+      <div class="row">
+        <a class="btn btn-sky" id="final-pro-cta" href="https://app.liaisonreply.com/auth/register?utm_source=pricing" data-billing-interval="year" data-cta-surface="pricing-page-final-pro">Go Pro, $79.99/year</a>
+        <a class="btn btn-ghost" href="https://app.liaisonreply.com/auth/register?utm_source=pricing" data-cta-surface="pricing-page-final-free">Start Free</a>
+      </div>
+      <p class="fine" style="margin-top:1rem">14-day refund, no questions asked.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Liaison Reply. All rights reserved. Support: <a href="mailto:support@liaisonreply.com">support@liaisonreply.com</a></span>
+    <nav aria-label="Legal"><a href="https://liaisonreply.com/privacy.html">Privacy</a><a href="https://liaisonreply.com/terms.html">Terms</a><a href="https://liaisonreply.com/cookies.html">Cookies</a><a href="https://liaisonreply.com/support.html">Support</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var plans = {
+    year:  {amt:"$79.99", per:"/year", billing:'About <b style="color:#fff">$6.67 a month</b>, billed once a year <span style="color:rgba(255,255,255,.45);white-space:nowrap">· <s>$95.88</s> if paid monthly</span>', badge:"Best value", cta:"Go Pro, billed yearly", surface:"pricing-page-pro-annual", finalCta:"Go Pro, $79.99/year", finalSurface:"pricing-page-final-pro"},
+    month: {amt:"$7.99", per:"/month", billing:'Billed monthly. Annual is <b style="color:#fff">$79.99/year</b> and saves about 17%.', badge:"Pro", cta:"Go Pro, billed monthly", surface:"pricing-page-pro-monthly", finalCta:"Go Pro, $7.99/month", finalSurface:"pricing-page-final-pro"}
+  };
+  var base = "https://app.liaisonreply.com/auth/register?utm_source=pricing";
+  var by = document.getElementById("btn-year"), bm = document.getElementById("btn-month");
+  function set(i){
+    var p = plans[i];
+    by.setAttribute("aria-pressed", i==="year" ? "true" : "false"); bm.setAttribute("aria-pressed", i==="month" ? "true" : "false");
+    document.getElementById("pro-amt").textContent = p.amt;
+    document.getElementById("pro-per").textContent = p.per;
+    document.getElementById("pro-billing").innerHTML = p.billing;
+    document.getElementById("pro-badge").textContent = p.badge;
+    var c = document.getElementById("pro-cta");
+    c.textContent = p.cta; c.href = base;
+    c.setAttribute("data-billing-interval", i); c.setAttribute("data-cta-surface", p.surface);
+    var f = document.getElementById("final-pro-cta");
+    f.textContent = p.finalCta; f.href = base;
+    f.setAttribute("data-billing-interval", i); f.setAttribute("data-cta-surface", p.finalSurface);
+  }
+  by.addEventListener("click", function(){ set("year"); });
+  bm.addEventListener("click", function(){ set("month"); });
+})();
+</script>
+</body>
+</html>

@@ -4,6 +4,8 @@
   const AUTH_HINT_KEY = "liaison_auth_hint";
   const COOKIE_CONSENT_KEY = "liaison_cookie_consent";
   const ROOT_COOKIE_DOMAIN = ".liaisonreply.com";
+  window.__liaisonSiteJsPresent = true;
+
   const ANALYTICS_COOKIE_NAMES = [
     "_ga",
     "_ga_FMVPQNPPDD",
@@ -36,6 +38,10 @@
   }
 
   function trackLandingEvent(eventName, payload = {}) {
+    if (typeof window.liaisonPostHogCapture === "function") {
+      window.liaisonPostHogCapture(eventName, payload);
+    }
+
     if (typeof window.gtag !== "function") {
       return;
     }

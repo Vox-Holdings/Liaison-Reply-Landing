@@ -4,7 +4,8 @@
     "watch:css": "tailwindcss -i ./tailwind.input.css -o ./output.css --content ./index.html --watch",
     "test:analytics": "node --test ./tests/pricing-analytics-contract.test.js",
     "test:smoke": "node --test ./tests/cookie-consent-smoke.test.js",
-    "images": "node scripts/convert-images.js"
+    "images": "node scripts/convert-images.js",
+    "test:growth": "node --test ./tests/growth-analytics-contract.test.js"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",

@@ -778,6 +778,9 @@
           #interactive-demo .dm-switch[aria-checked="true"]{background:rgba(45,212,191,.35);border-color:rgba(45,212,191,.7)}
           #interactive-demo .dm-switch[aria-checked="true"]::after{left:22px;background:#5eead4}
           #interactive-demo .dm-backlink{background:none;border:0;color:#7dd3fc;font-weight:700;font-size:.86rem;cursor:pointer;padding:0;margin-bottom:16px}
+          #interactive-demo .dm-steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+          #interactive-demo .dm-steps span{border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.45);border-radius:999px;padding:.4rem .85rem;font-size:.78rem;font-weight:700}
+          #interactive-demo .dm-steps span.on{border-color:rgba(34,211,238,.6);color:#a5f3fc;background:rgba(34,211,238,.08)}
           #interactive-demo .dm-loading{display:none;text-align:center;color:rgba(255,255,255,.55);padding:44px 0;font-size:.92rem}
           @media (max-width:1023px){
             #interactive-demo .dm-side{width:198px}
@@ -817,6 +820,7 @@
               <div class="dm-plan"><b>Liaison Reply Free</b>15 generations included, no card. Pro adds better replies, full memory, and every premium persona.<a href="/pricing">See what Pro adds</a></div>
             </aside>
             <main class="dm-main">
+              <div class="dm-steps" data-dm-steps><span data-step="1" class="on">1 · Message &amp; context</span><span data-step="2">2 · Generate replies</span><span data-step="3">3 · Edit &amp; copy</span></div>
               <div class="dm-view on" data-dm-view="compose">
                 <div class="dm-panel">
                   <span class="dm-label">The message you received</span>
@@ -856,6 +860,7 @@
                         <button class="dm-chip" aria-pressed="false" type="button">Friends</button>
                         <button class="dm-chip" aria-pressed="false" type="button">Other</button>
                       </div>
+                      <p class="dm-help" data-dm-ctxnote style="display:none;margin-top:10px;color:#7dd3fc">This demo follows one work conversation. In the app, every context gets its own strategy read.</p>
                       <span class="dm-sub">Tone of voice</span>
                       <div class="dm-chips" data-dm-chips="tone">
                         <button class="dm-chip" aria-pressed="true" type="button">Professional</button>
@@ -879,18 +884,19 @@
                       </div>
                     </div>
                   </div>
+                  <div style="margin-top:18px"><button class="dm-cta" data-dm-generate type="button">Generate replies</button><p class="dm-help" style="text-align:center;margin:10px 0 0">Prewritten for this conversation. Change the steering direction above and generate again to watch the strategy change.</p></div>
                 </div>
               </div>
               <div class="dm-loading" data-dm-loading>Reading the room and writing your replies…</div>
               <div class="dm-view" data-dm-view="replies">
                 <button class="dm-backlink" data-dm-goto="compose" type="button">← Back to compose</button>
-                <div class="dm-strategy">The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.</div>
+                <div class="dm-strategy"><p class="dm-eyebrow" data-dm-echo></p><span data-dm-strategy></span></div>
                 <div data-dm-replies style="margin-top:4px"></div>
                 <div class="dm-actions"><button class="dm-ghost" data-dm-generate type="button">Regenerate</button></div>
               </div>
               <div class="dm-view" data-dm-view="edit">
                 <button class="dm-backlink" data-dm-goto="replies" type="button">← Back to replies</button>
-                <div class="dm-strategy" style="margin-bottom:16px">The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.</div>
+                <div class="dm-strategy" style="margin-bottom:16px"><p class="dm-eyebrow" data-dm-echo2></p><span data-dm-strategy2></span></div>
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="dm-chip" style="cursor:default;border-color:rgba(45,212,191,.55);color:#ccfbf1" data-dm-edit-tag>Direct &amp; Accountable</span><span style="color:#38bdf8;font-size:.85rem;font-weight:700">Editing</span></div>
                 <textarea class="dm-input" rows="4" style="margin-top:14px" data-dm-draft></textarea>
                 <div class="dm-coach" data-dm-coach>
@@ -961,24 +967,88 @@
           (() => {
             const root = document.getElementById("interactive-demo");
             if (!root) return;
-            const REPLIES = [
-              { tag: "Direct & Accountable", text: "Hey, absolutely. I sent it because the client asked for it early and you were out. I'm sorry it landed without your review. Can we go through it together first thing?" },
-              { tag: "Warm & Collaborative", text: "You're right, that should not have gone out without your eyes on it. The client pushed for it early while you were out and I made the call. I should have flagged it to you first. It won't happen again." },
-              { tag: "Calm & Brief", text: "Fair point. The client asked for it early and you were out, so I sent it. I get why that is a problem. Can we set a rule for next time so I know when to hold?" }
-            ];
+            const SETS = {
+              "De-escalate": {
+                strategy: "The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.",
+                replies: [
+                  { tag: "Direct & Accountable", text: "Hey, absolutely. I sent it because the client asked for it early and you were out. I'm sorry it landed without your review. Can we go through it together first thing?" },
+                  { tag: "Warm & Collaborative", text: "You're right, that should not have gone out without your eyes on it. The client pushed for it early while you were out and I made the call. I should have flagged it to you first. It won't happen again." },
+                  { tag: "Calm & Brief", text: "Fair point. The client asked for it early and you were out, so I sent it. I get why that is a problem. Can we set a rule for next time so I know when to hold?" }
+                ]
+              },
+              "Keep momentum": {
+                strategy: "The suggested responses aim to keep momentum: acknowledge the miss in one line, give the reason briefly, and move straight to what happens next, so the project stays the focus instead of the mistake.",
+                replies: [
+                  { tag: "Direct & Accountable", text: "You're right, and I should have looped you in. The client asked for it early while you were out, so I made the call to keep us on schedule. Let's review it together tomorrow and adjust anything you want changed." },
+                  { tag: "Warm & Collaborative", text: "Totally fair. It went out early because the client was pressing and you were away. I kept it moving, but next time I'll hold for your review unless you tell me otherwise." },
+                  { tag: "Calm & Brief", text: "Fair. Client needed it early and you were out, so I sent it to keep us on track. Happy to walk through it together tomorrow." }
+                ]
+              },
+              "Set a boundary": {
+                strategy: "The suggested responses aim to set a boundary respectfully: own the call you made, name the constraint you were under, and ask for a clear rule, instead of absorbing a vague reprimand or getting defensive.",
+                replies: [
+                  { tag: "Direct & Accountable", text: "I understand the concern. The client asked for it early and you were out, so I used my judgment rather than miss the deadline. I'd rather we agree on when I should hold and when I should send, so this does not come up again." },
+                  { tag: "Warm & Collaborative", text: "I hear you. I was not trying to go around you; the timing forced a call. Going forward I need us to be clear on who signs off when you are out, because I cannot leave a client waiting without a rule to point to." },
+                  { tag: "Calm & Brief", text: "Understood. When you are out and a client deadline hits, I need a standing rule: hold it, or send it. Which would you prefer?" }
+                ]
+              },
+              "Buy time": {
+                strategy: "The suggested responses aim to buy time: acknowledge the message tonight without conceding or defending, and move the real conversation to tomorrow, when you have the facts in front of you.",
+                replies: [
+                  { tag: "Direct & Accountable", text: "You are right to flag it. I do not want to hash it out over text tonight. Can we sit down first thing tomorrow and go through what happened?" },
+                  { tag: "Warm & Collaborative", text: "Noted, and I take it seriously. Let me pull the thread and the timing together so I can walk you through it properly tomorrow." },
+                  { tag: "Calm & Brief", text: "Fair. Let me look at exactly what went out and when, and I will come to you first thing with the full picture." }
+                ]
+              },
+              "Get clarity": {
+                strategy: "The suggested responses aim to get clarity: ask whether the issue is the deck itself or the sign-off, so you fix the real problem instead of guessing at it.",
+                replies: [
+                  { tag: "Direct & Accountable", text: "I want to get this right. Was the issue the deck itself, or that it went out without your review? The client asked for it early while you were out, so I made the call, but I want to understand exactly what you needed." },
+                  { tag: "Warm & Collaborative", text: "Can you tell me what worried you most: the content, or the process? That helps me fix the right thing before tomorrow." },
+                  { tag: "Calm & Brief", text: "Before tomorrow, one question: is there anything in the deck you would have changed? I sent it because the client pressed early, but I want to know what I missed." }
+                ]
+              },
+              "Close the loop": {
+                strategy: "The suggested responses aim to close the loop: own the miss, state the fix, and confirm the new rule, so nothing is left hanging between you and your manager.",
+                replies: [
+                  { tag: "Direct & Accountable", text: "You are right, it should not have gone out without your review. The client asked early and you were out, and I made the wrong call. From now on nothing leaves without your sign-off, even if it means the client waits. Consider it handled." },
+                  { tag: "Warm & Collaborative", text: "Closing the loop on this: I sent it early at the client's request while you were out, and that skipped your review. New rule on my side: your review first, always. If timing is tight I will flag you instead of sending." },
+                  { tag: "Calm & Brief", text: "Owned. It will not go out without your review again. If a client pushes while you are out, I will tell them it is pending your sign-off." }
+                ]
+              }
+            };
             const RISKY = " Honestly, it's not my fault you weren't around.";
             const views = root.querySelectorAll("[data-dm-view]");
             const loading = root.querySelector("[data-dm-loading]");
+            const steps = root.querySelector("[data-dm-steps]");
+            const repliesWrap = root.querySelector("[data-dm-replies]");
+            let current = SETS["De-escalate"];
+            function selectedLabel(name) {
+              const g = root.querySelector('[data-dm-chips="' + name + '"]');
+              const on = g && g.querySelector('[aria-pressed="true"]');
+              return on ? on.textContent.trim() : "";
+            }
             function show(name) {
               views.forEach(v => v.classList.toggle("on", v.dataset.dmView === name));
               loading.style.display = "none";
               root.querySelectorAll("[data-dm-goto]").forEach(b => {
                 if (b.classList.contains("dm-nav2") || b.classList.contains("dm-tab")) b.setAttribute("aria-current", String(b.dataset.dmGoto === name));
               });
+              const stepFor = { compose: "1", replies: "2", edit: "3" }[name];
+              steps.style.display = stepFor ? "flex" : "none";
+              if (stepFor) steps.querySelectorAll("span").forEach(s => s.classList.toggle("on", s.dataset.step === stepFor));
             }
             root.querySelectorAll("[data-dm-goto]").forEach(b => b.addEventListener("click", () => show(b.dataset.dmGoto)));
+            const ctxNote = root.querySelector("[data-dm-ctxnote]");
+            let ctxTimer = null;
             root.querySelectorAll("[data-dm-chips]").forEach(group => {
               group.querySelectorAll(".dm-chip").forEach(chip => chip.addEventListener("click", () => {
+                if (group.dataset.dmChips === "context" && chip.textContent.trim() !== "Work") {
+                  ctxNote.style.display = "block";
+                  clearTimeout(ctxTimer);
+                  ctxTimer = setTimeout(() => { ctxNote.style.display = "none"; }, 4000);
+                  return;
+                }
                 group.querySelectorAll(".dm-chip").forEach(c => c.setAttribute("aria-pressed", "false"));
                 chip.setAttribute("aria-pressed", "true");
               }));
@@ -986,21 +1056,31 @@
             const personaBtn = root.querySelector("[data-dm-persona]");
             const personaMenu = root.querySelector("[data-dm-persona-menu]");
             personaBtn.addEventListener("click", () => { personaMenu.style.display = personaMenu.style.display === "none" ? "block" : "none"; });
-            const repliesWrap = root.querySelector("[data-dm-replies]");
-            REPLIES.forEach((r, i) => {
-              const btn = document.createElement("button");
-              btn.type = "button"; btn.className = "dm-reply"; btn.dataset.dmPick = String(i);
-              btn.innerHTML = '<span class="dm-tag"></span><p></p><span class="dm-edit">Tap to edit with coaching</span>';
-              btn.querySelector(".dm-tag").textContent = r.tag;
-              btn.querySelector("p").textContent = r.text;
-              btn.addEventListener("click", () => openEdit(i));
-              repliesWrap.appendChild(btn);
-            });
-            root.querySelectorAll("[data-dm-generate]").forEach(b => b.addEventListener("click", () => {
+            function generate() {
+              const dir = selectedLabel("direction") || "De-escalate";
+              current = SETS[dir] || SETS["De-escalate"];
+              const echo = (selectedLabel("context") || "Work") + " · " + (selectedLabel("tone") || "Professional") + " · " + dir;
+              root.querySelector("[data-dm-echo]").textContent = echo;
+              root.querySelector("[data-dm-echo2]").textContent = echo;
+              root.querySelector("[data-dm-strategy]").textContent = current.strategy;
+              root.querySelector("[data-dm-strategy2]").textContent = current.strategy;
+              repliesWrap.innerHTML = "";
+              current.replies.forEach((r, i) => {
+                const btn = document.createElement("button");
+                btn.type = "button"; btn.className = "dm-reply";
+                btn.innerHTML = '<span class="dm-tag"></span><p></p><span class="dm-edit">Tap to edit with coaching</span>';
+                btn.querySelector(".dm-tag").textContent = r.tag;
+                btn.querySelector("p").textContent = r.text;
+                btn.addEventListener("click", () => openEdit(i));
+                repliesWrap.appendChild(btn);
+              });
               views.forEach(v => v.classList.remove("on"));
+              steps.style.display = "flex";
+              steps.querySelectorAll("span").forEach(s => s.classList.toggle("on", s.dataset.step === "2"));
               loading.style.display = "block";
               setTimeout(() => show("replies"), 650);
-            }));
+            }
+            root.querySelectorAll("[data-dm-generate]").forEach(b => b.addEventListener("click", generate));
             const draft = root.querySelector("[data-dm-draft]");
             const coach = root.querySelector("[data-dm-coach]");
             const badge = root.querySelector("[data-dm-badge]");
@@ -1025,8 +1105,8 @@
               }
             }
             function openEdit(i) {
-              draft.value = REPLIES[i].text; risky = false; copied.style.display = "none";
-              editTag.textContent = REPLIES[i].tag; renderCoach(); show("edit");
+              draft.value = current.replies[i].text; risky = false; copied.style.display = "none";
+              editTag.textContent = current.replies[i].tag; renderCoach(); show("edit");
             }
             riskBtn.addEventListener("click", () => {
               if (!risky) { draft.value = draft.value.replace(/([.!?])\s*$/, RISKY); risky = true; }
@@ -1044,6 +1124,7 @@
             const toggle = root.querySelector("[data-dm-toggle]");
             toggle.addEventListener("click", () => toggle.setAttribute("aria-checked", String(toggle.getAttribute("aria-checked") !== "true")));
           })();
+
         </script>
       </section>
 
@@ -1398,6 +1479,24 @@
           }, { threshold: 0.05 }).observe(hero);
         } else if (bar) {
           bar.style.transform = "translateY(0)";
+        }
+      })();
+    </script>
+        <script>
+      (function () {
+        var seen = false;
+        function hideDemoButtons() {
+          if (seen) return;
+          seen = true;
+          document.querySelectorAll(".demo-btn").forEach(function (b) { b.style.display = "none"; });
+        }
+        document.querySelectorAll(".demo-btn").forEach(function (b) { b.addEventListener("click", hideDemoButtons); });
+        var demo = document.getElementById("interactive-demo");
+        if (demo && "IntersectionObserver" in window) {
+          var watcher = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) { hideDemoButtons(); watcher.disconnect(); } });
+          }, { threshold: 0.12 });
+          watcher.observe(demo);
         }
       })();
     </script>

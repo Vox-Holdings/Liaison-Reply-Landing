@@ -1495,8 +1495,14 @@
         if (demo && "IntersectionObserver" in window) {
           var watcher = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) { if (e.isIntersecting) { hideDemoButtons(); watcher.disconnect(); } });
-          }, { threshold: 0.12 });
+          }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
           watcher.observe(demo);
+        }
+        if (demo) {
+          window.addEventListener("scroll", function () {
+            var r = demo.getBoundingClientRect();
+            if (r.top < window.innerHeight && r.bottom > 0) hideDemoButtons();
+          }, { passive: true });
         }
       })();
     </script>

@@ -165,6 +165,8 @@
       <style>
       .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s ease; }
       .reveal.in { opacity: 1; transform: none; }
+      html { scroll-behavior: smooth; }
+      #interactive-demo { scroll-margin-top: 20px; }
       .wf-strip { display: grid; gap: 20px 16px; grid-template-columns: 1fr 1fr; grid-template-areas: "l1 l1" "i1 i1" "l2 l2" "i2 i2" "l3 l3" "p1 p2"; }
       .wf-l1 { grid-area: l1; } .wf-l2 { grid-area: l2; } .wf-l3 { grid-area: l3; }
       .wf-i1 { grid-area: i1; } .wf-i2 { grid-area: i2; } .wf-p1 { grid-area: p1; } .wf-p2 { grid-area: p2; }
@@ -230,6 +232,12 @@
               data-session-path="/chat"
               class="mt-10 block w-full text-center rounded-2xl bg-sky-500 px-10 py-5 text-lg font-bold text-black shadow-[0_0_40px_rgba(56,189,248,0.35)] hover:bg-sky-400 hover:shadow-[0_0_60px_rgba(56,189,248,0.5)] active:scale-[0.98] transition-all duration-200 sm:inline-block sm:w-auto"
             >Start Free</a>
+            <a
+              href="#interactive-demo"
+              data-cta-surface="hero-demo"
+              data-cta-label="Try a Demo"
+              class="mt-4 block w-full text-center rounded-2xl bg-amber-500 px-10 py-5 text-lg font-bold text-black shadow-[0_0_40px_rgba(245,158,11,0.30)] hover:bg-amber-400 active:scale-[0.98] transition-all duration-200 sm:inline-block sm:w-auto sm:mt-10 sm:ml-4"
+            >Try a Demo</a>
             <p class="mt-4 text-sm text-white/50">Your first 15 generations are free. No card. It runs in your browser.</p>
           </div>
 
@@ -697,7 +705,7 @@
           #interactive-demo .dm-ico svg{width:18px;height:18px}
           #interactive-demo .dm-chips{display:flex;flex-wrap:wrap;gap:8px}
           #interactive-demo .dm-chip{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:rgba(255,255,255,.75);border-radius:999px;padding:.5rem .85rem;font-size:.84rem;font-weight:600;cursor:pointer}
-          #interactive-demo .dm-chip[aria-pressed="true"]{border-color:rgba(45,212,191,.85);background:rgba(45,212,191,.16);color:#ccfbf1}
+          #interactive-demo .dm-chip[aria-pressed="true"]{border-color:transparent;background:rgba(45,212,191,.92);color:#03211c}
           #interactive-demo .dm-cta{display:block;width:100%;margin-top:26px;border:0;border-radius:14px;background:#22d3ee;color:#083344;font-size:.95rem;font-weight:800;padding:.85rem 1rem;cursor:pointer}
           #interactive-demo .dm-cta:hover{background:#67e8f9}
           #interactive-demo .dm-ghost{border:1px solid rgba(255,255,255,.16);background:transparent;color:rgba(255,255,255,.8);border-radius:12px;padding:.6rem 1rem;font-size:.86rem;font-weight:700;cursor:pointer}
@@ -709,8 +717,8 @@
           #interactive-demo .dm-reply p{margin:8px 0 0;line-height:1.6;font-size:.94rem}
           #interactive-demo .dm-reply .dm-edit{color:rgba(255,255,255,.4);font-size:.78rem;font-weight:700}
           #interactive-demo .dm-badge{display:inline-block;border-radius:999px;padding:.32rem .8rem;font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
-          #interactive-demo .dm-badge.ok{background:rgba(52,211,153,.18);color:#6ee7b7}
-          #interactive-demo .dm-badge.warn{background:rgba(251,113,133,.18);color:#fda4af}
+          #interactive-demo .dm-badge.ok{background:#34d399;color:#052e22}
+          #interactive-demo .dm-badge.warn{background:#fda4af;color:#4c0519}
           #interactive-demo .dm-coach{margin-top:16px;border-radius:16px;padding:16px;border:1px solid rgba(52,211,153,.35);background:rgba(52,211,153,.06)}
           #interactive-demo .dm-coach.warn{border-color:rgba(251,113,133,.35);background:rgba(251,113,133,.06)}
           #interactive-demo .dm-coach h4{margin:10px 0 0;color:#fff;font-size:.98rem;line-height:1.5}
@@ -771,7 +779,7 @@
             <main class="dm-main">
               <div class="dm-view on" data-dm-view="compose">
                 <span class="dm-label">What did they say?</span>
-                <textarea class="dm-input" rows="3" data-dm-incoming>Saw the deck went to the client without my review. We need to talk about this first thing tomorrow.</textarea>
+                <div style="position:relative"><textarea class="dm-input" rows="3" data-dm-incoming>Saw the deck went to the client without my review. We need to talk about this first thing tomorrow.</textarea><span style="position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.18);background:rgba(8,13,24,.88);color:rgba(255,255,255,.85);border-radius:999px;padding:.3rem .75rem;font-size:.75rem;font-weight:700">Paste</span></div>
                 <div class="dm-rowcard"><span class="dm-ico"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.6-4.6a2 2 0 012.8 0L16 16m-2-2 1.6-1.6a2 2 0 012.8 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></span><span><b>Fastest way in</b>Add screenshots. We rebuild the thread, reading them on this device where possible, or through our secure reading service, which doesn't store them.</span></div>
                 <div class="dm-rowcard"><span class="dm-ico"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-14 0m7 7v3m-4 0h8M12 11a3 3 0 003-3V5a3 3 0 10-6 0v3a3 3 0 003 3z"/></svg></span><span><b>Vent by voice</b>Capture the raw thought, no typing needed.</span></div>
                 <span class="dm-label">The Reality (Raw thoughts)</span>
@@ -813,14 +821,14 @@
               <div class="dm-loading" data-dm-loading>Reading the room and writing your replies…</div>
               <div class="dm-view" data-dm-view="replies">
                 <button class="dm-backlink" data-dm-goto="compose" type="button">← Back to compose</button>
-                <div class="dm-strategy"><p class="dm-eyebrow">The read</p>The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.</div>
-                <span class="dm-label">Three ways to answer</span>
-                <div data-dm-replies></div>
+                <div class="dm-strategy">The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.</div>
+                <div data-dm-replies style="margin-top:4px"></div>
                 <div class="dm-actions"><button class="dm-ghost" data-dm-generate type="button">Regenerate</button></div>
               </div>
               <div class="dm-view" data-dm-view="edit">
                 <button class="dm-backlink" data-dm-goto="replies" type="button">← Back to replies</button>
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="dm-chip" style="cursor:default" data-dm-edit-tag>Direct &amp; Accountable</span><span style="color:#38bdf8;font-size:.85rem;font-weight:700">Editing</span></div>
+                <div class="dm-strategy" style="margin-bottom:16px">The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="dm-chip" style="cursor:default;border-color:rgba(45,212,191,.55);color:#ccfbf1" data-dm-edit-tag>Direct &amp; Accountable</span><span style="color:#38bdf8;font-size:.85rem;font-weight:700">Editing</span></div>
                 <textarea class="dm-input" rows="4" style="margin-top:14px" data-dm-draft></textarea>
                 <div class="dm-coach" data-dm-coach>
                   <span class="dm-badge ok" data-dm-badge>Aligned</span>
@@ -1265,19 +1273,29 @@
       </div>
     </aside>
 
-        <!-- Sticky mobile CTA -->
+        <!-- Sticky CTA -->
     <div id="sticky-cta" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:0 1rem 1rem;transform:translateY(110%);transition:transform 0.45s ease">
-      <a
-        href="https://app.liaisonreply.com/auth/register"
-        data-session-primary
-        data-cta-surface="sticky-mobile"
-        data-cta-label="Try it free"
-        data-auth-text="Start Free"
-        data-session-text="Open Liaison Reply"
-        data-auth-path="https://app.liaisonreply.com/auth/register"
-        data-session-path="/chat"
-        class="block w-full text-center rounded-2xl bg-sky-500 px-6 py-4 font-bold text-black shadow-2xl"
-      >Start Free</a>
+      <div style="display:flex;gap:.6rem;max-width:600px;margin:0 auto">
+        <a
+          href="https://app.liaisonreply.com/auth/register"
+          data-session-primary
+          data-cta-surface="sticky-mobile"
+          data-cta-label="Try it free"
+          data-auth-text="Start Free"
+          data-session-text="Open Liaison Reply"
+          data-auth-path="https://app.liaisonreply.com/auth/register"
+          data-session-path="/chat"
+          style="flex:1 1 0"
+          class="block text-center rounded-2xl bg-sky-500 px-4 py-4 font-bold text-black shadow-2xl"
+        >Start Free</a>
+        <a
+          href="#interactive-demo"
+          data-cta-surface="sticky-demo"
+          data-cta-label="Try Demo"
+          style="flex:1 1 0"
+          class="block text-center rounded-2xl bg-amber-500 px-4 py-4 font-bold text-black shadow-2xl"
+        >Try Demo</a>
+      </div>
     </div>
 
     <script>
@@ -1295,17 +1313,16 @@
         }
         var bar = document.getElementById("sticky-cta");
         var hero = document.getElementById("hero");
-        var smallScreen = window.matchMedia && window.matchMedia("(max-width: 639px)").matches;
-        if (bar && smallScreen) {
+        if (bar) {
           bar.style.display = "block";
         }
-        if (bar && hero && smallScreen && "IntersectionObserver" in window) {
+        if (bar && hero && "IntersectionObserver" in window) {
           new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
               bar.style.transform = e.isIntersecting ? "translateY(110%)" : "translateY(0)";
             });
           }, { threshold: 0.05 }).observe(hero);
-        } else if (bar && smallScreen) {
+        } else if (bar) {
           bar.style.transform = "translateY(0)";
         }
       })();

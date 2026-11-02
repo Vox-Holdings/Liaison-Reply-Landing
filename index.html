@@ -1287,7 +1287,7 @@
               editTag.textContent = current.replies[i].tag; renderCoach(); show("edit");
             }
             riskBtn.addEventListener("click", () => {
-              if (!risky) { draft.value = draft.value.replace(/([.!?])\s*$/, scenario().risky); risky = true; }
+              if (!risky) { draft.value = draft.value.replace(/([.!?])\s*$/, "$1" + scenario().risky); risky = true; }
               else { draft.value = draft.value.replace(scenario().risky, ""); risky = false; }
               copied.style.display = "none"; renderCoach();
             });

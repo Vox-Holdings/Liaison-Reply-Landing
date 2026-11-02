@@ -519,27 +519,32 @@
 
       <!-- MEMORY -->
       <section class="mx-auto max-w-6xl px-6 py-24" data-reveal>
-        <div class="grid grid-cols-1 gap-16 md:grid-cols-2 md:items-center">
-          <div class="min-w-0">
-            <p class="text-sm font-bold uppercase tracking-widest text-sky-400">Memory</p>
-            <h2 class="mt-3 text-3xl font-black md:text-4xl">The conversation does not reset.</h2>
-            <p class="mt-4 leading-relaxed text-white/60">Every thread keeps its history, so drafts know what was said last week, not just the last message. On Pro, threads are never summarized down.</p>
-            <div class="faq-item mt-8 border-t border-b border-white/10">
-              <button class="faq-toggle flex w-full items-center justify-between py-5 text-left group" aria-expanded="false">
-                <span class="text-base font-medium text-white group-hover:text-sky-300 transition-colors">What are linked threads?</span>
-                <svg class="faq-icon h-5 w-5 text-white/40 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-              </button>
-              <div class="faq-panel overflow-hidden transition-all duration-300 ease-out" style="max-height:0;opacity:0">
-                <p class="text-sm leading-relaxed text-white/60">Some situations span conversations: the same problem with your partner, your manager, your client. Link the threads and Pro drafts draw on all of them.</p>
-                <img src="assets/previews/link-conversations-real.png" alt="The Link Conversations panel in Liaison Reply, where related conversations are linked" width="1165" height="460" loading="lazy" decoding="async" class="w-full rounded-2xl border border-white/5" style="margin-top:12px;margin-bottom:20px" />
-              </div>
-            </div>
+        <div class="max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-widest text-sky-400">Memory</p>
+          <h2 class="mt-3 text-3xl font-black md:text-4xl">The conversation does not reset.</h2>
+          <p class="mt-4 leading-relaxed text-white/60">Every thread keeps its history, so drafts know what was said last week, not just the last message.</p>
+          <ul class="mt-8 space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+              <span class="leading-relaxed text-white/60"><span class="font-bold text-white">Full thread memory.</span> Your conversations stay whole in History, ready to pick up where you left off.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+              <span class="leading-relaxed text-white/60"><span class="font-bold text-white">Pro threads are never summarized down.</span> On Pro, the full history stays intact however long the thread runs, so nothing gets flattened into a summary.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+              <span class="leading-relaxed text-white/60"><span class="font-bold text-white">Linked threads.</span> Some situations span conversations: the same problem with your partner, your manager, your client. Link the threads and Pro drafts draw on all of them.</span>
+            </li>
+          </ul>
+          <div class="mt-8" style="max-width:680px">
+            <img src="assets/previews/link-conversations-real.png" alt="The Link Conversations panel in Liaison Reply, where related conversations are linked" width="1165" height="460" loading="lazy" decoding="async" class="w-full rounded-2xl border border-white/5" />
+            <p class="mt-3 text-sm text-white/50">The Link Conversations panel, where related threads are joined.</p>
           </div>
-          <div class="relative mx-auto w-full" style="max-width:560px">
-            <div class="rounded-2xl border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
-              <img
+        </div>
+        <figure class="mx-auto mt-16" style="max-width:1000px">
+          <div class="rounded-2xl border border-white/10 bg-gradient-to-b from-[#101828] to-[#060a12] p-3 shadow-2xl">
+            <img
                 src="assets/previews/history-threads-real.png"
                 alt="The History view in Liaison Reply, where your past conversations are kept"
                 width="1165"
@@ -548,10 +553,9 @@
                 decoding="async"
                 class="w-full rounded-2xl border border-white/5"
               />
-            </div>
-            <p class="mt-4 text-center text-sm text-white/50">Your saved conversations, in History</p>
           </div>
-        </div>
+          <figcaption class="mt-4 text-center text-sm text-white/50">Your saved conversations, in History</figcaption>
+        </figure>
       </section>
 
       <!-- COACHING -->

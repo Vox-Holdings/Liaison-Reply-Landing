@@ -666,63 +666,302 @@
       <!-- INTERACTIVE DEMO -->
       <section id="interactive-demo" class="mx-auto max-w-6xl px-6 py-24" data-reveal>
         <style>
-          #interactive-demo .demo-shell{border:1px solid rgba(255,255,255,.1);border-radius:28px;background:linear-gradient(145deg,rgba(19,29,48,.96),rgba(7,12,23,.98));padding:clamp(1.25rem,3vw,2.25rem);box-shadow:0 30px 90px rgba(0,0,0,.28)}
-          #interactive-demo .demo-controls{display:grid;gap:1.35rem;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:2rem}
-          #interactive-demo .demo-label{display:block;color:rgba(255,255,255,.48);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem}
-          #interactive-demo .demo-pills{display:flex;flex-wrap:wrap;gap:.55rem}
-          #interactive-demo .demo-pill{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:rgba(255,255,255,.72);border-radius:999px;padding:.62rem .82rem;font-size:.82rem;font-weight:700;cursor:pointer;transition:.2s}
-          #interactive-demo .demo-pill[aria-pressed="true"]{border-color:rgba(56,189,248,.9);background:rgba(56,189,248,.16);color:#d8f7ff}
-          #interactive-demo .demo-grid{display:grid;gap:1rem;grid-template-columns:1.05fr .95fr;margin-top:2rem}
-          #interactive-demo .demo-card{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:20px;padding:1.2rem}
-          #interactive-demo .demo-message{color:rgba(255,255,255,.88);font-size:1rem;line-height:1.65}
-          #interactive-demo .demo-meta{color:rgba(255,255,255,.45);font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}
-          #interactive-demo .demo-replies{display:grid;gap:.75rem;margin-top:1rem}
-          #interactive-demo .demo-reply{border-left:2px solid #38bdf8;padding:.75rem .9rem;background:rgba(56,189,248,.06);color:rgba(255,255,255,.8);line-height:1.55}
-          #interactive-demo .demo-coaching{margin-top:1rem;border:1px solid rgba(251,191,36,.25);background:rgba(251,191,36,.07);border-radius:14px;padding:.85rem;color:rgba(255,255,255,.72);line-height:1.5}
-          #interactive-demo .demo-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1.35rem}
-          @media(max-width:760px){#interactive-demo .demo-controls,#interactive-demo .demo-grid{grid-template-columns:1fr}}
+          #interactive-demo .dm-frame{border:1px solid rgba(255,255,255,.1);border-radius:28px;background:linear-gradient(160deg,#0d1626,#060a12);box-shadow:0 30px 90px rgba(0,0,0,.35);overflow:hidden;text-align:left}
+          #interactive-demo .dm-body{display:flex;min-height:640px}
+          #interactive-demo .dm-side{width:218px;flex:0 0 auto;border-right:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:20px 14px;display:flex;flex-direction:column;gap:6px}
+          #interactive-demo .dm-logo{display:flex;align-items:center;gap:10px;padding:2px 8px 16px;color:#fff;font-weight:800;font-size:.95rem}
+          #interactive-demo .dm-logo-mark{width:28px;height:28px;border-radius:9px;background:linear-gradient(145deg,#38bdf8,#0ea5e9);display:flex;align-items:center;justify-content:center;color:#04263b;font-weight:900;font-size:.8rem}
+          #interactive-demo .dm-new{margin:0 4px 12px;border:1px solid rgba(56,189,248,.4);background:rgba(56,189,248,.1);color:#bae6fd;border-radius:12px;padding:.55rem .8rem;font-size:.82rem;font-weight:700;cursor:pointer;text-align:left}
+          #interactive-demo .dm-nav{display:flex;align-items:center;gap:11px;width:100%;border:0;background:transparent;color:rgba(255,255,255,.62);border-radius:12px;padding:.6rem .8rem;font-size:.88rem;font-weight:600;cursor:pointer;text-align:left}
+          #interactive-demo .dm-nav svg{width:19px;height:19px;flex:0 0 auto}
+          #interactive-demo .dm-nav[aria-current="true"]{background:rgba(56,189,248,.16);color:#e0f7ff}
+          #interactive-demo .dm-plan{margin-top:auto;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);border-radius:14px;padding:12px;color:rgba(255,255,255,.6);font-size:.78rem;line-height:1.5}
+          #interactive-demo .dm-plan b{color:#fff;display:block;font-size:.84rem}
+          #interactive-demo .dm-plan a{display:inline-block;margin-top:8px;color:#38bdf8;font-weight:700;text-decoration:none}
+          #interactive-demo .dm-main{flex:1 1 auto;min-width:0;padding:26px 26px 30px}
+          #interactive-demo .dm-topbar{display:none;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);color:#fff;font-weight:800}
+          #interactive-demo .dm-tabs{display:none;border-top:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+          #interactive-demo .dm-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 11px;background:transparent;border:0;color:rgba(255,255,255,.5);font-size:.66rem;font-weight:700;cursor:pointer}
+          #interactive-demo .dm-tab svg{width:20px;height:20px}
+          #interactive-demo .dm-tab[aria-current="true"]{color:#38bdf8}
+          #interactive-demo .dm-view{display:none;max-width:660px;margin:0 auto}
+          #interactive-demo .dm-view.on{display:block}
+          #interactive-demo .dm-label{display:block;color:rgba(255,255,255,.85);font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:22px 0 8px}
+          #interactive-demo .dm-label:first-child{margin-top:0}
+          #interactive-demo .dm-help{color:rgba(255,255,255,.42);font-size:.8rem;line-height:1.5;margin:0 0 10px}
+          #interactive-demo .dm-input{width:100%;box-sizing:border-box;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);color:rgba(255,255,255,.92);border-radius:14px;padding:13px 14px;font-size:.95rem;line-height:1.55;font-family:inherit;resize:vertical}
+          #interactive-demo .dm-input:focus{outline:2px solid rgba(56,189,248,.55);outline-offset:1px}
+          #interactive-demo .dm-rowcard{display:flex;gap:12px;align-items:flex-start;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);border-radius:14px;padding:13px 14px;margin-top:12px;color:rgba(255,255,255,.65);font-size:.86rem;line-height:1.55}
+          #interactive-demo .dm-rowcard b{color:#fff;display:block;font-size:.9rem}
+          #interactive-demo .dm-ico{width:34px;height:34px;flex:0 0 auto;border-radius:10px;background:rgba(56,189,248,.14);color:#7dd3fc;display:flex;align-items:center;justify-content:center}
+          #interactive-demo .dm-ico svg{width:18px;height:18px}
+          #interactive-demo .dm-chips{display:flex;flex-wrap:wrap;gap:8px}
+          #interactive-demo .dm-chip{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:rgba(255,255,255,.75);border-radius:999px;padding:.5rem .85rem;font-size:.84rem;font-weight:600;cursor:pointer}
+          #interactive-demo .dm-chip[aria-pressed="true"]{border-color:rgba(45,212,191,.85);background:rgba(45,212,191,.16);color:#ccfbf1}
+          #interactive-demo .dm-cta{display:block;width:100%;margin-top:26px;border:0;border-radius:14px;background:#22d3ee;color:#083344;font-size:.95rem;font-weight:800;padding:.85rem 1rem;cursor:pointer}
+          #interactive-demo .dm-cta:hover{background:#67e8f9}
+          #interactive-demo .dm-ghost{border:1px solid rgba(255,255,255,.16);background:transparent;color:rgba(255,255,255,.8);border-radius:12px;padding:.6rem 1rem;font-size:.86rem;font-weight:700;cursor:pointer}
+          #interactive-demo .dm-strategy{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);border-radius:16px;padding:16px;color:rgba(255,255,255,.72);font-size:.9rem;line-height:1.6}
+          #interactive-demo .dm-eyebrow{color:rgba(255,255,255,.4);font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px}
+          #interactive-demo .dm-reply{width:100%;text-align:left;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);border-radius:16px;padding:16px;margin-top:12px;cursor:pointer;color:rgba(255,255,255,.85)}
+          #interactive-demo .dm-reply:hover{border-color:rgba(56,189,248,.5)}
+          #interactive-demo .dm-reply .dm-tag{color:#7dd3fc;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+          #interactive-demo .dm-reply p{margin:8px 0 0;line-height:1.6;font-size:.94rem}
+          #interactive-demo .dm-reply .dm-edit{color:rgba(255,255,255,.4);font-size:.78rem;font-weight:700}
+          #interactive-demo .dm-badge{display:inline-block;border-radius:999px;padding:.32rem .8rem;font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+          #interactive-demo .dm-badge.ok{background:rgba(52,211,153,.18);color:#6ee7b7}
+          #interactive-demo .dm-badge.warn{background:rgba(251,113,133,.18);color:#fda4af}
+          #interactive-demo .dm-coach{margin-top:16px;border-radius:16px;padding:16px;border:1px solid rgba(52,211,153,.35);background:rgba(52,211,153,.06)}
+          #interactive-demo .dm-coach.warn{border-color:rgba(251,113,133,.35);background:rgba(251,113,133,.06)}
+          #interactive-demo .dm-coach h4{margin:10px 0 0;color:#fff;font-size:.98rem;line-height:1.5}
+          #interactive-demo .dm-coach ul{margin:10px 0 0;padding-left:18px;color:rgba(255,255,255,.65);line-height:1.6;font-size:.88rem}
+          #interactive-demo .dm-notes{margin-top:14px;border-top:1px solid rgba(255,255,255,.09);padding-top:12px}
+          #interactive-demo .dm-notes .dm-flag{color:#fda4af;font-size:.7rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-left:6px}
+          #interactive-demo .dm-notes p{color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.6;margin:6px 0 0}
+          #interactive-demo .dm-notes .dm-try{color:rgba(255,255,255,.85);font-style:italic}
+          #interactive-demo .dm-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+          #interactive-demo .dm-actions .dm-cta{margin-top:0;flex:1 1 200px}
+          #interactive-demo .dm-copied{display:none;margin-top:14px;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.08);border-radius:12px;padding:12px 14px;color:rgba(255,255,255,.75);font-size:.88rem;line-height:1.55}
+          #interactive-demo .dm-thread{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);border-radius:14px;padding:14px;margin-top:10px;color:rgba(255,255,255,.8);cursor:pointer}
+          #interactive-demo .dm-thread b{color:#fff}
+          #interactive-demo .dm-thread p{margin:3px 0 0;color:rgba(255,255,255,.45);font-size:.82rem;line-height:1.5}
+          #interactive-demo .dm-linkpill{margin-left:auto;flex:0 0 auto;border:1px solid rgba(56,189,248,.4);color:#7dd3fc;border-radius:999px;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .6rem}
+          #interactive-demo .dm-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+          #interactive-demo .dm-pcard{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);border-radius:16px;padding:16px;color:rgba(255,255,255,.65);font-size:.86rem;line-height:1.55}
+          #interactive-demo .dm-pcard b{color:#fff;display:block;font-size:.95rem;margin-bottom:4px}
+          #interactive-demo .dm-pro{color:#fbbf24;font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+          #interactive-demo .dm-setrow{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);border-radius:14px;padding:14px 16px;margin-top:10px;color:rgba(255,255,255,.75);font-size:.9rem}
+          #interactive-demo .dm-setrow b{color:#fff}
+          #interactive-demo .dm-switch{width:46px;height:26px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);position:relative;cursor:pointer;flex:0 0 auto}
+          #interactive-demo .dm-switch::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#94a3b8;transition:.2s}
+          #interactive-demo .dm-switch[aria-checked="true"]{background:rgba(45,212,191,.35);border-color:rgba(45,212,191,.7)}
+          #interactive-demo .dm-switch[aria-checked="true"]::after{left:22px;background:#5eead4}
+          #interactive-demo .dm-backlink{background:none;border:0;color:#7dd3fc;font-weight:700;font-size:.86rem;cursor:pointer;padding:0;margin-bottom:16px}
+          #interactive-demo .dm-loading{display:none;text-align:center;color:rgba(255,255,255,.55);padding:44px 0;font-size:.92rem}
+          @media (max-width:1023px){
+            #interactive-demo .dm-side{width:66px;padding:20px 10px}
+            #interactive-demo .dm-side .dm-nav span,#interactive-demo .dm-side .dm-logo span,#interactive-demo .dm-side .dm-new,#interactive-demo .dm-plan{display:none}
+            #interactive-demo .dm-nav{justify-content:center;padding:.6rem 0}
+            #interactive-demo .dm-logo{justify-content:center;padding-bottom:14px}
+          }
+          @media (max-width:639px){
+            #interactive-demo .dm-body{min-height:0}
+            #interactive-demo .dm-side{display:none}
+            #interactive-demo .dm-topbar{display:flex}
+            #interactive-demo .dm-tabs{display:flex}
+            #interactive-demo .dm-main{padding:20px 16px 24px}
+            #interactive-demo .dm-cards{grid-template-columns:1fr}
+          }
         </style>
-        <p class="text-center text-sm font-bold uppercase tracking-widest text-sky-400">Try the controls</p>
-        <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">See how the room changes.</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">Choose a persona and a direction. The same hard message takes a different shape depending on what you need from the reply.</p>
-        <div class="demo-shell mt-12">
-          <div class="demo-controls">
-            <div><span class="demo-label">Persona</span><div class="demo-pills" data-demo-personas role="group" aria-label="Choose a persona"></div></div>
-            <div><span class="demo-label">Steer the reply</span><div class="demo-pills" data-demo-intents role="group" aria-label="Choose a reply direction"></div></div>
+        <p class="text-center text-sm font-bold uppercase tracking-widest text-sky-400">Interactive demo</p>
+        <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">From message in to message out.</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">This is the app in miniature, running the manager conversation from the steps above. It follows your screen: the desktop web layout on a computer, the compact layout on a tablet, the phone layout on a phone. Work it end to end.</p>
+        <div class="dm-frame mt-12">
+          <div class="dm-topbar"><span style="display:flex;align-items:center;gap:9px"><span class="dm-logo-mark" style="width:26px;height:26px;border-radius:8px;background:linear-gradient(145deg,#38bdf8,#0ea5e9);display:inline-flex;align-items:center;justify-content:center;color:#04263b;font-weight:900;font-size:.75rem">LR</span>Liaison Reply</span><span style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:inline-block"></span></div>
+          <div class="dm-body">
+            <aside class="dm-side">
+              <div class="dm-logo"><span class="dm-logo-mark">LR</span><span>Liaison Reply</span></div>
+              <button class="dm-new" data-dm-goto="compose" type="button">+ Start New</button>
+              <button class="dm-nav" data-dm-goto="compose" aria-current="true" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span>Compose</span></button>
+              <button class="dm-nav" data-dm-goto="history" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2m6-2a9 9 0 11-9-9 9 9 0 019 9z"/></svg><span>History</span></button>
+              <button class="dm-nav" data-dm-goto="personas" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4m4 4a4 4 0 01-4-4m4 4v.01"/></svg><span>Personas</span></button>
+              <button class="dm-nav" data-dm-goto="settings" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M10.3 4.3a1.7 1.7 0 013.4 0 1.7 1.7 0 001.9 1.5 1.7 1.7 0 012.4 1l.1.1a1.7 1.7 0 01-1 2.9 1.7 1.7 0 00-.6 2.2 1.7 1.7 0 01-.6 2.3H15a1.7 1.7 0 01-2.9-1 1.7 1.7 0 00-2.2-.6 1.7 1.7 0 01-2.3-.6v-.2a1.7 1.7 0 011-2.9 1.7 1.7 0 001.5-1.9z"/><circle cx="12" cy="12" r="3"/></svg><span>Settings</span></button>
+              <div class="dm-plan"><b>Free plan</b>15 generations included, no card.<a href="/pricing">See what Pro adds</a></div>
+            </aside>
+            <main class="dm-main">
+              <div class="dm-view on" data-dm-view="compose">
+                <span class="dm-label">What did they say?</span>
+                <textarea class="dm-input" rows="3" data-dm-incoming>Saw the deck went to the client without my review. We need to talk about this first thing tomorrow.</textarea>
+                <div class="dm-rowcard"><span class="dm-ico"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.6-4.6a2 2 0 012.8 0L16 16m-2-2 1.6-1.6a2 2 0 012.8 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></span><span><b>Fastest way in</b>Add screenshots. We rebuild the thread, reading them on this device where possible, or through our secure reading service, which doesn't store them.</span></div>
+                <div class="dm-rowcard"><span class="dm-ico"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-14 0m7 7v3m-4 0h8M12 11a3 3 0 003-3V5a3 3 0 10-6 0v3a3 3 0 003 3z"/></svg></span><span><b>Vent by voice</b>Capture the raw thought, no typing needed.</span></div>
+                <span class="dm-label">The Reality (Raw thoughts)</span>
+                <p class="dm-help">Optional. Add facts that were not said in the text thread but should shape the reply.</p>
+                <textarea class="dm-input" rows="3">My manager. I sent it because the client asked for it early and she was out. I want to explain without sounding defensive.</textarea>
+                <span class="dm-label">Relationship context</span>
+                <p class="dm-help">Required. This calibrates the strategy and risk read.</p>
+                <div class="dm-chips" data-dm-chips="context">
+                  <button class="dm-chip" aria-pressed="false" type="button">Dating</button>
+                  <button class="dm-chip" aria-pressed="true" type="button">Work</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Client</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Family</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Friends</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Other</button>
+                </div>
+                <span class="dm-label">Tone of voice</span>
+                <div class="dm-chips" data-dm-chips="tone">
+                  <button class="dm-chip" aria-pressed="true" type="button">Professional</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Friendly</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Direct</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Firm</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Empathetic</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Authoritative</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Playful</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Custom</button>
+                </div>
+                <span class="dm-label">How should Liaison Reply steer this reply?</span>
+                <div class="dm-chips" data-dm-chips="direction">
+                  <button class="dm-chip" aria-pressed="true" type="button">De-escalate</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Keep momentum</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Set a boundary</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Buy time</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Get clarity</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Close the loop</button>
+                  <button class="dm-chip" aria-pressed="false" type="button">Custom</button>
+                </div>
+                <button class="dm-cta" data-dm-generate type="button">Submit context</button>
+              </div>
+              <div class="dm-loading" data-dm-loading>Reading the room and writing your replies…</div>
+              <div class="dm-view" data-dm-view="replies">
+                <button class="dm-backlink" data-dm-goto="compose" type="button">← Back to compose</button>
+                <div class="dm-strategy"><p class="dm-eyebrow">The read</p>The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.</div>
+                <span class="dm-label">Three ways to answer</span>
+                <div data-dm-replies></div>
+                <div class="dm-actions"><button class="dm-ghost" data-dm-generate type="button">Regenerate</button></div>
+              </div>
+              <div class="dm-view" data-dm-view="edit">
+                <button class="dm-backlink" data-dm-goto="replies" type="button">← Back to replies</button>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="dm-chip" style="cursor:default" data-dm-edit-tag>Direct &amp; Accountable</span><span style="color:#38bdf8;font-size:.85rem;font-weight:700">Editing</span></div>
+                <textarea class="dm-input" rows="4" style="margin-top:14px" data-dm-draft></textarea>
+                <div class="dm-coach" data-dm-coach>
+                  <span class="dm-badge ok" data-dm-badge>Aligned</span>
+                  <p class="dm-eyebrow" style="margin-top:12px">Strategic coaching</p>
+                  <h4 data-dm-coach-head>Your edits are still tracking with the original strategy and keeping the message tactically clean.</h4>
+                  <ul data-dm-coach-list><li>The draft is staying focused, controlled, and close to the intent of the selected card.</li></ul>
+                  <div class="dm-notes" data-dm-notes style="display:none">
+                    <p class="dm-eyebrow">Phrase notes</p>
+                    <p>“Honestly, it's not my fault you weren't around.”<span class="dm-flag">Warning</span></p>
+                    <p>This phrase sounds defensive and could be read as shifting blame to your manager for their absence.</p>
+                    <p class="dm-try">Try: Consider removing this sentence entirely. The original draft already explains the situation clearly and offers a solution.</p>
+                  </div>
+                </div>
+                <div class="dm-actions">
+                  <button class="dm-ghost" data-dm-risk type="button">Add a risky line</button>
+                  <button class="dm-cta" data-dm-copy type="button">Confirm &amp; Copy</button>
+                  <button class="dm-ghost" data-dm-goto="replies" type="button">Cancel</button>
+                </div>
+                <div class="dm-copied" data-dm-copied><b style="color:#fff">Copied.</b> Paste it into the conversation and send it yourself. Liaison Reply never sends anything for you.</div>
+              </div>
+              <div class="dm-view" data-dm-view="history">
+                <span class="dm-label">History</span>
+                <p class="dm-help">Your past conversations. Every thread keeps its full history, so drafts know what was said last week, not just the last message.</p>
+                <button class="dm-thread" data-dm-goto="compose" type="button"><span><b>Priya</b><p>…regularly forget weekly. Meet a…</p></span></button>
+                <button class="dm-thread" data-dm-goto="compose" type="button"><span><b>Jess</b><p>…then picks at Barbara to fix my…</p></span><span class="dm-linkpill">Linked</span></button>
+                <button class="dm-thread" data-dm-goto="compose" type="button"><span><b>Dana</b><p>Linked with Jess. Context carries across both threads.</p></span><span class="dm-linkpill">Linked</span></button>
+                <div class="dm-rowcard"><span class="dm-ico"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M13.2 6.2a4 4 0 015.6 5.6l-3 3a4 4 0 01-5.6-5.6M10.8 17.8a4 4 0 01-5.6-5.6l3-3a4 4 0 015.6 5.6"/></svg></span><span><b>Linked threads</b>Some situations span conversations. Link the threads and Pro drafts draw on all of them.</span></div>
+              </div>
+              <div class="dm-view" data-dm-view="personas">
+                <span class="dm-label">Personas</span>
+                <p class="dm-help">Personas set the voice your drafts are written in. The full set of premium personas comes with Pro.</p>
+                <div class="dm-cards">
+                  <div class="dm-pcard"><b>Everyday voice</b>The standard voice on Free. Clear, natural, sounds like you on a good day.<p style="margin:8px 0 0"><span class="dm-chip" style="cursor:default" aria-pressed="true">Applied</span></p></div>
+                  <div class="dm-pcard"><span class="dm-pro">Pro</span><b>Premium persona</b>One of the four premium personas. Unlocks with Pro, along with unlimited generations.</div>
+                  <div class="dm-pcard"><span class="dm-pro">Pro</span><b>Premium persona</b>One of the four premium personas. Unlocks with Pro, along with unlimited generations.</div>
+                  <div class="dm-pcard"><span class="dm-pro">Pro</span><b>Premium persona</b>One of the four premium personas. Unlocks with Pro, along with unlimited generations.</div>
+                </div>
+              </div>
+              <div class="dm-view" data-dm-view="settings">
+                <span class="dm-label">Settings</span>
+                <div class="dm-setrow"><span><b>How you sound</b><br><span style="color:rgba(255,255,255,.45);font-size:.82rem">Style Notes teach Liaison to write replies that sound like you.</span></span><button class="dm-switch" role="switch" aria-checked="true" data-dm-toggle type="button" aria-label="Toggle Style Notes"></button></div>
+                <div class="dm-setrow"><span><b>Invite &amp; Earn Credits</b><br><span style="color:rgba(255,255,255,.45);font-size:.82rem">Friends get +2 credits. You get +5 when they verify their email.</span></span><span style="color:rgba(255,255,255,.35)">›</span></div>
+                <div class="dm-setrow"><span><b>Plan</b><br><span style="color:rgba(255,255,255,.45);font-size:.82rem">Free. 15 generations included.</span></span><a href="/pricing" style="color:#38bdf8;font-weight:700;text-decoration:none">See Pro</a></div>
+                <div class="dm-setrow"><span><b>Support</b><br><span style="color:rgba(255,255,255,.45);font-size:.82rem">support@liaisonreply.com</span></span><span style="color:rgba(255,255,255,.35)">›</span></div>
+              </div>
+            </main>
           </div>
-          <div class="demo-grid" aria-live="polite">
-            <article class="demo-card"><span class="demo-meta">Incoming message</span><p class="demo-message mt-3">“Wow. Okay. So you saw my message at 9 and just decided not to answer. Good to know where I stand.”</p><div class="demo-coaching" data-demo-coaching></div></article>
-            <article class="demo-card"><span class="demo-meta">Three reply paths</span><h3 data-demo-heading></h3><div class="demo-replies" data-demo-replies></div></article>
-          </div>
-          <div class="demo-foot"><p class="text-sm text-white/45">Sample conversation. Nothing is sent, and no account is needed to explore.</p><a href="https://app.liaisonreply.com/auth/register" data-session-primary data-cta-surface="interactive-demo" data-cta-label="Try it with your message" data-auth-text="Try it with your message" data-session-text="Open Liaison Reply" data-auth-path="https://app.liaisonreply.com/auth/register" data-session-path="/chat" class="rounded-full bg-sky-500 px-5 py-3 text-sm font-bold text-black hover:bg-sky-400 transition-colors">Try it with your message</a></div>
+          <nav class="dm-tabs">
+            <button class="dm-tab" data-dm-goto="compose" aria-current="true" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Compose</button>
+            <button class="dm-tab" data-dm-goto="history" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2m6-2a9 9 0 11-9-9 9 9 0 019 9z"/></svg>History</button>
+            <button class="dm-tab" data-dm-goto="personas" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4m4 4a4 4 0 01-4-4m4 4v.01"/></svg>Personas</button>
+            <button class="dm-tab" data-dm-goto="settings" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.2a1.7 1.7 0 00-1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.2a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.9.3h0a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.2a1.7 1.7 0 001 1.5h0a1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.9v0a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.2a1.7 1.7 0 00-1.4 1z"/></svg>Settings</button>
+          </nav>
+        </div>
+        <div class="demo-foot" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1.35rem">
+          <p class="text-sm text-white/45" style="margin:0">Sample conversation. In the app, your own message, context, and edits drive the replies.</p>
+          <a href="https://app.liaisonreply.com/auth/register" data-session-primary data-cta-surface="interactive-demo" data-cta-label="Try it with your message" data-auth-text="Try it with your message" data-session-text="Open Liaison Reply" data-auth-path="https://app.liaisonreply.com/auth/register" data-session-path="/chat" class="rounded-full bg-sky-500 px-5 py-3 text-sm font-bold text-black hover:bg-sky-400 transition-colors">Try it with your message</a>
         </div>
         <script>
           (() => {
-            const personas = ["The Diplomat","The Charmer","The Closer","The Cool Head","Casual"];
-            const intents = ["Calm it down","Keep momentum","Set a boundary","Buy time","Show interest","Close the loop"];
-            const bases = {
-              "The Diplomat":["You’re right to call that out. I saw it and should have answered. I’m sorry.","I understand why that landed badly. I wasn’t trying to ignore you, but I can see the impact.","You matter to me, and I want to handle this better. Can we talk tonight?"],
-              "The Charmer":["Okay, fair. I saw it and fumbled the reply. That one’s on me.","You’re right to give me a little grief. Can I make it up to you tonight?","No disappearing act intended. I’m here now."],
-              "The Closer":["You’re right. I saw it and didn’t answer. I’m sorry. Let’s reset tonight.","I dropped the ball. I’ll own that instead of arguing about it.","Let’s talk tonight and resolve this."],
-              "The Cool Head":["I understand why you’re upset. I saw the message and failed to reply.","I’m not going to argue with the impact. I’m sorry.","Let’s take the heat out of this and talk when we’re both calmer."],
-              "Casual":["Yeah, that was on me. I saw it and forgot to reply. Sorry.","I get why that annoyed you. I wasn’t trying to ignore you.","Can we reset? I’m here now."]
-            };
-            const modifiers = {
-              "Calm it down":["Acknowledge the impact before explaining the reason.","Lead with accountability, then lower the temperature."],
-              "Keep momentum":["Make the next step easy and specific.","Move from the tension toward a real conversation."],
-              "Set a boundary":["Keep the boundary about your availability, not their worth.","Be clear without turning the reply into a counterattack."],
-              "Buy time":["Name when you’ll return so space doesn’t feel like abandonment.","Ask for room without going silent."],
-              "Show interest":["Reassure them directly before adding context.","Make your attention unmistakable."],
-              "Close the loop":["State what happened, own your part, and give a next step.","Leave the conversation with a clear path forward."]
-            };
-            const personaWrap=document.querySelector("[data-demo-personas]"), intentWrap=document.querySelector("[data-demo-intents]"), repliesWrap=document.querySelector("[data-demo-replies]"), heading=document.querySelector("[data-demo-heading]"), coaching=document.querySelector("[data-demo-coaching]");
-            let persona="The Diplomat", intent="Calm it down";
-            const render=()=>{ const base=bases[persona]; const mod=modifiers[intent]; const lines=intent==="Calm it down"?base:[base[0],mod[0],base[2]];
-              personaWrap.innerHTML=personas.map(v=>'<button type="button" class="demo-pill" aria-pressed="'+(v===persona)+'" data-v="'+v+'">'+v+'</button>').join("");
-              intentWrap.innerHTML=intents.map(v=>'<button type="button" class="demo-pill" aria-pressed="'+(v===intent)+'" data-v="'+v+'">'+v+'</button>').join("");
-              heading.textContent=persona+" · "+intent; repliesWrap.innerHTML=lines.map((v,i)=>'<div class="demo-reply"><span class="demo-meta">'+["Safe","Warm","Direct"][i]+"</span><br>"+v+"</div>").join(""); coaching.textContent="Strategic coaching: "+mod[1];
-              personaWrap.querySelectorAll("button").forEach(b=>b.onclick=()=>{persona=b.dataset.v;render()}); intentWrap.querySelectorAll("button").forEach(b=>b.onclick=()=>{intent=b.dataset.v;render()});
-            }; render();
+            const root = document.getElementById("interactive-demo");
+            if (!root) return;
+            const REPLIES = [
+              { tag: "Direct & Accountable", text: "Hey, absolutely. I sent it because the client asked for it early and you were out. I'm sorry it landed without your review. Can we go through it together first thing?" },
+              { tag: "Warm & Collaborative", text: "You're right, that should not have gone out without your eyes on it. The client pushed for it early while you were out and I made the call. I should have flagged it to you first. It won't happen again." },
+              { tag: "Calm & Brief", text: "Fair point. The client asked for it early and you were out, so I sent it. I get why that is a problem. Can we set a rule for next time so I know when to hold?" }
+            ];
+            const RISKY = " Honestly, it's not my fault you weren't around.";
+            const views = root.querySelectorAll("[data-dm-view]");
+            const loading = root.querySelector("[data-dm-loading]");
+            function show(name) {
+              views.forEach(v => v.classList.toggle("on", v.dataset.dmView === name));
+              loading.style.display = "none";
+              root.querySelectorAll("[data-dm-goto]").forEach(b => {
+                if (b.classList.contains("dm-nav") || b.classList.contains("dm-tab")) b.setAttribute("aria-current", String(b.dataset.dmGoto === name));
+              });
+            }
+            root.querySelectorAll("[data-dm-goto]").forEach(b => b.addEventListener("click", () => show(b.dataset.dmGoto)));
+            root.querySelectorAll("[data-dm-chips]").forEach(group => {
+              group.querySelectorAll(".dm-chip").forEach(chip => chip.addEventListener("click", () => {
+                group.querySelectorAll(".dm-chip").forEach(c => c.setAttribute("aria-pressed", "false"));
+                chip.setAttribute("aria-pressed", "true");
+              }));
+            });
+            const repliesWrap = root.querySelector("[data-dm-replies]");
+            REPLIES.forEach((r, i) => {
+              const btn = document.createElement("button");
+              btn.type = "button"; btn.className = "dm-reply"; btn.dataset.dmPick = String(i);
+              btn.innerHTML = '<span class="dm-tag"></span><p></p><span class="dm-edit">Tap to edit with coaching</span>';
+              btn.querySelector(".dm-tag").textContent = r.tag;
+              btn.querySelector("p").textContent = r.text;
+              btn.addEventListener("click", () => openEdit(i));
+              repliesWrap.appendChild(btn);
+            });
+            root.querySelectorAll("[data-dm-generate]").forEach(b => b.addEventListener("click", () => {
+              views.forEach(v => v.classList.remove("on"));
+              loading.style.display = "block";
+              setTimeout(() => show("replies"), 650);
+            }));
+            const draft = root.querySelector("[data-dm-draft]");
+            const coach = root.querySelector("[data-dm-coach]");
+            const badge = root.querySelector("[data-dm-badge]");
+            const head = root.querySelector("[data-dm-coach-head]");
+            const list = root.querySelector("[data-dm-coach-list]");
+            const notes = root.querySelector("[data-dm-notes]");
+            const riskBtn = root.querySelector("[data-dm-risk]");
+            const copied = root.querySelector("[data-dm-copied]");
+            const editTag = root.querySelector("[data-dm-edit-tag]");
+            let risky = false;
+            function renderCoach() {
+              if (risky) {
+                coach.classList.add("warn"); badge.className = "dm-badge warn"; badge.textContent = "Warning";
+                head.textContent = "The added sentence introduces a defensive and accusatory tone that could damage your relationship with your manager.";
+                list.innerHTML = "<li>It sounds like blame rather than focusing on a solution.</li><li>It undermines the collaborative tone the rest of the draft works to build.</li>";
+                notes.style.display = "block"; riskBtn.textContent = "Remove the risky line";
+              } else {
+                coach.classList.remove("warn"); badge.className = "dm-badge ok"; badge.textContent = "Aligned";
+                head.textContent = "Your edits are still tracking with the original strategy and keeping the message tactically clean.";
+                list.innerHTML = "<li>The draft is staying focused, controlled, and close to the intent of the selected card.</li>";
+                notes.style.display = "none"; riskBtn.textContent = "Add a risky line";
+              }
+            }
+            function openEdit(i) {
+              draft.value = REPLIES[i].text; risky = false; copied.style.display = "none";
+              editTag.textContent = REPLIES[i].tag; renderCoach(); show("edit");
+            }
+            riskBtn.addEventListener("click", () => {
+              if (!risky) { draft.value = draft.value.replace(/([.!?])\s*$/, RISKY); risky = true; }
+              else { draft.value = draft.value.replace(RISKY, ""); risky = false; }
+              copied.style.display = "none"; renderCoach();
+            });
+            draft.addEventListener("input", () => {
+              const has = draft.value.includes("not my fault you weren't around");
+              if (has !== risky) { risky = has; renderCoach(); }
+            });
+            root.querySelector("[data-dm-copy]").addEventListener("click", async () => {
+              try { await navigator.clipboard.writeText(draft.value); } catch (e) { draft.select(); document.execCommand && document.execCommand("copy"); }
+              copied.style.display = "block";
+            });
+            const toggle = root.querySelector("[data-dm-toggle]");
+            toggle.addEventListener("click", () => toggle.setAttribute("aria-checked", String(toggle.getAttribute("aria-checked") !== "true")));
           })();
         </script>
       </section>

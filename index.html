@@ -166,6 +166,8 @@
       .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s ease; }
       .reveal.in { opacity: 1; transform: none; }
       html { scroll-behavior: smooth; }
+      .demo-btn { background: #f59e0b !important; color: #000 !important; }
+      .demo-btn:hover { background: #fbbf24 !important; }
       #interactive-demo { scroll-margin-top: 20px; }
       .wf-strip { display: grid; gap: 20px 16px; grid-template-columns: 1fr 1fr; grid-template-areas: "l1 l1" "i1 i1" "l2 l2" "i2 i2" "l3 l3" "p1 p2"; }
       .wf-l1 { grid-area: l1; } .wf-l2 { grid-area: l2; } .wf-l3 { grid-area: l3; }
@@ -236,7 +238,7 @@
               href="#interactive-demo"
               data-cta-surface="hero-demo"
               data-cta-label="Try a Demo"
-              class="mt-4 block w-full text-center rounded-2xl bg-amber-500 px-10 py-5 text-lg font-bold text-black shadow-[0_0_40px_rgba(245,158,11,0.30)] hover:bg-amber-400 active:scale-[0.98] transition-all duration-200 sm:inline-block sm:w-auto sm:mt-10 sm:ml-4"
+              style="background:#f59e0b;color:#000" class="demo-btn mt-4 block w-full text-center rounded-2xl px-10 py-5 text-lg font-bold shadow-[0_0_40px_rgba(245,158,11,0.30)] active:scale-[0.98] transition-all duration-200 sm:inline-block sm:w-auto sm:mt-10 sm:ml-4"
             >Try a Demo</a>
             <p class="mt-4 text-sm text-white/50">Your first 15 generations are free. No card. It runs in your browser.</p>
           </div>
@@ -1292,8 +1294,8 @@
           href="#interactive-demo"
           data-cta-surface="sticky-demo"
           data-cta-label="Try Demo"
-          style="flex:1 1 0"
-          class="block text-center rounded-2xl bg-amber-500 px-4 py-4 font-bold text-black shadow-2xl"
+          style="flex:1 1 0;background:#f59e0b;color:#000"
+          class="demo-btn block text-center rounded-2xl px-4 py-4 font-bold shadow-2xl"
         >Try Demo</a>
       </div>
     </div>

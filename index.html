@@ -797,7 +797,7 @@
         </style>
         <p class="text-center text-sm font-bold uppercase tracking-widest text-sky-400">Interactive demo</p>
         <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">From message in to message out.</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">This is the app, running the manager conversation from the steps above. It follows your screen: the desktop web layout on a computer, the compact layout on a tablet, the phone layout on a phone. Add your context, submit it, pick a reply, edit it with coaching, and copy it out.</p>
+        <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">This is the app. It starts on the manager conversation from the steps above, and it follows your screen: the desktop web layout on a computer, the compact layout on a tablet, the phone layout on a phone. Switch the relationship context and the whole scenario changes with it: a manager, a date, a client, family, a friend. Add your context, submit it, pick a reply, edit it with coaching, and copy it out.</p>
         <div class="dm-frame mt-12">
           <div class="dm-topbar"><span style="display:flex;align-items:center;gap:9px"><svg width="26" height="26" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="3" y="3" width="34" height="34" rx="10" stroke="#22d3ee" stroke-width="2.5"/><path d="M13 12v12h12" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round"/><circle cx="27" cy="13" r="2.4" fill="#22d3ee"/></svg>Liaison Reply</span><span style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:inline-block"></span></div>
           <div class="dm-body">
@@ -846,7 +846,7 @@
                       <div class="dm-actions-row"><button class="dm-pill-dark" type="button">Paste</button><button class="dm-pill-teal" data-dm-generate type="button">Submit context</button></div>
                       <span class="dm-sub">The Reality (Raw thoughts)</span>
                       <p class="dm-help">Optional. Add facts that were not said in the text thread but should shape the reply.</p>
-                      <textarea class="dm-input" rows="3" placeholder="Add private context that should guide the reply...">My manager. I sent it because the client asked for it early and she was out. I want to explain without sounding defensive.</textarea>
+                      <textarea class="dm-input" rows="3" data-dm-reality placeholder="Add private context that should guide the reply...">My manager. I sent it because the client asked for it early and she was out. I want to explain without sounding defensive.</textarea>
                       <span class="dm-sub">Relationship context</span>
                       <p class="dm-help">Required. This calibrates the strategy and risk read.</p>
                       <div class="dm-chips" data-dm-chips="context">
@@ -857,7 +857,6 @@
                         <button class="dm-chip" aria-pressed="false" type="button">Friends</button>
                         <button class="dm-chip" aria-pressed="false" type="button">Other</button>
                       </div>
-                      <p class="dm-help" data-dm-ctxnote style="display:none;margin-top:10px;color:#7dd3fc">This demo follows one work conversation. In the app, every context gets its own strategy read.</p>
                       <span class="dm-sub">Tone of voice</span>
                       <div class="dm-chips" data-dm-chips="tone">
                         <button class="dm-chip" aria-pressed="true" type="button">Professional</button>
@@ -903,9 +902,9 @@
                   <ul data-dm-coach-list><li>The draft is staying focused, controlled, and close to the intent of the selected card.</li></ul>
                   <div class="dm-notes" data-dm-notes style="display:none">
                     <p class="dm-eyebrow">Phrase notes</p>
-                    <p>“Honestly, it's not my fault you weren't around.”<span class="dm-flag">Warning</span></p>
-                    <p>This phrase sounds defensive and could be read as shifting blame to your manager for their absence.</p>
-                    <p class="dm-try">Try: Consider removing this sentence entirely. The original draft already explains the situation clearly and offers a solution.</p>
+                    <p><span data-dm-note-phrase>“Honestly, it's not my fault you weren't around.”</span><span class="dm-flag">Warning</span></p>
+                    <p data-dm-note-why>This phrase sounds defensive and could be read as shifting blame to your manager for their absence.</p>
+                    <p class="dm-try" data-dm-note-try>Try: Consider removing this sentence entirely. The original draft already explains the situation clearly and offers a solution.</p>
                   </div>
                 </div>
                 <div style="margin-top:16px;text-align:right"><button class="dm-ghost" data-dm-risk type="button">Add a risky line</button></div>
@@ -964,62 +963,235 @@
           (() => {
             const root = document.getElementById("interactive-demo");
             if (!root) return;
-            const SETS = {
-              "De-escalate": {
-                strategy: "The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.",
-                replies: [
-                  { tag: "Direct & Accountable", text: "Hey, absolutely. I sent it because the client asked for it early and you were out. I'm sorry it landed without your review. Can we go through it together first thing?" },
-                  { tag: "Warm & Collaborative", text: "You're right, that should not have gone out without your eyes on it. The client pushed for it early while you were out and I made the call. I should have flagged it to you first. It won't happen again." },
-                  { tag: "Calm & Brief", text: "Fair point. The client asked for it early and you were out, so I sent it. I get why that is a problem. Can we set a rule for next time so I know when to hold?" }
-                ]
+            const TAGS = ["Direct & Accountable", "Warm & Collaborative", "Calm & Brief"];
+            function S(strategy, a, b, c) { return { strategy: strategy, replies: [{ tag: TAGS[0], text: a }, { tag: TAGS[1], text: b }, { tag: TAGS[2], text: c }] }; }
+            const SCENARIOS = {
+              "Work": {
+                incoming: "Saw the deck went to the client without my review. We need to talk about this first thing tomorrow.",
+                reality: "My manager. I sent it because the client asked for it early and she was out. I want to explain without sounding defensive.",
+                risky: " Honestly, it's not my fault you weren't around.",
+                warnHead: "The added sentence introduces a defensive and accusatory tone that could damage your relationship with your manager.",
+                warnBullets: ["It sounds like blame rather than focusing on a solution.", "It undermines the collaborative tone the rest of the draft works to build."],
+                notePhrase: "Honestly, it's not my fault you weren't around.",
+                noteWhy: "This phrase sounds defensive and could be read as shifting blame to your manager for their absence.",
+                noteTry: "Consider removing this sentence entirely. The original draft already explains the situation clearly and offers a solution.",
+                sets: {
+                  "De-escalate": S("The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.",
+                    "Hey, absolutely. I sent it because the client asked for it early and you were out. I'm sorry it landed without your review. Can we go through it together first thing?",
+                    "You're right, that should not have gone out without your eyes on it. The client pushed for it early while you were out and I made the call. I should have flagged it to you first. It won't happen again.",
+                    "Fair point. The client asked for it early and you were out, so I sent it. I get why that is a problem. Can we set a rule for next time so I know when to hold?"),
+                  "Keep momentum": S("The suggested responses aim to keep momentum: acknowledge the miss in one line, give the reason briefly, and move straight to what happens next, so the project stays the focus instead of the mistake.",
+                    "You're right, and I should have looped you in. The client asked for it early while you were out, so I made the call to keep us on schedule. Let's review it together tomorrow and adjust anything you want changed.",
+                    "Totally fair. It went out early because the client was pressing and you were away. I kept it moving, but next time I'll hold for your review unless you tell me otherwise.",
+                    "Fair. Client needed it early and you were out, so I sent it to keep us on track. Happy to walk through it together tomorrow."),
+                  "Set a boundary": S("The suggested responses aim to set a boundary respectfully: own the call you made, name the constraint you were under, and ask for a clear rule, instead of absorbing a vague reprimand or getting defensive.",
+                    "I understand the concern. The client asked for it early and you were out, so I used my judgment rather than miss the deadline. I'd rather we agree on when I should hold and when I should send, so this does not come up again.",
+                    "I hear you. I was not trying to go around you; the timing forced a call. Going forward I need us to be clear on who signs off when you are out, because I cannot leave a client waiting without a rule to point to.",
+                    "Understood. When you are out and a client deadline hits, I need a standing rule: hold it, or send it. Which would you prefer?"),
+                  "Buy time": S("The suggested responses aim to buy time: acknowledge the message tonight without conceding or defending, and move the real conversation to tomorrow, when you have the facts in front of you.",
+                    "You are right to flag it. I do not want to hash it out over text tonight. Can we sit down first thing tomorrow and go through what happened?",
+                    "Noted, and I take it seriously. Let me pull the thread and the timing together so I can walk you through it properly tomorrow.",
+                    "Fair. Let me look at exactly what went out and when, and I will come to you first thing with the full picture."),
+                  "Get clarity": S("The suggested responses aim to get clarity: ask whether the issue is the deck itself or the sign-off, so you fix the real problem instead of guessing at it.",
+                    "I want to get this right. Was the issue the deck itself, or that it went out without your review? The client asked for it early while you were out, so I made the call, but I want to understand exactly what you needed.",
+                    "Can you tell me what worried you most: the content, or the process? That helps me fix the right thing before tomorrow.",
+                    "Before tomorrow, one question: is there anything in the deck you would have changed? I sent it because the client pressed early, but I want to know what I missed."),
+                  "Close the loop": S("The suggested responses aim to close the loop: own the miss, state the fix, and confirm the new rule, so nothing is left hanging between you and your manager.",
+                    "You are right, it should not have gone out without your review. The client asked early and you were out, and I made the wrong call. From now on nothing leaves without your sign-off, even if it means the client waits. Consider it handled.",
+                    "Closing the loop on this: I sent it early at the client's request while you were out, and that skipped your review. New rule on my side: your review first, always. If timing is tight I will flag you instead of sending.",
+                    "Owned. It will not go out without your review again. If a client pushes while you are out, I will tell them it is pending your sign-off.")
+                }
               },
-              "Keep momentum": {
-                strategy: "The suggested responses aim to keep momentum: acknowledge the miss in one line, give the reason briefly, and move straight to what happens next, so the project stays the focus instead of the mistake.",
-                replies: [
-                  { tag: "Direct & Accountable", text: "You're right, and I should have looped you in. The client asked for it early while you were out, so I made the call to keep us on schedule. Let's review it together tomorrow and adjust anything you want changed." },
-                  { tag: "Warm & Collaborative", text: "Totally fair. It went out early because the client was pressing and you were away. I kept it moving, but next time I'll hold for your review unless you tell me otherwise." },
-                  { tag: "Calm & Brief", text: "Fair. Client needed it early and you were out, so I sent it to keep us on track. Happy to walk through it together tomorrow." }
-                ]
+              "Dating": {
+                incoming: "It's never last-minute with you. Just tell me you're not coming so I can stop waiting.",
+                reality: "We have been seeing each other for two months. I cancelled last Friday too. Work ran late again tonight and I froze instead of texting her. I do want to see her.",
+                risky: " Honestly, you're overreacting about one night.",
+                warnHead: "The added sentence dismisses the pattern she is actually upset about, and it will read as you not taking her seriously.",
+                warnBullets: ["It argues with her feelings instead of answering them.", "It turns a fixable night into a question about whether you respect her time."],
+                notePhrase: "Honestly, you're overreacting about one night.",
+                noteWhy: "She is not upset about one night. She named a pattern, and this tells her the pattern is in her head.",
+                noteTry: "Consider removing this sentence entirely. Naming the pattern yourself is what makes the rest believable.",
+                sets: {
+                  "De-escalate": S("The suggested responses aim to de-escalate by answering the pattern, not just tonight: name that this has happened before, own the silence, and give her a concrete plan instead of another vague promise.",
+                    "You're right, and it's not just tonight. I did the same thing last Friday. Work ran late and instead of texting you I just froze, which is worse. I'm sorry. Can I take you out Thursday and actually put it in my calendar this time?",
+                    "You shouldn't have to sit there waiting on me. That's twice now and I know what that looks like. I want to see you; I handled tonight badly. Let me make the next plan and keep it.",
+                    "Fair. It's a pattern and I own it. Tonight was work, and I should have texted the second I knew. Thursday, my pick, no maybes?"),
+                  "Keep momentum": S("The suggested responses aim to keep momentum by owning tonight quickly and moving straight to a specific next plan with a day attached, so the conversation goes forward instead of circling the apology.",
+                    "You're right to call it out. Tonight got away from me at work and I should have texted. Thursday, dinner at that Thai place, 7pm, I'll book it now. Still want to see you, properly this time.",
+                    "No excuse, I went quiet when I should have just said work ran late. Let me fix the pattern instead of apologizing for it: Thursday is on me, and I'll confirm the day before.",
+                    "You're right. Thursday, 7, I'll make the reservation tonight so it's real. Deal?"),
+                  "Set a boundary": S("The suggested responses aim to set a boundary gently: own your part fully, be honest that being read as not caring is not something you can keep absorbing, and ask what would actually rebuild trust.",
+                    "I deserve some of that. Two Fridays in a row is on me, and the silence was worse than the cancel. What I can't do is keep being read as not caring when I do. Tell me what would make you believe the next plan.",
+                    "You're right about tonight, and about last time. I'll own both. I do need you to know I'm not blowing you off; work is genuinely eating my Fridays. Can we pick nights that aren't Fridays so I stop setting you up?",
+                    "Fair on the facts. I'm asking for one thing: judge the next plan by whether I show up, not by these two weeks."),
+                  "Buy time": S("The suggested responses aim to buy time without going cold: answer tonight, briefly and warmly, and move the bigger conversation to a call tomorrow instead of having it over text at midnight.",
+                    "You deserved a text tonight and you didn't get one. I'm sorry. I don't want to do this over text while you're upset and I'm wiped. Can I call you tomorrow after work and we actually talk it through?",
+                    "That's fair, and I'm not going to pretend it isn't a pattern. Give me until tomorrow's call to answer it properly?",
+                    "You're right. Not ignoring this, just asking to talk tomorrow instead of texting it badly tonight."),
+                  "Get clarity": S("The suggested responses aim to get clarity by asking, honestly, whether tonight was the last straw or whether a kept plan fixes it, so you respond to where you two actually stand.",
+                    "I need to ask straight: is tonight the thing itself, or is it that you're starting to feel like I'm not serious? Because if it's the second one, a dinner invite doesn't fix it.",
+                    "You said 'just tell me you're not coming', so let me ask: do you actually want me there Thursday, or are you past it? I'll respect either answer.",
+                    "Before I start planning things: are we okay if I just show up consistently from here, or is this already too much?"),
+                  "Close the loop": S("The suggested responses aim to close the loop by owning the pattern completely, making one specific kept plan, and ending the maybe-energy she is tired of.",
+                    "Closing this out properly: you were right, twice is a pattern, and waiting on a 'maybe' from me is over. Thursday, 7pm, I've booked Suda. If work explodes I'll text you by 5, not disappear. That's the new rule.",
+                    "I'm not doing the vague thing anymore. You matter more than my Fridays. Thursday is locked, calendar, reservation, done. Judge me on Thursday.",
+                    "Done apologizing in circles. Thursday, 7, booked. I'll be there early.")
+                }
               },
-              "Set a boundary": {
-                strategy: "The suggested responses aim to set a boundary respectfully: own the call you made, name the constraint you were under, and ask for a clear rule, instead of absorbing a vague reprimand or getting defensive.",
-                replies: [
-                  { tag: "Direct & Accountable", text: "I understand the concern. The client asked for it early and you were out, so I used my judgment rather than miss the deadline. I'd rather we agree on when I should hold and when I should send, so this does not come up again." },
-                  { tag: "Warm & Collaborative", text: "I hear you. I was not trying to go around you; the timing forced a call. Going forward I need us to be clear on who signs off when you are out, because I cannot leave a client waiting without a rule to point to." },
-                  { tag: "Calm & Brief", text: "Understood. When you are out and a client deadline hits, I need a standing rule: hold it, or send it. Which would you prefer?" }
-                ]
+              "Client": {
+                incoming: "We love the draft, but finance needs one more round of revisions before they can release the next milestone. Can you have them back by Friday?",
+                reality: "This is the third 'final' round. The contract includes two revision rounds and the milestone was due last week. I need the payment, and I don't want to burn the relationship.",
+                risky: " To be honest, it feels like the goalposts keep moving so the milestone doesn't have to be paid.",
+                warnHead: "The added sentence accuses your client of stalling on purpose. Even if you suspect it, saying it ends negotiations instead of starting them.",
+                warnBullets: ["It assigns a motive you cannot prove.", "It makes the Friday deadline, not the contract, the fight."],
+                notePhrase: "it feels like the goalposts keep moving so the milestone doesn't have to be paid",
+                noteWhy: "This reads as an accusation of bad faith. A client who was merely disorganized now has something real to push back on.",
+                noteTry: "Point at the contract instead: the scope already covers two rounds, so round three is a change order. Same firmness, no accusation.",
+                sets: {
+                  "De-escalate": S("The suggested responses aim to de-escalate while protecting the milestone: agree to look at the notes, and separate the revision question from the payment question so they stop travelling together.",
+                    "Happy to look at the notes. One thing worth separating: the contract has the milestone releasing on the second round, and we're at three. Can we release the milestone as agreed and treat this round as a small change order? Keeps finance clean and me on Friday.",
+                    "I can turn a tight round by Friday. Before I start, can we confirm the milestone from the original scope goes out this week as planned? Then these revisions sit on top, no hard feelings either side.",
+                    "Quick check so I plan my week right: is the milestone tied to this round in finance's view? The agreement had it releasing already, so I want to make sure we're reading the same page."),
+                  "Keep momentum": S("The suggested responses aim to keep momentum by saying yes to the work while attaching the payment to the same timeline, so the project moves and the money moves with it.",
+                    "Friday works for the revisions. Let's lock both dates today: revisions back Friday, milestone released the same day per the agreement. Send the notes over and I'll start.",
+                    "On it. I'll send the revised draft Friday with an updated invoice reflecting the milestone. Two rounds were in scope; I'll bill this round at the project rate we used in March.",
+                    "Yes to Friday. To keep us on rails, I'll treat this as change order three with the milestone released alongside. Shout if finance needs the paperwork worded differently."),
+                  "Set a boundary": S("The suggested responses aim to set a boundary with the contract as the shield: polite, specific, and clear that round three is paid work, without accusing anyone of anything.",
+                    "I want to be careful here: the agreement covers two revision rounds, and this is the third. I'm glad to do it, and I'll quote it as a change order so your finance team has clean paperwork. The original milestone is due now under the same agreement.",
+                    "Quick scope note before Friday: rounds one and two were included; a third round is billable. Happy to proceed, just flagging it now so there are no surprises on the invoice.",
+                    "I can do Friday, as a change order. What I can't do is fold a third round into the original fee; that is the one line I have to hold."),
+                  "Buy time": S("The suggested responses aim to buy time by asking for the actual notes before committing to Friday, so you price and scope round three with the facts instead of on the spot.",
+                    "Possibly Friday; it depends on the size of the notes. Send the full list over and I'll confirm timing and how we handle it under the agreement within the day.",
+                    "Let me see the revisions first before I promise Friday. If they're light, Friday is fine; if it's a rebuild, we'll scope it properly.",
+                    "Send the notes and I'll come back today with a straight answer on Friday and cost."),
+                  "Get clarity": S("The suggested responses aim to get clarity on whether finance is questioning the work or the process, because the reply that fixes a paperwork problem is different from the one that fixes a quality problem.",
+                    "Before I start: is finance asking for changes to the work itself, or is the milestone paperwork missing something? If it's paperwork, I can fix that today and the draft may not need another round at all.",
+                    "Help me aim this round: what specifically is finance unhappy with? 'One more round' could mean three bullet points or a new direction, and Friday depends on which.",
+                    "Is the milestone delayed because of these revisions, or is that a separate queue? The answer changes what I send you Friday."),
+                  "Close the loop": S("The suggested responses aim to close the loop by wrapping the ambiguity into one written summary both sides can point to: scope, round count, dates, and money.",
+                    "Let me close the loop in writing so we stop chasing it: scope included two rounds, both delivered. This third round I'll do as a change order, back Friday. Milestone one releases this week per the agreement. Reply 'agreed' and I'll start today.",
+                    "Summary so we're aligned: draft v3 Friday (change order, quoted separately), milestone released this week as contracted. If I've got any of that wrong, correct me now and I'll adjust.",
+                    "Locking it in: Friday for revisions, milestone this week, round three billed as extra scope. That's the whole picture on one thread.")
+                }
               },
-              "Buy time": {
-                strategy: "The suggested responses aim to buy time: acknowledge the message tonight without conceding or defending, and move the real conversation to tomorrow, when you have the facts in front of you.",
-                replies: [
-                  { tag: "Direct & Accountable", text: "You are right to flag it. I do not want to hash it out over text tonight. Can we sit down first thing tomorrow and go through what happened?" },
-                  { tag: "Warm & Collaborative", text: "Noted, and I take it seriously. Let me pull the thread and the timing together so I can walk you through it properly tomorrow." },
-                  { tag: "Calm & Brief", text: "Fair. Let me look at exactly what went out and when, and I will come to you first thing with the full picture." }
-                ]
+              "Family": {
+                incoming: "Your sister says you're not coming Sunday now. This family barely gets together anymore. Call me.",
+                reality: "I never said I wasn't coming. I told my sister I might be late because my shift changed. She relayed it wrong. I don't want a week of guilt over a mix-up.",
+                risky: " Honestly, you always believe her version before you ask me.",
+                warnHead: "The added sentence turns a mix-up into an old argument about favoritism, and your mom will hear the accusation, not the correction.",
+                warnBullets: ["It makes her defend your sister instead of hearing your plan.", "It buys a week of tension over a Sunday that was never actually cancelled."],
+                notePhrase: "you always believe her version before you ask me",
+                noteWhy: "Even with some history behind it, 'always' makes it a verdict about her, and the Sunday plan gets lost.",
+                noteTry: "Correct the relay and stop there: you are coming, you will be late, you will bring dessert. Facts travel better than grievances.",
+                sets: {
+                  "De-escalate": S("The suggested responses aim to de-escalate by fixing the relay error first and leading with the plan, so your mom hears 'he's coming' before anything else.",
+                    "Mom, there's been a mix-up in the relay. I never said I wasn't coming. My shift changed, so I'll be there closer to 2 than 1, and I'm bringing the pie. See you Sunday.",
+                    "I'm coming Sunday. What I told her was I might be a bit late because of work. Sorry it landed as a no; it isn't one. What time is everyone actually sitting down?",
+                    "Still coming, just late. My shift moved. Put me down for dessert so I contribute something despite the timing."),
+                  "Keep momentum": S("The suggested responses aim to keep momentum by confirming Sunday and adding one concrete helpful thing, so the conversation moves to planning instead of feelings.",
+                    "Coming Sunday, arriving about 2 after my shift. I'll bring drinks and the pie, and I'll stay for dishes. Tell sis the relay got garbled.",
+                    "Yes to Sunday. Late, not absent. Can I pick up anything on the way in? Coming straight from work.",
+                    "Locking it in: Sunday, there by 2, bringing dessert. Next family chat I'll post my shift myself so it doesn't get translated."),
+                  "Set a boundary": S("The suggested responses aim to set a boundary kindly: correct the fact, and ask that plans about you get checked with you before they become family news.",
+                    "I am coming Sunday; I'll just be late. One ask, Mom: when plans about me come through my sister, check with me before worrying. The relay dropped the 'late' part and added a 'not coming' part, and we lost a day to it.",
+                    "For Sunday: coming, slightly late, bringing pie. Going forward, if you hear I've cancelled something, ask me directly. It saves us both the spiral.",
+                    "I'll always tell you myself if I'm not coming. That's the deal. Sunday is a yes."),
+                  "Buy time": S("The suggested responses aim to buy time by answering the only question that matters tonight (you are coming) and parking the bigger feelings talk for after Sunday.",
+                    "Quick answer so you don't sit with it all week: I'm coming Sunday, just late after my shift. The longer talk about how the message got twisted, let's do it after Sunday, not before.",
+                    "Short version tonight: yes Sunday, about 2. I'll call tomorrow on my break and we'll sort out how it got garbled.",
+                    "Coming. Details tomorrow when I call; don't let it hang over your week."),
+                  "Get clarity": S("The suggested responses aim to get clarity by asking what your sister actually said, word for word, so you fix the message and not your mom's version of it.",
+                    "Before we go further: what did she say exactly? Because what I told her was 'I might be late, my shift changed.' If it arrived as 'not coming,' the problem is in the middle, not with either of us.",
+                    "Can I ask what time she thinks things start? I wonder if the whole mix-up is the start time, not my coming at all.",
+                    "Did she say I cancelled, or that I was unsure? Those are different problems and I want to fix the right one."),
+                  "Close the loop": S("The suggested responses aim to close the loop with the final plan stated once, clearly, and an end to the relay chain.",
+                    "Final word on Sunday so nobody has to relay anything: I'm coming, arriving about 2 because of my shift, bringing pie, staying till 6. If anything changes I'll text the family chat myself.",
+                    "Putting it in one place: yes Sunday, late arrival, dessert covered. Done. See you there, Mom.",
+                    "Consider it settled: I'm in for Sunday. I'll post my ETA in the group chat that morning so everyone's working from the same message.")
+                }
               },
-              "Get clarity": {
-                strategy: "The suggested responses aim to get clarity: ask whether the issue is the deck itself or the sign-off, so you fix the real problem instead of guessing at it.",
-                replies: [
-                  { tag: "Direct & Accountable", text: "I want to get this right. Was the issue the deck itself, or that it went out without your review? The client asked for it early while you were out, so I made the call, but I want to understand exactly what you needed." },
-                  { tag: "Warm & Collaborative", text: "Can you tell me what worried you most: the content, or the process? That helps me fix the right thing before tomorrow." },
-                  { tag: "Calm & Brief", text: "Before tomorrow, one question: is there anything in the deck you would have changed? I sent it because the client pressed early, but I want to know what I missed." }
-                ]
+              "Friends": {
+                incoming: "lol ok. guess the group chat made plans without me again. have fun i guess",
+                reality: "He was in the chat the whole time. He just never answered the date poll, so we booked the cabin for the weekend most people picked. Nobody cut him out. I don't want this hanging over the trip.",
+                risky: " You literally never answered the poll, so that's kind of on you.",
+                warnHead: "The added sentence scores a point and loses the friend. He already feels left out; being told it's his fault confirms it.",
+                warnBullets: ["It turns a fixable logistics miss into a blame exchange.", "It makes him defend himself instead of deciding whether he's coming."],
+                notePhrase: "You literally never answered the poll, so that's kind of on you.",
+                noteWhy: "True and unusable. The goal is getting him to the cabin, not winning the group chat record.",
+                noteTry: "Skip the verdict and give him the practical path: there's still a seat and a bed if he wants in.",
+                sets: {
+                  "De-escalate": S("The suggested responses aim to de-escalate by making room for the feeling first, then showing him the open door: the cabin still has space and he is wanted there.",
+                    "Man, nobody cut you out. The poll sat there and your name was the one I kept waiting on. There's still a bed at the cabin if you want in; say the word and I'll add you to the booking.",
+                    "I get why it looks that way from your side. Truth is we booked the weekend that won the poll and figured you'd chime in. You're wanted on this trip. You in?",
+                    "Not the plan at all. There's room. Come, and I'll handle the group chat part."),
+                  "Keep momentum": S("The suggested responses aim to keep momentum by skipping the archaeology and going straight to logistics: dates, cost, and a deadline to grab the last spot.",
+                    "Straight to it: cabin's booked the 21st to 23rd, $90 each with you in, one bed left. Want it? I'll hold it till tomorrow night before I offer it to Dan's brother.",
+                    "You in or not? Everything's set except your name. Say yes and I'll send the e-transfer details.",
+                    "Here's the whole picture: leave Friday 4pm, my car has a seat. Decide by tomorrow and it's easy."),
+                  "Set a boundary": S("The suggested responses aim to set a boundary warmly: the friendship matters, and so does not re-litigating every plan; ask him to use the poll next time or say he's out.",
+                    "I care that you're there, and I need to say this once: the 'have fun I guess' text when you never answered the poll puts me in a no-win spot. Next time just vote or say you're out, and I'll always save you the update either way. This time: bed's yours if you want it.",
+                    "Real talk: I won't chase silence and then absorb the guilt trip after. You're invited, genuinely. Vote in the poll or text me, that's all I ask.",
+                    "You're my friend and you're invited. The boundary is small: no more plans-by-guilt-text. Say in or out and I respect either."),
+                  "Buy time": S("The suggested responses aim to buy time by not litigating the poll tonight and promising a call tomorrow, when it can be a conversation instead of a text spiral.",
+                    "I'm not doing this one by text tonight, it always lands wrong. You're not excluded; that's the headline. Call you tomorrow and we'll sort the cabin properly.",
+                    "Pause on the thread. Nothing's decided about you that you can't change. Tomorrow, phone, five minutes.",
+                    "Read this as: you matter, and I'm parking it till tomorrow's call so we don't make it weirder in chat."),
+                  "Get clarity": S("The suggested responses aim to get clarity by asking whether he actually wants to come or is hurt on principle, because those need different answers.",
+                    "Genuine question: do you want to come and it stings that it looked planned without you, or do you not want the trip and the sting is the point? I'll fix either, they're just different fixes.",
+                    "Is this about the cabin, or about feeling like the group's moving on without you lately? Honest answer gets an honest fix.",
+                    "Tell me what would make this right: a seat on this trip, or just not feeling like an afterthought? I can do either."),
+                  "Close the loop": S("The suggested responses aim to close the loop by stating the facts once, the offer once, and ending the topic on this thread.",
+                    "Closing this out so it doesn't follow us to the cabin: you were in the chat, the poll picked the date, there's a bed with your name on it till tomorrow night. Yes or no, both fine, and then we're done talking about it. Deal?",
+                    "Final state of things: invited, wanted, spot held till tomorrow. Ball's in your court and there's zero grudge either way.",
+                    "That's the whole story. Say the word and you're booked; say nothing and I'll take it as a no with no hard feelings.")
+                }
               },
-              "Close the loop": {
-                strategy: "The suggested responses aim to close the loop: own the miss, state the fix, and confirm the new rule, so nothing is left hanging between you and your manager.",
-                replies: [
-                  { tag: "Direct & Accountable", text: "You are right, it should not have gone out without your review. The client asked early and you were out, and I made the wrong call. From now on nothing leaves without your sign-off, even if it means the client waits. Consider it handled." },
-                  { tag: "Warm & Collaborative", text: "Closing the loop on this: I sent it early at the client's request while you were out, and that skipped your review. New rule on my side: your review first, always. If timing is tight I will flag you instead of sending." },
-                  { tag: "Calm & Brief", text: "Owned. It will not go out without your review again. If a client pushes while you are out, I will tell them it is pending your sign-off." }
-                ]
+              "Other": {
+                incoming: "Hello, this is the second noise complaint this month from the unit below. If it happens again I will have to begin the formal process. Please advise how you will prevent this.",
+                reality: "The loud night was my brother staying over; his TV was up while I was on a night shift. The first complaint was my move-in weekend in September. I need this place and I don't want a file started over two nights.",
+                risky: " Honestly, the first complaint was barely justified, so calling this a pattern is a stretch.",
+                warnHead: "The added sentence argues with the record your landlord is building. In a formal process, this reply becomes part of that record.",
+                warnBullets: ["It disputes a complaint instead of answering the only question asked: prevention.", "It gives the landlord a reason to document harder, not softer."],
+                notePhrase: "calling this a pattern is a stretch",
+                noteWhy: "You may be right on the facts, but 'pattern' is the landlord's framing for the file, and fighting the word reads as not taking it seriously.",
+                noteTry: "Answer the prevention question directly: guest spoken to, TV moved off the shared wall, quiet hours after 10. Prevention closes files; arguments open them.",
+                sets: {
+                  "De-escalate": S("The suggested responses aim to de-escalate by taking the complaint seriously, explaining the one loud night without excuses, and giving a prevention plan in writing.",
+                    "Thank you for telling me directly. The loud night was my brother staying over; his TV was up while I was on a night shift, and I've spoken to him. The TV is now off the shared wall and we keep things down after 10. I take this seriously and don't want a third.",
+                    "Understood, and I apologize to the neighbours below. It was a guest, one night, and it's handled: no loud TV after 10, and guests know the building rules before they stay. Please let me know if there's anything further.",
+                    "I appreciate the chance to address it. Cause identified (a guest's TV), fix in place (moved, volume down after 10, guest briefed). I value living here and I'll keep it quiet."),
+                  "Keep momentum": S("The suggested responses aim to keep momentum by answering the prevention question in full today, so the file closes on your reply instead of growing.",
+                    "Answering your question directly: the source was a guest's television on the shared wall. It has been moved to the interior wall, volume stays low after 10pm, and any future guest gets the building's quiet hours in writing from me first. Happy to confirm any of this in person.",
+                    "Prevention plan, effective now: TV relocated, headphones after 10, guests briefed, and I'll check in with the unit below myself this week to make sure it's resolved at the source.",
+                    "Here's what changed today: the setup that caused it no longer exists. If a third complaint ever comes, it won't be from the same cause."),
+                  "Set a boundary": S("The suggested responses aim to set a boundary factually: accept responsibility for the night that was yours, and calmly put the timeline on record without disputing the landlord's process.",
+                    "I accept responsibility for my guest's noise and it's addressed. For the record, the first complaint was my move-in weekend in September, so the two events are months apart and unrelated. I am committed to quiet enjoyment for everyone here and will keep it that way.",
+                    "One factual note for the file: the two complaints are September (move-in) and this week (a guest). Different causes, both handled. I am not disputing your process; I am asking that the record show the gap between them.",
+                    "I'll own my night. I'd also ask that any formal step reflect that this is two isolated nights months apart, not an ongoing pattern."),
+                  "Buy time": S("The suggested responses aim to buy time respectfully by acknowledging the notice today and promising a full written prevention plan within a set time, rather than improvising one.",
+                    "Thank you for the notice. I take it seriously and I don't want to answer half-prepared. You will have my full written prevention plan by tomorrow evening.",
+                    "Received and understood. Give me until tomorrow to reply properly with what happened and what changes; I want it accurate rather than fast.",
+                    "I will respond in full tomorrow. Short version now: it was a guest, it is handled, details to follow in writing."),
+                  "Get clarity": S("The suggested responses aim to get clarity on what the formal process actually involves and what would close the matter, so you respond to the real stakes.",
+                    "Thank you for the heads-up. So I respond correctly: what does the formal process involve, and is there anything specific you would like to see from me beyond a prevention plan? I want to close this out properly.",
+                    "Can I ask what the threshold is on your side: is a third complaint the trigger regardless of cause, or does an addressed, one-off guest night count differently? It changes how I manage guests.",
+                    "Who do I confirm the prevention steps with once they're in place, you or the building manager?"),
+                  "Close the loop": S("The suggested responses aim to close the loop with a complete written record: what happened, what changed, and your commitment, in one message the file can rest on.",
+                    "Closing the loop in writing: on the night in question my brother was staying over and his TV, against the shared wall, was too loud while I was at work. That setup is gone: TV moved to the interior wall, volume low after 10, guests briefed on quiet hours before they arrive. The September complaint was my move-in weekend. I intend to live here quietly and long-term, and this is my commitment on record.",
+                    "Final summary for your file: cause found, cause removed, prevention in place, apology offered to the unit below. I consider the matter addressed and will keep it that way.",
+                    "For the record: two unrelated nights, both explained, both fixed at the source. Thank you for handling it by message first.")
+                }
               }
             };
-            const RISKY = " Honestly, it's not my fault you weren't around.";
             const views = root.querySelectorAll("[data-dm-view]");
             const loading = root.querySelector("[data-dm-loading]");
             const steps = root.querySelector("[data-dm-steps]");
             const repliesWrap = root.querySelector("[data-dm-replies]");
-            let current = SETS["De-escalate"];
+            const incomingEl = root.querySelector("[data-dm-incoming]");
+            const realityEl = root.querySelector("[data-dm-reality]");
+            let ctx = "Work";
+            let current = SCENARIOS["Work"].sets["De-escalate"];
+            function scenario() { return SCENARIOS[ctx]; }
             function selectedLabel(name) {
               const g = root.querySelector('[data-dm-chips="' + name + '"]');
               const on = g && g.querySelector('[aria-pressed="true"]');
@@ -1036,18 +1208,19 @@
               if (stepFor) steps.querySelectorAll("span").forEach(s => s.classList.toggle("on", s.dataset.step === stepFor));
             }
             root.querySelectorAll("[data-dm-goto]").forEach(b => b.addEventListener("click", () => show(b.dataset.dmGoto)));
-            const ctxNote = root.querySelector("[data-dm-ctxnote]");
-            let ctxTimer = null;
+            function setScenario(name) {
+              if (!SCENARIOS[name]) return;
+              ctx = name;
+              incomingEl.value = SCENARIOS[name].incoming;
+              realityEl.value = SCENARIOS[name].reality;
+              copied.style.display = "none";
+              show("compose");
+            }
             root.querySelectorAll("[data-dm-chips]").forEach(group => {
               group.querySelectorAll(".dm-chip").forEach(chip => chip.addEventListener("click", () => {
-                if (group.dataset.dmChips === "context" && chip.textContent.trim() !== "Work") {
-                  ctxNote.style.display = "block";
-                  clearTimeout(ctxTimer);
-                  ctxTimer = setTimeout(() => { ctxNote.style.display = "none"; }, 4000);
-                  return;
-                }
                 group.querySelectorAll(".dm-chip").forEach(c => c.setAttribute("aria-pressed", "false"));
                 chip.setAttribute("aria-pressed", "true");
+                if (group.dataset.dmChips === "context") setScenario(chip.textContent.trim());
               }));
             });
             const personaBtn = root.querySelector("[data-dm-persona]");
@@ -1055,8 +1228,8 @@
             personaBtn.addEventListener("click", () => { personaMenu.style.display = personaMenu.style.display === "none" ? "block" : "none"; });
             function generate() {
               const dir = selectedLabel("direction") || "De-escalate";
-              current = SETS[dir] || SETS["De-escalate"];
-              const echo = (selectedLabel("context") || "Work") + " · " + (selectedLabel("tone") || "Professional") + " · " + dir;
+              current = scenario().sets[dir] || scenario().sets["De-escalate"];
+              const echo = ctx + " · " + (selectedLabel("tone") || "Professional") + " · " + dir;
               root.querySelector("[data-dm-echo]").textContent = echo;
               root.querySelector("[data-dm-echo2]").textContent = echo;
               root.querySelector("[data-dm-strategy]").textContent = current.strategy;
@@ -1087,12 +1260,20 @@
             const riskBtn = root.querySelector("[data-dm-risk]");
             const copied = root.querySelector("[data-dm-copied]");
             const editTag = root.querySelector("[data-dm-edit-tag]");
+            const notePhrase = root.querySelector("[data-dm-note-phrase]");
+            const noteWhy = root.querySelector("[data-dm-note-why]");
+            const noteTry = root.querySelector("[data-dm-note-try]");
             let risky = false;
             function renderCoach() {
+              const sc = scenario();
               if (risky) {
                 coach.classList.add("warn"); badge.className = "dm-badge warn"; badge.textContent = "Warning";
-                head.textContent = "The added sentence introduces a defensive and accusatory tone that could damage your relationship with your manager.";
-                list.innerHTML = "<li>It sounds like blame rather than focusing on a solution.</li><li>It undermines the collaborative tone the rest of the draft works to build.</li>";
+                head.textContent = sc.warnHead;
+                list.innerHTML = "";
+                sc.warnBullets.forEach(t => { const li = document.createElement("li"); li.textContent = t; list.appendChild(li); });
+                notePhrase.textContent = "“" + sc.notePhrase + "”";
+                noteWhy.textContent = sc.noteWhy;
+                noteTry.textContent = "Try: " + sc.noteTry;
                 notes.style.display = "block"; riskBtn.textContent = "Remove the risky line";
               } else {
                 coach.classList.remove("warn"); badge.className = "dm-badge ok"; badge.textContent = "Aligned";
@@ -1106,12 +1287,12 @@
               editTag.textContent = current.replies[i].tag; renderCoach(); show("edit");
             }
             riskBtn.addEventListener("click", () => {
-              if (!risky) { draft.value = draft.value.replace(/([.!?])\s*$/, RISKY); risky = true; }
-              else { draft.value = draft.value.replace(RISKY, ""); risky = false; }
+              if (!risky) { draft.value = draft.value.replace(/([.!?])\s*$/, scenario().risky); risky = true; }
+              else { draft.value = draft.value.replace(scenario().risky, ""); risky = false; }
               copied.style.display = "none"; renderCoach();
             });
             draft.addEventListener("input", () => {
-              const has = draft.value.includes("not my fault you weren't around");
+              const has = draft.value.includes(scenario().risky.trim());
               if (has !== risky) { risky = has; renderCoach(); }
             });
             root.querySelector("[data-dm-copy]").addEventListener("click", async () => {
@@ -1121,7 +1302,6 @@
             const toggle = root.querySelector("[data-dm-toggle]");
             toggle.addEventListener("click", () => toggle.setAttribute("aria-checked", String(toggle.getAttribute("aria-checked") !== "true")));
           })();
-
         </script>
       </section>
 

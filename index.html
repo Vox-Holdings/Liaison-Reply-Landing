@@ -820,10 +820,12 @@
               <div class="dm-steps" data-dm-steps><span data-step="1" class="on">1 · Message &amp; context</span><span data-step="2">2 · Generate replies</span><span data-step="3">3 · Edit &amp; copy</span></div>
               <div class="dm-view on" data-dm-view="compose">
                 <div class="dm-panel">
-                  <span class="dm-label">The message you received</span>
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+                    <span class="dm-label">The message you received</span>
+                    <span class="dm-paste" style="position:static;flex:none">Paste</span>
+                  </div>
                   <div class="dm-msgwrap">
                     <textarea class="dm-input" rows="3" data-dm-incoming>Saw the deck went to the client without my review. We need to talk about this first thing tomorrow.</textarea>
-                    <span class="dm-paste">Paste</span>
                   </div>
                   <div class="dm-vent"><span class="dm-mic"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-14 0m7 7v3m-4 0h8M12 11a3 3 0 003-3V5a3 3 0 10-6 0v3a3 3 0 003 3z"/></svg></span><span><b>Vent by voice</b><small>Speak freely. No typing.</small></span></div>
                   <div class="dm-fast"><b>Fastest way in</b><p>Add screenshots. We rebuild the thread, reading them on this device where possible, or through our secure reading service, which doesn't store them.</p><button class="dm-addshots" type="button">Add screenshots</button></div>

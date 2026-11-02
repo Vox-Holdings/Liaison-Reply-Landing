@@ -662,6 +662,70 @@
         </div>
       </section>
 
+      <!-- INTERACTIVE DEMO -->
+      <section id="interactive-demo" class="mx-auto max-w-6xl px-6 py-24" data-reveal>
+        <style>
+          #interactive-demo .demo-shell{border:1px solid rgba(255,255,255,.1);border-radius:28px;background:linear-gradient(145deg,rgba(19,29,48,.96),rgba(7,12,23,.98));padding:clamp(1.25rem,3vw,2.25rem);box-shadow:0 30px 90px rgba(0,0,0,.28)}
+          #interactive-demo .demo-controls{display:grid;gap:1.35rem;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:2rem}
+          #interactive-demo .demo-label{display:block;color:rgba(255,255,255,.48);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem}
+          #interactive-demo .demo-pills{display:flex;flex-wrap:wrap;gap:.55rem}
+          #interactive-demo .demo-pill{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:rgba(255,255,255,.72);border-radius:999px;padding:.62rem .82rem;font-size:.82rem;font-weight:700;cursor:pointer;transition:.2s}
+          #interactive-demo .demo-pill[aria-pressed="true"]{border-color:rgba(56,189,248,.9);background:rgba(56,189,248,.16);color:#d8f7ff}
+          #interactive-demo .demo-grid{display:grid;gap:1rem;grid-template-columns:1.05fr .95fr;margin-top:2rem}
+          #interactive-demo .demo-card{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:20px;padding:1.2rem}
+          #interactive-demo .demo-message{color:rgba(255,255,255,.88);font-size:1rem;line-height:1.65}
+          #interactive-demo .demo-meta{color:rgba(255,255,255,.45);font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}
+          #interactive-demo .demo-replies{display:grid;gap:.75rem;margin-top:1rem}
+          #interactive-demo .demo-reply{border-left:2px solid #38bdf8;padding:.75rem .9rem;background:rgba(56,189,248,.06);color:rgba(255,255,255,.8);line-height:1.55}
+          #interactive-demo .demo-coaching{margin-top:1rem;border:1px solid rgba(251,191,36,.25);background:rgba(251,191,36,.07);border-radius:14px;padding:.85rem;color:rgba(255,255,255,.72);line-height:1.5}
+          #interactive-demo .demo-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1.35rem}
+          @media(max-width:760px){#interactive-demo .demo-controls,#interactive-demo .demo-grid{grid-template-columns:1fr}}
+        </style>
+        <p class="text-center text-sm font-bold uppercase tracking-widest text-sky-400">Try the controls</p>
+        <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">See how the room changes.</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">Choose a persona and a direction. The same hard message takes a different shape depending on what you need from the reply.</p>
+        <div class="demo-shell mt-12">
+          <div class="demo-controls">
+            <div><span class="demo-label">Persona</span><div class="demo-pills" data-demo-personas role="group" aria-label="Choose a persona"></div></div>
+            <div><span class="demo-label">Steer the reply</span><div class="demo-pills" data-demo-intents role="group" aria-label="Choose a reply direction"></div></div>
+          </div>
+          <div class="demo-grid" aria-live="polite">
+            <article class="demo-card"><span class="demo-meta">Incoming message</span><p class="demo-message mt-3">“Wow. Okay. So you saw my message at 9 and just decided not to answer. Good to know where I stand.”</p><div class="demo-coaching" data-demo-coaching></div></article>
+            <article class="demo-card"><span class="demo-meta">Three reply paths</span><h3 data-demo-heading></h3><div class="demo-replies" data-demo-replies></div></article>
+          </div>
+          <div class="demo-foot"><p class="text-sm text-white/45">Sample conversation. Nothing is sent, and no account is needed to explore.</p><a href="https://app.liaisonreply.com/auth/register" data-session-primary data-cta-surface="interactive-demo" data-cta-label="Try it with your message" data-auth-text="Try it with your message" data-session-text="Open Liaison Reply" data-auth-path="https://app.liaisonreply.com/auth/register" data-session-path="/chat" class="rounded-full bg-sky-500 px-5 py-3 text-sm font-bold text-black hover:bg-sky-400 transition-colors">Try it with your message</a></div>
+        </div>
+        <script>
+          (() => {
+            const personas = ["The Diplomat","The Charmer","The Closer","The Cool Head","Casual"];
+            const intents = ["Calm it down","Keep momentum","Set a boundary","Buy time","Show interest","Close the loop"];
+            const bases = {
+              "The Diplomat":["You’re right to call that out. I saw it and should have answered. I’m sorry.","I understand why that landed badly. I wasn’t trying to ignore you, but I can see the impact.","You matter to me, and I want to handle this better. Can we talk tonight?"],
+              "The Charmer":["Okay, fair. I saw it and fumbled the reply. That one’s on me.","You’re right to give me a little grief. Can I make it up to you tonight?","No disappearing act intended. I’m here now."],
+              "The Closer":["You’re right. I saw it and didn’t answer. I’m sorry. Let’s reset tonight.","I dropped the ball. I’ll own that instead of arguing about it.","Let’s talk tonight and resolve this."],
+              "The Cool Head":["I understand why you’re upset. I saw the message and failed to reply.","I’m not going to argue with the impact. I’m sorry.","Let’s take the heat out of this and talk when we’re both calmer."],
+              "Casual":["Yeah, that was on me. I saw it and forgot to reply. Sorry.","I get why that annoyed you. I wasn’t trying to ignore you.","Can we reset? I’m here now."]
+            };
+            const modifiers = {
+              "Calm it down":["Acknowledge the impact before explaining the reason.","Lead with accountability, then lower the temperature."],
+              "Keep momentum":["Make the next step easy and specific.","Move from the tension toward a real conversation."],
+              "Set a boundary":["Keep the boundary about your availability, not their worth.","Be clear without turning the reply into a counterattack."],
+              "Buy time":["Name when you’ll return so space doesn’t feel like abandonment.","Ask for room without going silent."],
+              "Show interest":["Reassure them directly before adding context.","Make your attention unmistakable."],
+              "Close the loop":["State what happened, own your part, and give a next step.","Leave the conversation with a clear path forward."]
+            };
+            const personaWrap=document.querySelector("[data-demo-personas]"), intentWrap=document.querySelector("[data-demo-intents]"), repliesWrap=document.querySelector("[data-demo-replies]"), heading=document.querySelector("[data-demo-heading]"), coaching=document.querySelector("[data-demo-coaching]");
+            let persona="The Diplomat", intent="Calm it down";
+            const render=()=>{ const base=bases[persona]; const mod=modifiers[intent]; const lines=intent==="Calm it down"?base:[base[0],mod[0],base[2]];
+              personaWrap.innerHTML=personas.map(v=>'<button type="button" class="demo-pill" aria-pressed="'+(v===persona)+'" data-v="'+v+'">'+v+'</button>').join("");
+              intentWrap.innerHTML=intents.map(v=>'<button type="button" class="demo-pill" aria-pressed="'+(v===intent)+'" data-v="'+v+'">'+v+'</button>').join("");
+              heading.textContent=persona+" · "+intent; repliesWrap.innerHTML=lines.map((v,i)=>'<div class="demo-reply"><span class="demo-meta">'+["Safe","Warm","Direct"][i]+"</span><br>"+v+"</div>").join(""); coaching.textContent="Strategic coaching: "+mod[1];
+              personaWrap.querySelectorAll("button").forEach(b=>b.onclick=()=>{persona=b.dataset.v;render()}); intentWrap.querySelectorAll("button").forEach(b=>b.onclick=()=>{intent=b.dataset.v;render()});
+            }; render();
+          })();
+        </script>
+      </section>
+
       <!-- PRICING -->
       <section id="plans" class="mx-auto max-w-6xl px-6 py-24" data-pricing-section data-reveal>
         <h2 class="text-center text-3xl font-black md:text-4xl">Pricing</h2>

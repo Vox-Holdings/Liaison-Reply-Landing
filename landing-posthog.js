@@ -155,6 +155,8 @@
 
   capture("$pageview", {});
 
+  capture("landing_session_started", {});
+
   const sentQuartiles = new Set();
 
   function currentScrollPercent() {

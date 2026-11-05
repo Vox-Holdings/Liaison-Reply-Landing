@@ -17,10 +17,10 @@ People who need help answering loaded messages at work, in dating, or with famil
 ## Features & Usage
 
 ### What do I get with the free tier?
-You get 15 lifetime credits so you can test the full workflow before paying. Credits do not automatically reset or replenish. Verified referrals can add bonus credits.
+You get 15 lifetime credits so you can test the full workflow before paying. Credits do not automatically reset or replenish. Style Notes are available on every plan. Verified referrals can add bonus credits.
 
 ### What changes when I upgrade to Pro?
-Pro gives you unlimited generations for normal use, subject to fair-use protections, plus full conversation memory, linked threads, 12 rewrites per reply, Style Notes, and all premium personas (The Diplomat, The Charmer, The Closer, The Cool Head).
+Pro gives you unlimited generations for normal use, subject to fair-use protections, plus full conversation memory, linked threads, 12 rewrites per reply, and all premium personas (The Diplomat, The Charmer, The Closer, The Cool Head). Style Notes remain available on Free.
 
 ### How does the three-reply system work?
 The engine analyzes the sender's tone and social dynamics to generate three distinct, humanized responses optimized for specific communication outcomes:

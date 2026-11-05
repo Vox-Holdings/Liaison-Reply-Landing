@@ -422,37 +422,6 @@
     observer.observe(demo);
   }
 
-  const DEMO_COPY_EXPERIMENT_ID = "demo-copy-v1";
-  const DEMO_COPY_VARIANT = "scenario-led";
-
-  function buildExperimentAnalyticsPayload() {
-    return {
-      demo_copy_experiment_id: DEMO_COPY_EXPERIMENT_ID,
-      demo_copy_variant: DEMO_COPY_VARIANT,
-    };
-  }
-
-  function initDemoCopyExperimentTracking() {
-    const section = document.querySelector("[data-demo-copy-experiment-section]");
-    if (!section || section.dataset.experimentTracked === "true") return;
-    section.dataset.experimentTracked = "true";
-    const emit = () => trackLandingEvent("landing_experiment_exposed", {
-      ...buildExperimentAnalyticsPayload(),
-      experiment_surface: "demo-section",
-    });
-    if (typeof window.IntersectionObserver !== "function") {
-      emit();
-      return;
-    }
-    const observer = new window.IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        emit();
-        observer.disconnect();
-      }
-    }, { threshold: 0.25 });
-    observer.observe(section);
-  }
-
   function initCtaTracking() {
     document.querySelectorAll("[data-cta-surface]").forEach((link) => {
       if (link.dataset.ctaTracked === "true") {
@@ -481,7 +450,6 @@
         }
 
         trackLandingEvent("landing_cta_clicked", {
-          ...buildExperimentAnalyticsPayload(),
           cta_surface: ctaSurface,
           cta_label: ctaLabel,
           billing_interval: billingInterval,
@@ -614,6 +582,5 @@
   hydrateAppLinks();
   initPricingSectionTracking();
   initDemoTracking();
-  initDemoCopyExperimentTracking();
   initCtaTracking();
 })();

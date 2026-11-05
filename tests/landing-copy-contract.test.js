@@ -29,6 +29,7 @@ test("active public copy uses lifetime credits and never promises replenishment"
 
 test("demo persona controls are wired to deterministic behavior", () => {
   const source = fs.readFileSync(path.join(root, "index.html"), "utf8");
+  assert.doesNotMatch(source + fs.readFileSync(path.join(root, "site.js"), "utf8"), /demo-copy|landing_experiment_exposed|data-demo-copy/);
   assert.match(source, /data-dm-persona-row="diplomat"/);
   assert.match(source, /data-dm-persona-row="charmer"/);
   assert.match(source, /data-dm-persona-row="closer"/);

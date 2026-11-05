@@ -17,10 +17,10 @@ People who need help answering loaded messages at work, in dating, or with famil
 ## Features & Usage
 
 ### What do I get with the free tier?
-You get 15 free generations so you can test the full workflow before paying. That is enough to see whether the product helps you think and reply more clearly.
+You get 15 lifetime credits so you can test the full workflow before paying. Credits do not automatically reset or replenish. Verified referrals can add bonus credits.
 
 ### What changes when I upgrade to Pro?
-Pro gives you more room to keep going when the conversation gets difficult, plus deeper conversation memory, premium personas (The Diplomat, The Charmer, The Closer, The Cool Head), and priority support for higher-stakes situations.
+Pro gives you unlimited generations for normal use, subject to fair-use protections, plus full conversation memory, linked threads, 12 rewrites per reply, Style Notes, and all premium personas (The Diplomat, The Charmer, The Closer, The Cool Head).
 
 ### How does the three-reply system work?
 The engine analyzes the sender's tone and social dynamics to generate three distinct, humanized responses optimized for specific communication outcomes:
@@ -45,7 +45,7 @@ Yes. You can manage your subscription through Stripe at any time, including canc
 ### What is the difference between Pro Monthly and Pro Yearly?
 - Pro Monthly: $7.99/month, pay month to month
 - Pro Yearly: $79.99/year ($6.67/month effective, save 17%)
-Both include unlimited generations for normal use, full conversation memory, all premium personas, and priority support.
+Both include unlimited generations for normal use, subject to fair-use protections, full conversation memory, linked threads, rewrites, Style Notes, and all premium personas.
 
 ### What are "fair-use abuse guardrails"?
 Unlimited generations are for normal use and subject to fair-use abuse guardrails to prevent misuse of the system while ensuring legitimate heavy users aren't restricted.
@@ -72,7 +72,7 @@ Cookie consent controls optional analytics and limited site-memory features on t
 ### Why am I getting blank or empty replies?
 Blank generations usually indicate a webhook or API issue. Try:
 1. Check that your message has content (not empty)
-2. Verify you have generation credits (free tier limit: 15)
+2. Verify you have generation credits (the Free allowance is 15 lifetime credits, plus any verified-referral bonuses)
 3. Refresh and retry
 4. If blank persists, contact support with your user ID and timestamp
 

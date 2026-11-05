@@ -45,7 +45,7 @@ Yes. You can manage your subscription through Stripe at any time, including canc
 ### What is the difference between Pro Monthly and Pro Yearly?
 - Pro Monthly: $7.99/month, pay month to month
 - Pro Yearly: $79.99/year ($6.67/month effective, save 17%)
-Both include unlimited generations for normal use, subject to fair-use protections, full conversation memory, linked threads, rewrites, Style Notes, and all premium personas.
+Both include unlimited generations for normal use, subject to fair-use protections, full conversation memory, linked threads, rewrites, and all premium personas.
 
 ### What are "fair-use abuse guardrails"?
 Unlimited generations are for normal use and subject to fair-use abuse guardrails to prevent misuse of the system while ensuring legitimate heavy users aren't restricted.

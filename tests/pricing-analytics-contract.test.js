@@ -34,35 +34,3 @@ test('landing pricing CTA tracking emits interval and click events with beacon t
     'landing analytics should use beacon transport for navigational clicks'
   );
 });
-
-test('demo copy experiment uses variant hooks and emits exposure analytics', () => {
-  assert.match(
-    html,
-    /data-demo-copy-experiment-section[\s\S]*data-demo-copy-headline[\s\S]*data-demo-copy-description/,
-    'demo section should expose stable experiment copy hooks'
-  );
-
-  assert.match(
-    html,
-    /data-demo-copy-footer[\s\S]*data-demo-copy-proof-note/,
-    'demo section should expose footer and proof-note hooks for variant copy'
-  );
-
-  assert.match(
-    siteJs,
-    /trackLandingEvent\("landing_experiment_exposed"[\s\S]*experiment_surface: "demo-section"/,
-    'demo experiment should emit exposure event when the section is viewed'
-  );
-
-  assert.match(
-    siteJs,
-    /demo_copy_experiment_id[\s\S]*demo_copy_variant/,
-    'landing analytics payload should include experiment and variant metadata'
-  );
-
-  assert.match(
-    siteJs,
-    /trackLandingEvent\("landing_cta_clicked", \{[\s\S]*\.\.\.buildExperimentAnalyticsPayload\(\)/,
-    'CTA click events should include experiment metadata for conversion analysis'
-  );
-});

@@ -177,6 +177,39 @@
       ]
     }
     </script>
+    <!-- Experiment #2 (demo placement): variant assignment. Runs in the head so the arm is known before the body parses. -->
+    <script>
+      (function () {
+        var TOKEN_KEY = "liaison_exp2_token";
+        var VARIANT_KEY = "liaison_exp2_variant";
+        function read(key) {
+          try { return window.localStorage.getItem(key); } catch (e) { return null; }
+        }
+        function store(key, value) {
+          try { window.localStorage.setItem(key, value); } catch (e) {}
+        }
+        function newToken() {
+          if (window.crypto && typeof window.crypto.randomUUID === "function") return window.crypto.randomUUID();
+          return "id-" + Date.now() + "-" + Math.random().toString(36).slice(2, 12);
+        }
+        function hashToken(token) {
+          var h = 2166136261;
+          for (var i = 0; i < token.length; i++) {
+            h ^= token.charCodeAt(i);
+            h = Math.imul(h, 16777619);
+          }
+          return (h >>> 0) % 2;
+        }
+        var variant = read(VARIANT_KEY);
+        if (variant !== "A" && variant !== "B") {
+          var token = read(TOKEN_KEY);
+          if (!token) { token = newToken(); store(TOKEN_KEY, token); }
+          variant = hashToken(token) === 0 ? "A" : "B";
+          store(VARIANT_KEY, variant);
+        }
+        window.__exp2Variant = variant;
+      })();
+    </script>
       <style>
       .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s ease; }
       .reveal.in { opacity: 1; transform: none; }
@@ -1349,6 +1382,60 @@
           })();
         </script>
       </section>
+    <script>
+      // Experiment #2 (demo placement): Arm B moves the demo block directly
+      // below the hero. This runs during parse, immediately after the demo
+      // section, so the order is final before first paint.
+      (function () {
+        try {
+          var variant = window.__exp2Variant;
+          if (variant !== "A" && variant !== "B") {
+            try { variant = window.localStorage.getItem("liaison_exp2_variant"); } catch (e) {}
+          }
+          if (variant !== "B") return;
+          var demo = document.getElementById("interactive-demo");
+          var hero = document.getElementById("hero");
+          if (demo && hero && hero.parentNode) {
+            hero.parentNode.insertBefore(demo, hero.nextSibling);
+          }
+        } catch (e) {}
+      })();
+      // Experiment #2: landing_demo_interacted fires once per session on the
+      // first genuine interaction inside the demo (relationship-context
+      // switch, generate, reply-card pick / edit start). Scrolling into the
+      // demo does not count; that stays landing_demo_viewed.
+      (function () {
+        var FIRED_KEY = "liaison_exp2_demo_interacted";
+        var fired = false;
+        try { fired = window.sessionStorage.getItem(FIRED_KEY) === "1"; } catch (e) {}
+        function interacted(kind) {
+          if (fired) return;
+          fired = true;
+          try { window.sessionStorage.setItem(FIRED_KEY, "1"); } catch (e) {}
+          if (typeof window.liaisonTrackLandingEvent === "function") {
+            window.liaisonTrackLandingEvent("landing_demo_interacted", {
+              surface: "interactive-demo",
+              interaction_type: kind,
+            });
+          }
+        }
+        var demo = document.getElementById("interactive-demo");
+        if (!demo) return;
+        demo.addEventListener("click", function (event) {
+          var t = event.target;
+          if (!t || typeof t.closest !== "function") return;
+          if (t.closest("[data-dm-generate]")) { interacted("generate"); return; }
+          if (t.closest(".dm-reply")) { interacted("reply_edit"); return; }
+          var chip = t.closest(".dm-chip");
+          if (chip) {
+            var group = chip.closest("[data-dm-chips]");
+            if (group && group.getAttribute("data-dm-chips") === "context") {
+              interacted("context");
+            }
+          }
+        });
+      })();
+    </script>
 
       <!-- PRICING -->
       <section id="plans" class="mx-auto max-w-6xl px-6 py-24" data-pricing-section data-reveal>
@@ -1612,7 +1699,6 @@
         <nav class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-2 px-2" aria-label="Follow us">
           <a href="https://x.com/LiaisonReply" class="hover:text-white/50 transition-colors">Follow us on X</a>
           <a href="https://www.instagram.com/liaison.reply" class="hover:text-white/50 transition-colors">Follow us on Instagram</a>
-          <a href="https://www.facebook.com/profile.php?id=61584020103366" class="hover:text-white/50 transition-colors">Follow us on Facebook</a>
         </nav>
       </footer>
     </main>

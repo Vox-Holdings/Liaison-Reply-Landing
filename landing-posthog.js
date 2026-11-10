@@ -121,8 +121,20 @@
     return clean;
   }
 
+  function exp2Variant() {
+    const fromWindow =
+      typeof window.__exp2Variant === "string" ? window.__exp2Variant : "";
+    if (fromWindow === "A" || fromWindow === "B") {
+      return fromWindow;
+    }
+
+    const stored = safeGet("liaison_exp2_variant");
+    return stored === "A" || stored === "B" ? stored : null;
+  }
+
   function capture(eventName, props = {}) {
     try {
+      const variant = exp2Variant();
       const payload = {
         api_key: POSTHOG_API_KEY,
         event: eventName,
@@ -135,6 +147,7 @@
           $process_person_profile: false,
           consent_continuity: hasContinuityConsent(),
           landing_source: "landing_site",
+          ...(variant ? { exp2_variant: variant } : {}),
         },
         timestamp: new Date().toISOString(),
       };

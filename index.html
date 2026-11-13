@@ -289,7 +289,7 @@
               data-cta-label="Try a Demo"
               style="background:#f59e0b;color:#000" class="demo-btn mt-4 block w-full text-center rounded-2xl px-10 py-5 text-lg font-bold shadow-[0_0_40px_rgba(245,158,11,0.30)] active:scale-[0.98] transition-all duration-200 sm:inline-block sm:w-auto sm:mt-10 sm:ml-4"
             >Try a Demo</a>
-            <p class="mt-4 text-sm text-white/50">15 lifetime credits. No card. Try a real scenario in your browser; the demo stays local until you take the prefilled scenario into the app.</p>
+            <p class="mt-4 text-sm text-white/50">15 lifetime credits. No card. Explore a guided sample in your browser, then use the app for your own messages.</p>
           </div>
 
           <!-- Real app screenshot -->
@@ -845,7 +845,7 @@
         </style>
         <p class="text-center text-sm font-bold uppercase tracking-widest text-sky-400">Interactive demo</p>
         <h2 class="mt-3 text-center text-3xl font-black md:text-4xl">From message in to message out.</h2>
-         <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">Try it right here, in your browser. Pick a situation that sounds familiar, choose a voice, pick a direction, and see replies you could actually send. Like one? Open the same scenario in the app and make it yours. This preview is free and never uses your credits.</p>
+         <p class="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/60">Guided preview · no sign-up or credits needed. Choose a sample situation and a direction, compare three prewritten replies, then try the coaching example. Use the app for your own messages and live coaching.</p>
         <div class="dm-frame mt-12">
           <div class="dm-topbar"><span style="display:flex;align-items:center;gap:9px"><svg width="26" height="26" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="3" y="3" width="34" height="34" rx="10" stroke="#22d3ee" stroke-width="2.5"/><path d="M13 12v12h12" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round"/><circle cx="27" cy="13" r="2.4" fill="#22d3ee"/></svg>Liaison Reply</span><span style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:inline-block"></span></div>
           <div class="dm-body">
@@ -859,47 +859,27 @@
                 <p class="dm-brand-tag">Three calibrated replies for the moment that still matters.</p>
               </div>
               <button class="dm-nav2" data-dm-goto="compose" aria-current="true" type="button"><small>Reply</small><strong>Compose</strong></button>
-              <button class="dm-nav2" data-dm-goto="history" aria-current="false" type="button"><small>Recent</small><strong>History</strong></button>
-              <button class="dm-nav2" data-dm-goto="personas" aria-current="false" type="button"><small>Styles</small><strong>Personas</strong></button>
-              <button class="dm-nav2" data-dm-goto="settings" aria-current="false" type="button"><small>Account</small><strong>Settings</strong></button>
               <div class="dm-plan"><b>Liaison Reply Free</b>15 lifetime credits, no card. Verified referrals add bonus credits. Pro adds deeper memory, rewrites, and every premium persona.<a href="/pricing">See what Pro adds</a></div>
             </aside>
             <main class="dm-main">
-              <div class="dm-steps" data-dm-steps><span data-step="1" class="on">1 · Message &amp; context</span><span data-step="2">2 · Generate replies</span><span data-step="3">3 · Edit &amp; copy</span></div>
+              <div class="dm-steps" data-dm-steps><span data-step="1" class="on">1 · Message &amp; context</span><span data-step="2">2 · Compare replies</span><span data-step="3">3 · Edit &amp; copy</span></div>
               <div class="dm-view on" data-dm-view="compose">
                 <div class="dm-panel">
                   <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
                     <span class="dm-label">The message you received</span>
-                    <span class="dm-paste" style="position:static;flex:none">Paste</span>
+                    <span class="dm-help">Sample message</span>
                   </div>
                   <div class="dm-msgwrap">
-                    <textarea class="dm-input" rows="3" data-dm-incoming aria-label="The message you received">Saw the deck went to the client without my review. We need to talk about this first thing tomorrow.</textarea>
-                  </div>
-                  <div class="dm-vent"><span class="dm-mic"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-14 0m7 7v3m-4 0h8M12 11a3 3 0 003-3V5a3 3 0 10-6 0v3a3 3 0 003 3z"/></svg></span><span><b>Vent by voice</b><small>Speak freely. No typing.</small></span></div>
-                  <div class="dm-fast"><b>Fastest way in</b><p>Add screenshots. We rebuild the thread, reading them on this device where possible, or through our secure reading service, which doesn't store them.</p><button class="dm-addshots" type="button">Add screenshots</button></div>
-                  <div class="dm-persona">
-                    <button class="dm-persona-bar" data-dm-persona aria-expanded="false" aria-haspopup="listbox" aria-label="Selected persona: Casual, Free" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h8m-8 4h5M21 12a9 9 0 01-13.2 8L3 21l1-4.8A9 9 0 1121 12z"/></svg><b>Casual</b><span class="dm-chev">▾</span></button>
-                    <p class="dm-persona-cap">Relaxed and friendly conversation style</p>
-                    <div class="dm-persona-menu" data-dm-persona-menu style="display:none">
-                    <button class="dm-pm-row" data-dm-persona-row="casual" aria-pressed="true" type="button"><span>Casual</span><span style="color:#5eead4;font-weight:800">Free · Applied</span></button>
-                    <button class="dm-pm-row" data-dm-persona-row="diplomat" aria-pressed="false" type="button"><span>The Diplomat</span><span class="dm-pro">Pro</span></button>
-                    <button class="dm-pm-row" data-dm-persona-row="charmer" aria-pressed="false" type="button"><span>The Charmer</span><span class="dm-pro">Pro</span></button>
-                    <button class="dm-pm-row" data-dm-persona-row="closer" aria-pressed="false" type="button"><span>The Closer</span><span class="dm-pro">Pro</span></button>
-                    <button class="dm-pm-row" data-dm-persona-row="cool-head" aria-pressed="false" type="button"><span>The Cool Head</span><span class="dm-pro">Pro</span></button>
-                    </div>
+                    <textarea class="dm-input" rows="3" data-dm-incoming readonly aria-label="The message you received">Saw the deck went to the client without my review. We need to talk about this first thing tomorrow.</textarea>
                   </div>
                   <div class="dm-acc">
-                    <div class="dm-acc-head"><span>Add context, tone, and intent</span><span class="dm-chev">▾</span></div>
+                    <div class="dm-acc-head"><span>Choose the situation and direction</span></div>
                     <div class="dm-acc-body">
-                      <span class="dm-sub" style="margin-top:14px">Earlier thread messages</span>
-                      <p class="dm-help">Optional. Paste unattributed prior messages here, then submit them so Liaison Reply can map each line to you or the contact before it drafts.</p>
-                      <textarea class="dm-input" rows="3" aria-label="Earlier messages from the thread" placeholder="Paste earlier messages from the thread..."></textarea>
-                      <div class="dm-actions-row"><button class="dm-pill-dark" type="button">Paste</button><button class="dm-pill-teal" data-dm-generate type="button">Submit context</button></div>
-                      <span class="dm-sub">The Reality (Raw thoughts)</span>
-                      <p class="dm-help">Optional. Add facts that were not said in the text thread but should shape the reply.</p>
-                      <textarea class="dm-input" rows="3" data-dm-reality aria-label="The Reality: private context that should guide the reply" placeholder="Add private context that should guide the reply...">My manager. I sent it because the client asked for it early and she was out. I want to explain without sounding defensive.</textarea>
+                      <span class="dm-sub">Sample background</span>
+                      <p class="dm-help">These sample facts shape the prewritten replies. In the app, add your own context.</p>
+                      <textarea class="dm-input" rows="3" data-dm-reality readonly aria-label="The Reality: private context that should guide the reply" placeholder="Add private context that should guide the reply...">My manager. I sent it because the client asked for it early and she was out. I want to explain without sounding defensive.</textarea>
                       <span class="dm-sub">Relationship context</span>
-                      <p class="dm-help">Required. This calibrates the strategy and risk read.</p>
+                      <p class="dm-help">Choose a sample conversation. This replaces the message and background above.</p>
                       <div class="dm-chips" data-dm-chips="context">
                         <button class="dm-chip" aria-pressed="false" type="button">Dating</button>
                         <button class="dm-chip" aria-pressed="true" type="button">Work</button>
@@ -907,17 +887,6 @@
                         <button class="dm-chip" aria-pressed="false" type="button">Family</button>
                         <button class="dm-chip" aria-pressed="false" type="button">Friends</button>
                         <button class="dm-chip" aria-pressed="false" type="button">Other</button>
-                      </div>
-                      <span class="dm-sub">Tone of voice</span>
-                      <div class="dm-chips" data-dm-chips="tone">
-                        <button class="dm-chip" aria-pressed="true" type="button">Professional</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Friendly</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Direct</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Firm</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Empathetic</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Authoritative</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Playful</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Custom</button>
                       </div>
                       <span class="dm-sub">How should Liaison Reply steer this reply?</span>
                       <div class="dm-chips" data-dm-chips="direction" style="margin-bottom:6px">
@@ -927,30 +896,30 @@
                         <button class="dm-chip" aria-pressed="false" type="button">Buy time</button>
                         <button class="dm-chip" aria-pressed="false" type="button">Get clarity</button>
                         <button class="dm-chip" aria-pressed="false" type="button">Close the loop</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Custom</button>
                       </div>
                     </div>
                   </div>
-                  <div style="margin-top:18px"><button class="dm-cta" data-dm-generate type="button">Generate replies</button><p class="dm-help" style="text-align:center;margin:10px 0 0">Prewritten for this conversation. Change the steering direction above and generate again to watch the strategy change.</p></div>
+                  <div style="margin-top:18px"><button class="dm-cta" data-dm-generate type="button">Compare sample replies</button><p class="dm-help" style="text-align:center;margin:10px 0 0">Prewritten for this conversation. Change the direction to compare a different strategy.</p></div>
                 </div>
               </div>
-              <div class="dm-loading" data-dm-loading>Reading the room and writing your replies…</div>
+              <div class="dm-loading" data-dm-loading>Loading sample replies…</div>
               <div class="dm-view" data-dm-view="replies">
                 <button class="dm-backlink" data-dm-goto="compose" type="button">← Back to compose</button>
                 <div class="dm-strategy"><p class="dm-eyebrow" data-dm-echo></p><span data-dm-strategy></span></div>
                 <div data-dm-replies style="margin-top:4px"></div>
-                <div class="dm-actions"><button class="dm-ghost" data-dm-generate type="button">Regenerate</button></div>
+                <div class="dm-actions"><button class="dm-ghost" data-dm-goto="compose" type="button">Choose another direction</button></div>
               </div>
               <div class="dm-view" data-dm-view="edit">
                 <button class="dm-backlink" data-dm-goto="replies" type="button">← Back to replies</button>
                 <div class="dm-strategy" style="margin-bottom:16px"><p class="dm-eyebrow" data-dm-echo2></p><span data-dm-strategy2></span></div>
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="dm-chip" style="cursor:default;border-color:rgba(45,212,191,.55);color:#ccfbf1" data-dm-edit-tag>Direct &amp; Accountable</span><span style="color:#38bdf8;font-size:.85rem;font-weight:700">Editing</span></div>
                 <textarea class="dm-input" rows="4" style="margin-top:14px" data-dm-draft aria-label="Your edited reply"></textarea>
-                <div class="dm-coach" data-dm-coach>
+                <p class="dm-help">Scripted coaching example. Custom edits are not analyzed in this preview.</p>
+                <div class="dm-coach" data-dm-coach aria-live="polite">
                   <span class="dm-badge ok" data-dm-badge>Aligned</span>
                   <p class="dm-eyebrow" style="margin-top:12px">Strategic coaching</p>
-                  <h4 data-dm-coach-head>Your edits are still tracking with the original strategy and keeping the message tactically clean.</h4>
-                  <ul data-dm-coach-list><li>The draft is staying focused, controlled, and close to the intent of the selected card.</li></ul>
+                  <h4 data-dm-coach-head>This sample reply follows the selected strategy.</h4>
+                  <ul data-dm-coach-list><li>Try adding the example risky line to see why it changes the message.</li></ul>
                   <div class="dm-notes" data-dm-notes style="display:none">
                     <p class="dm-eyebrow">Phrase notes</p>
                     <p><span data-dm-note-phrase>“Honestly, it's not my fault you weren't around.”</span><span class="dm-flag">Warning</span></p>
@@ -963,65 +932,21 @@
                   <button class="dm-cta" data-dm-copy type="button">Confirm &amp; Copy</button>
                   <button class="dm-ghost" data-dm-goto="replies" type="button" style="width:100%;margin-top:10px;padding:.85rem 1rem">Cancel</button>
                 </div>
-                <div class="dm-copied" data-dm-copied><b style="color:#fff">Copied.</b> Paste it into the conversation and send it yourself. Liaison Reply never sends anything for you.</div>
-              </div>
-              <div class="dm-view" data-dm-view="history">
-                <div class="dm-panel">
-                  <span class="dm-label">History</span>
-                  <p class="dm-help">Your past conversations. Every thread keeps its full history, so drafts know what was said last week, not just the last message.</p>
-                  <input class="dm-input" placeholder="Search conversations" style="margin-bottom:6px" />
-                  <button class="dm-thread" data-dm-goto="compose" type="button"><span><b>Priya</b><p>…regularly forget weekly. Meet a…</p></span></button>
-                  <button class="dm-thread" data-dm-goto="compose" type="button"><span><b>Jess</b><p>…then picks at Barbara to fix my…</p></span><span class="dm-linkpill">Linked</span></button>
-                  <button class="dm-thread" data-dm-goto="compose" type="button"><span><b>Dana</b><p>Linked with Jess. Context carries across both threads.</p></span><span class="dm-linkpill">Linked</span></button>
-                  <div class="dm-fast" style="margin-top:16px"><b>Linked threads</b><p>Some situations span conversations. Link the threads and Pro drafts draw on all of them.</p></div>
-                </div>
-              </div>
-              <div class="dm-view" data-dm-view="personas">
-                <div class="dm-panel">
-                  <span class="dm-label">Personas</span>
-                  <p class="dm-help">Personas set the voice your drafts are written in. Free includes 5 tries a day for premium personas; Pro includes continued access.</p>
-                  <div class="dm-cards">
-                    <div class="dm-pcard"><b>Casual</b>Relaxed and friendly conversation style.<p style="margin:8px 0 0"><span class="dm-chip" style="cursor:default" aria-pressed="true">Applied</span></p></div>
-                    <div class="dm-pcard"><span class="dm-pro">Pro</span><b>Premium persona</b>One of the four premium personas. Free includes 5 tries a day; Pro includes continued access.</div>
-                    <div class="dm-pcard"><span class="dm-pro">Pro</span><b>Premium persona</b>One of the four premium personas. Free includes 5 tries a day; Pro includes continued access.</div>
-                    <div class="dm-pcard"><span class="dm-pro">Pro</span><b>Premium persona</b>One of the four premium personas. Free includes 5 tries a day; Pro includes continued access.</div>
-                  </div>
-                </div>
-              </div>
-              <div class="dm-view" data-dm-view="settings">
-                <div class="dm-panel">
-                  <span class="dm-label">Settings</span>
-                  <div class="dm-setrow"><span><b>How you sound</b><br><span style="color:rgba(255,255,255,.45);font-size:.82rem">Style Notes teach Liaison to write replies that sound like you.</span></span><button class="dm-switch" role="switch" aria-checked="true" data-dm-toggle type="button" aria-label="Toggle Style Notes"></button></div>
-                  <div class="dm-setrow"><span><b>Invite &amp; Earn Credits</b><br><span style="color:rgba(255,255,255,.45);font-size:.82rem">Verified referrals add bonus credits after a friend verifies their email.</span></span><button data-dm-referral-info type="button" style="color:#38bdf8;font-weight:700;background:none;border:0;cursor:pointer">How it works</button></div>
-                  <div class="dm-setrow"><span><b>Plan</b><br><span style="color:rgba(255,255,255,.45);font-size:.82rem">Free. 15 lifetime credits included.</span></span><a href="/pricing" style="color:#38bdf8;font-weight:700;text-decoration:none">See Pro</a></div>
-                  <div class="dm-setrow"><span><b>Support</b><br><span style="color:rgba(255,255,255,.45);font-size:.82rem">support@liaisonreply.com</span></span><span style="color:rgba(255,255,255,.35)">›</span></div>
-                </div>
+                <div class="dm-copied" data-dm-copied role="status" aria-live="polite"><b style="color:#fff">Copied.</b> Paste it into the conversation and send it yourself. Liaison Reply never sends anything for you.</div>
               </div>
             </main>
           </div>
-          <nav class="dm-tabs">
-            <button class="dm-tab" data-dm-goto="compose" aria-current="true" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Compose</button>
-            <button class="dm-tab" data-dm-goto="history" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2m6-2a9 9 0 11-9-9 9 9 0 019 9z"/></svg>History</button>
-            <button class="dm-tab" data-dm-goto="personas" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4m4 4a4 4 0 01-4-4m4 4v.01"/></svg>Personas</button>
-            <button class="dm-tab" data-dm-goto="settings" aria-current="false" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.2a1.7 1.7 0 00-1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.2a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a2 2 0 001.9.3h0a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.2a1.7 1.7 0 001 1.5h0a1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.9v0a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.2a1.7 1.7 0 00-1.4 1z"/></svg>Settings</button>
-          </nav>
+
         </div>
          <div class="demo-foot" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1.35rem">
            <p class="text-sm text-white/45" style="margin:0">Sample conversation. In the app, your own message, context, and edits drive the replies.</p>
-           <a href="https://app.liaisonreply.com/auth/register?scenario_id=negative-feedback-from-boss&amp;scenario_surface=interactive-demo&amp;prefill_message=We+need+to+talk+about+the+deck+that+went+to+the+client+without+my+review.&amp;prefill_context=This+is+a+manager+conversation.+I+want+to+explain+the+context+without+sounding+defensive.&amp;prefill_intent=De-escalate" data-session-primary data-cta-surface="interactive-demo" data-cta-label="Try this work scenario" data-auth-text="Try this work scenario" data-session-text="Open Liaison Reply" data-auth-path="https://app.liaisonreply.com/auth/register?scenario_id=negative-feedback-from-boss&amp;scenario_surface=interactive-demo&amp;prefill_message=We+need+to+talk+about+the+deck+that+went+to+the+client+without+my+review.&amp;prefill_context=This+is+a+manager+conversation.+I+want+to+explain+the+context+without+sounding+defensive.&amp;prefill_intent=De-escalate" data-session-path="/chat" class="rounded-full bg-sky-500 px-5 py-3 text-sm font-bold text-black hover:bg-sky-400 transition-colors">Try this work scenario</a>
+           <a href="https://app.liaisonreply.com/auth/register" data-session-primary data-cta-surface="interactive-demo" data-cta-label="Try your own message" data-auth-text="Try your own message" data-session-text="Open Liaison Reply" data-auth-path="/auth/register" data-session-path="/chat" class="rounded-full bg-sky-500 px-5 py-3 text-sm font-bold text-black hover:bg-sky-400 transition-colors">Try your own message</a>
         </div>
         <script>
           (() => {
             const root = document.getElementById("interactive-demo");
             if (!root) return;
              const TAGS = ["Direct & Accountable", "Warm & Collaborative", "Calm & Brief"];
-             const PERSONAS = {
-               casual: { name: "Casual", plan: "Free", lens: "keeps the language relaxed and friendly" },
-               diplomat: { name: "The Diplomat", plan: "Pro", lens: "softens friction while preserving the point" },
-               charmer: { name: "The Charmer", plan: "Pro", lens: "adds warmth and an inviting next step" },
-               closer: { name: "The Closer", plan: "Pro", lens: "turns the exchange toward a clear decision" },
-               "cool-head": { name: "The Cool Head", plan: "Pro", lens: "keeps the reply measured when emotions run high" },
-             };
             function S(strategy, a, b, c) { return { strategy: strategy, replies: [{ tag: TAGS[0], text: a }, { tag: TAGS[1], text: b }, { tag: TAGS[2], text: c }] }; }
             const SCENARIOS = {
               "Work": {
@@ -1248,7 +1173,6 @@
             const incomingEl = root.querySelector("[data-dm-incoming]");
             const realityEl = root.querySelector("[data-dm-reality]");
              let ctx = "Work";
-             let personaId = "casual";
             let current = SCENARIOS["Work"].sets["De-escalate"];
             function scenario() { return SCENARIOS[ctx]; }
             function selectedLabel(name) {
@@ -1282,40 +1206,22 @@
                 if (group.dataset.dmChips === "context") setScenario(chip.textContent.trim());
               }));
             });
-             const personaBtn = root.querySelector("[data-dm-persona]");
-             const personaMenu = root.querySelector("[data-dm-persona-menu]");
-             function setPersona(id) {
-               const persona = PERSONAS[id] || PERSONAS.casual;
-               personaId = PERSONAS[id] ? id : "casual";
-               personaBtn.querySelector("b").textContent = persona.name;
-               personaBtn.setAttribute("aria-label", `Selected persona: ${persona.name}, ${persona.plan}`);
-               root.querySelector(".dm-persona-cap").textContent = `${persona.plan} · ${persona.lens}.`;
-               root.querySelectorAll("[data-dm-persona-row]").forEach(row => row.setAttribute("aria-pressed", String(row.dataset.dmPersonaRow === personaId)));
-               personaMenu.style.display = "none";
-               personaBtn.setAttribute("aria-expanded", "false");
-               personaBtn.focus();
-               if (typeof window.liaisonTrackLandingEvent === "function") window.liaisonTrackLandingEvent("landing_demo_persona_selected", { surface: "interactive-demo", persona: persona.name, plan: persona.plan });
-             }
-             personaBtn.setAttribute("aria-expanded", "false");
-             personaBtn.addEventListener("click", () => { const open = personaMenu.style.display === "none"; personaMenu.style.display = open ? "block" : "none"; personaBtn.setAttribute("aria-expanded", String(open)); });
-             root.querySelectorAll("[data-dm-persona-row]").forEach(row => row.addEventListener("click", () => setPersona(row.dataset.dmPersonaRow)));
             function generate() {
               const dir = selectedLabel("direction") || "De-escalate";
               current = scenario().sets[dir] || scenario().sets["De-escalate"];
-               const persona = PERSONAS[personaId];
-               const echo = ctx + " · " + persona.name + " · " + (selectedLabel("tone") || "Professional") + " · " + dir;
+               const echo = ctx + " · " + dir;
               root.querySelector("[data-dm-echo]").textContent = echo;
               root.querySelector("[data-dm-echo2]").textContent = echo;
-               const personaStrategy = `${current.strategy} ${persona.name} ${persona.lens}.`;
-               root.querySelector("[data-dm-strategy]").textContent = personaStrategy;
-               root.querySelector("[data-dm-strategy2]").textContent = personaStrategy;
+               const sampleStrategy = current.strategy;
+               root.querySelector("[data-dm-strategy]").textContent = sampleStrategy;
+               root.querySelector("[data-dm-strategy2]").textContent = sampleStrategy;
               repliesWrap.innerHTML = "";
               current.replies.forEach((r, i) => {
                 const btn = document.createElement("button");
                 btn.type = "button"; btn.className = "dm-reply";
                 btn.innerHTML = '<span class="dm-tag"></span><p></p><span class="dm-edit">Tap to edit with coaching</span>';
                 btn.querySelector(".dm-tag").textContent = r.tag;
-                 btn.querySelector("p").textContent = `${r.text} ${persona.name === "Casual" ? "" : `(${persona.name} read: ${persona.lens}.)`}`.trim();
+                 btn.querySelector("p").textContent = r.text;
                 btn.addEventListener("click", () => openEdit(i));
                 repliesWrap.appendChild(btn);
               });
@@ -1325,10 +1231,8 @@
               loading.style.display = "block";
               setTimeout(() => show("replies"), 650);
             }
-             root.querySelectorAll("[data-dm-generate]").forEach(b => b.addEventListener("click", () => { if (typeof window.liaisonTrackLandingEvent === "function") window.liaisonTrackLandingEvent("landing_demo_generation_triggered", { surface: "interactive-demo", persona: PERSONAS[personaId].name, steering: selectedLabel("direction") || "De-escalate", context: ctx }); generate(); }));
+             root.querySelectorAll("[data-dm-generate]").forEach(b => b.addEventListener("click", () => { if (typeof window.liaisonTrackLandingEvent === "function") window.liaisonTrackLandingEvent("landing_demo_generation_triggered", { surface: "interactive-demo", steering: selectedLabel("direction") || "De-escalate", context: ctx }); generate(); }));
              root.querySelectorAll('[data-dm-chips="direction"] .dm-chip').forEach(chip => chip.addEventListener("click", () => { if (typeof window.liaisonTrackLandingEvent === "function") window.liaisonTrackLandingEvent("landing_demo_steering_selected", { surface: "interactive-demo", steering: chip.textContent.trim(), context: ctx }); }));
-             const referralInfo = root.querySelector("[data-dm-referral-info]");
-             if (referralInfo) referralInfo.addEventListener("click", () => { referralInfo.textContent = "Verified referrals add bonus credits"; if (typeof window.liaisonTrackLandingEvent === "function") window.liaisonTrackLandingEvent("landing_referral_information_viewed", { surface: "interactive-demo" }); });
             const draft = root.querySelector("[data-dm-draft]");
             const coach = root.querySelector("[data-dm-coach]");
             const badge = root.querySelector("[data-dm-badge]");
@@ -1342,6 +1246,7 @@
             const noteWhy = root.querySelector("[data-dm-note-why]");
             const noteTry = root.querySelector("[data-dm-note-try]");
             let risky = false;
+            let originalDraft = "";
             function renderCoach() {
               const sc = scenario();
               if (risky) {
@@ -1353,32 +1258,43 @@
                 noteWhy.textContent = sc.noteWhy;
                 noteTry.textContent = "Try: " + sc.noteTry;
                 notes.style.display = "block"; riskBtn.textContent = "Remove the risky line";
+              } else if (draft.value !== originalDraft) {
+                coach.classList.remove("warn"); badge.className = "dm-badge"; badge.textContent = "Not analyzed";
+                head.textContent = "Custom edits are not analyzed in this guided preview.";
+                list.innerHTML = "<li>Use the app for live coaching on your own wording.</li>";
+                notes.style.display = "none"; riskBtn.textContent = "Add a risky line";
               } else {
                 coach.classList.remove("warn"); badge.className = "dm-badge ok"; badge.textContent = "Aligned";
-                head.textContent = "Your edits are still tracking with the original strategy and keeping the message tactically clean.";
-                list.innerHTML = "<li>The draft is staying focused, controlled, and close to the intent of the selected card.</li>";
+                head.textContent = "This sample reply follows the selected strategy.";
+                list.innerHTML = "<li>Try adding the example risky line to see why it changes the message.</li>";
                 notes.style.display = "none"; riskBtn.textContent = "Add a risky line";
               }
             }
             function openEdit(i) {
-              draft.value = current.replies[i].text; risky = false; copied.style.display = "none";
+              originalDraft = current.replies[i].text; draft.value = originalDraft; risky = false; copied.style.display = "none";
               editTag.textContent = current.replies[i].tag; renderCoach(); show("edit");
             }
             riskBtn.addEventListener("click", () => {
-              if (!risky) { draft.value = draft.value.replace(/([.!?])\s*$/, "$1" + scenario().risky); risky = true; }
+              if (!risky) { draft.value = draft.value.trimEnd() + scenario().risky; risky = true; }
               else { draft.value = draft.value.replace(scenario().risky, ""); risky = false; }
               copied.style.display = "none"; renderCoach();
             });
             draft.addEventListener("input", () => {
               const has = draft.value.includes(scenario().risky.trim());
-              if (has !== risky) { risky = has; renderCoach(); }
+              risky = has; copied.style.display = "none"; renderCoach();
             });
             root.querySelector("[data-dm-copy]").addEventListener("click", async () => {
-              try { await navigator.clipboard.writeText(draft.value); } catch (e) { draft.select(); document.execCommand && document.execCommand("copy"); }
+              let success = false;
+              try { await navigator.clipboard.writeText(draft.value); success = true; }
+              catch (e) {
+                draft.focus(); draft.select();
+                try { success = !!(document.execCommand && document.execCommand("copy")); } catch (e) {}
+              }
+              copied.textContent = success
+                ? "Copied. Paste it into your conversation and send it yourself."
+                : "Copy failed. Your reply is selected; use your device’s Copy command.";
               copied.style.display = "block";
             });
-            const toggle = root.querySelector("[data-dm-toggle]");
-            toggle.addEventListener("click", () => toggle.setAttribute("aria-checked", String(toggle.getAttribute("aria-checked") !== "true")));
           })();
         </script>
       </section>

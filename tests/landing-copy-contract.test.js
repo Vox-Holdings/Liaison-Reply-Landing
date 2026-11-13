@@ -27,16 +27,12 @@ test("active public copy uses lifetime credits and never promises replenishment"
   assert.match(source, /fair-use protections/i);
 });
 
-test("demo persona controls are wired to deterministic behavior", () => {
+test("guided demo exposes only supported sample controls", () => {
   const source = fs.readFileSync(path.join(root, "index.html"), "utf8");
-  assert.doesNotMatch(source + fs.readFileSync(path.join(root, "site.js"), "utf8"), /demo-copy|landing_experiment_exposed|data-demo-copy/);
-  assert.match(source, /data-dm-persona-row="diplomat"/);
-  assert.match(source, /data-dm-persona-row="charmer"/);
-  assert.match(source, /data-dm-persona-row="closer"/);
-  assert.match(source, /data-dm-persona-row="cool-head"/);
-  assert.match(source, /function setPersona\(id\)/);
-  assert.match(source, /querySelectorAll\("\[data-dm-persona-row\]"\).*addEventListener/);
-  assert.match(source, /personaStrategy/);
-  assert.match(source, /landing_demo_persona_selected/);
+  assert.match(source, /Guided preview/);
+  assert.match(source, /data-dm-incoming readonly/);
+  assert.match(source, /data-dm-reality readonly/);
+  assert.doesNotMatch(source, /data-dm-persona-row|data-dm-chips="tone"|data-dm-goto="settings"/);
   assert.match(source, /landing_demo_steering_selected/);
+  assert.match(source, /Try your own message/);
 });

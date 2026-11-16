@@ -134,7 +134,7 @@
     const params = new URLSearchParams(window.location.search);
     const next = {};
 
-    ["utm_source", "ref_id", "scenario_id", "prefill", "billing_interval"]
+    ["utm_source", "utm_medium", "utm_campaign", "ref_id", "scenario_id", "prefill", "billing_interval"]
       .forEach((key) => {
         const value = params.get(key);
         if (value) {
@@ -347,6 +347,33 @@
 
   function hydrateAppLinks() {
     const active = hasSessionHint();
+
+    const attribution = currentAttribution();
+    if (Object.keys(attribution).length > 0) {
+      document
+        .querySelectorAll('a[href^="' + APP_ORIGIN + '"]')
+        .forEach((link) => {
+          if (
+            link.hasAttribute("data-app-link") ||
+            link.hasAttribute("data-session-primary") ||
+            link.hasAttribute("data-session-secondary")
+          ) {
+            return;
+          }
+
+          try {
+            const url = new URL(link.getAttribute("href"));
+            Object.entries(attribution).forEach(([key, value]) => {
+              if (value && !url.searchParams.has(key)) {
+                url.searchParams.set(key, String(value));
+              }
+            });
+            link.setAttribute("href", url.toString());
+          } catch {
+            // Leave malformed hrefs untouched.
+          }
+        });
+    }
 
     document.querySelectorAll("[data-app-link]").forEach((link) => {
       const authPath = link.getAttribute("data-auth-path") || "/auth/register";

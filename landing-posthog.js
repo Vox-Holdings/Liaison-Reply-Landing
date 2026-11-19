@@ -4,6 +4,10 @@
   const CONSENT_KEY = "liaison_cookie_consent";
   const DISTINCT_ID_KEY = "liaison_posthog_distinct_id";
   const QUARTILES = [25, 50, 75, 100];
+  const SESSION_KEY = "liaison_posthog_session";
+  const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
+  const VITALS_MAX_VALUE_MS = 15 * 60 * 1000;
+  const VITALS_FLUSH_MS = 5000;
 
   function safeGet(key) {
     try {
@@ -73,6 +77,53 @@
     return ephemeralId;
   }
 
+  let sessionMemory = null;
+
+  function readSessionRecord() {
+    try {
+      const raw = window.sessionStorage.getItem(SESSION_KEY);
+      if (!raw) {
+        return null;
+      }
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed.id !== "string") {
+        return null;
+      }
+      return parsed;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeSessionRecord(record) {
+    sessionMemory = record;
+    try {
+      window.sessionStorage.setItem(SESSION_KEY, JSON.stringify(record));
+    } catch {
+      // Ignore storage failures.
+    }
+  }
+
+  // One id per visit, shared by every event in that visit. Stored in
+  // sessionStorage so it survives same-tab navigation but never crosses
+  // sessions, and rotated after 30 minutes without an event.
+  function sessionId() {
+    const now = Date.now();
+    const stored = readSessionRecord() || sessionMemory;
+    if (
+      stored &&
+      stored.id &&
+      now - (stored.lastSeen || 0) < SESSION_TIMEOUT_MS
+    ) {
+      const record = { id: stored.id, lastSeen: now };
+      writeSessionRecord(record);
+      return record.id;
+    }
+    const record = { id: randomId(), lastSeen: now };
+    writeSessionRecord(record);
+    return record.id;
+  }
+
   function pagePath() {
     return window.location.pathname || "/";
   }
@@ -115,6 +166,14 @@
         typeof value === "boolean"
       ) {
         clean[key] = value;
+      } else if (
+        key.startsWith("$web_vitals_") &&
+        key.endsWith("_event") &&
+        value !== null &&
+        typeof value === "object" &&
+        !Array.isArray(value)
+      ) {
+        clean[key] = value;
       }
     });
 
@@ -132,7 +191,7 @@
     return stored === "A" || stored === "B" ? stored : null;
   }
 
-  function capture(eventName, props = {}) {
+  function capture(eventName, props = {}, options = {}) {
     try {
       const variant = exp2Variant();
       const payload = {
@@ -141,6 +200,7 @@
         distinct_id: distinctId(),
         properties: {
           ...sanitiseProps(props),
+          $session_id: sessionId(),
           page_path: pagePath(),
           page_type: pageType(pagePath()),
           $current_url: window.location.origin + pagePath(),
@@ -152,10 +212,26 @@
         timestamp: new Date().toISOString(),
       };
 
+      const body = JSON.stringify(payload);
+      if (
+        options.beacon &&
+        typeof window.navigator !== "undefined" &&
+        typeof window.navigator.sendBeacon === "function"
+      ) {
+        try {
+          const blob = new Blob([body], { type: "application/json" });
+          if (window.navigator.sendBeacon(`${POSTHOG_HOST}/capture/`, blob)) {
+            return;
+          }
+        } catch {
+          // Fall through to fetch.
+        }
+      }
+
       window.fetch(`${POSTHOG_HOST}/capture/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body,
         keepalive: true,
         mode: "cors",
       }).catch(() => {});
@@ -169,6 +245,176 @@
   capture("$pageview", {});
 
   capture("landing_session_started", {});
+
+  const pageLoadedAt = Date.now();
+  let pageleaveSent = false;
+
+  function vitalsRating(name, value) {
+    if (name === "LCP") {
+      return value <= 2500 ? "good" : value <= 4000 ? "needs-improvement" : "poor";
+    }
+    if (name === "FCP") {
+      return value <= 1800 ? "good" : value <= 3000 ? "needs-improvement" : "poor";
+    }
+    if (name === "INP") {
+      return value <= 200 ? "good" : value <= 500 ? "needs-improvement" : "poor";
+    }
+    if (name === "CLS") {
+      return value <= 0.1 ? "good" : value <= 0.25 ? "needs-improvement" : "poor";
+    }
+    return "good";
+  }
+
+  const vitals = {};
+  let vitalsFlushTimer = null;
+  const pageLoadId = randomId();
+
+  function recordVital(name, value) {
+    if (typeof value !== "number" || !Number.isFinite(value)) {
+      return;
+    }
+    if (name !== "CLS" && value >= VITALS_MAX_VALUE_MS) {
+      return;
+    }
+    const rounded =
+      name === "CLS" ? Math.round(value * 1000) / 1000 : Math.round(value);
+    vitals[name] = {
+      name,
+      value: rounded,
+      rating: vitalsRating(name, rounded),
+      delta: rounded,
+      id: `vitals-${name}-${pageLoadId}`,
+      navigationType: "navigate",
+    };
+    scheduleVitalsFlush();
+  }
+
+  function scheduleVitalsFlush() {
+    if (vitalsFlushTimer) {
+      return;
+    }
+    vitalsFlushTimer = setTimeout(() => flushWebVitals(false), VITALS_FLUSH_MS);
+  }
+
+  function flushWebVitals(onPageHide) {
+    if (vitalsFlushTimer) {
+      clearTimeout(vitalsFlushTimer);
+      vitalsFlushTimer = null;
+    }
+    const names = Object.keys(vitals);
+    if (names.length === 0) {
+      return;
+    }
+    const props = {};
+    names.forEach((name) => {
+      const metric = vitals[name];
+      props[`$web_vitals_${name}_event`] = { ...metric };
+      props[`$web_vitals_${name}_value`] = metric.value;
+      delete vitals[name];
+    });
+    capture("$web_vitals", props, onPageHide ? { beacon: true } : {});
+  }
+
+  function initWebVitals() {
+    if (typeof window.PerformanceObserver !== "function") {
+      return;
+    }
+
+    try {
+      const paintObserver = new window.PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+          if (entry.name === "first-contentful-paint") {
+            recordVital("FCP", entry.startTime);
+          }
+        });
+      });
+      paintObserver.observe({ type: "paint", buffered: true });
+    } catch {
+      // PerformanceObserver unavailable or unsupported entry type.
+    }
+
+    try {
+      const lcpObserver = new window.PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const last = entries[entries.length - 1];
+        if (last) {
+          recordVital("LCP", last.renderTime || last.loadTime || last.startTime);
+        }
+      });
+      lcpObserver.observe({ type: "largest-contentful-paint", buffered: true });
+    } catch {
+      // PerformanceObserver unavailable or unsupported entry type.
+    }
+
+    try {
+      let clsValue = 0;
+      const clsObserver = new window.PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+          if (!entry.hadRecentInput) {
+            clsValue += entry.value;
+            recordVital("CLS", clsValue);
+          }
+        });
+      });
+      clsObserver.observe({ type: "layout-shift", buffered: true });
+    } catch {
+      // PerformanceObserver unavailable or unsupported entry type.
+    }
+
+    try {
+      const interactions = {};
+      const inpObserver = new window.PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+          if (
+            typeof entry.interactionId !== "number" &&
+            typeof entry.interactionId !== "string"
+          ) {
+            return;
+          }
+          const end =
+            typeof entry.processingEnd === "number"
+              ? entry.processingEnd
+              : entry.startTime + entry.duration;
+          const latency = end - entry.startTime;
+          const prev = interactions[entry.interactionId] || 0;
+          if (latency > prev) {
+            interactions[entry.interactionId] = latency;
+          }
+        });
+        const worst = Math.max(0, ...Object.values(interactions));
+        if (worst > 0) {
+          recordVital("INP", worst);
+        }
+      });
+      inpObserver.observe({ type: "event", buffered: true, durationThreshold: 16 });
+    } catch {
+      // PerformanceObserver unavailable or unsupported entry type.
+    }
+  }
+
+  initWebVitals();
+
+  function sendPageleave() {
+    if (pageleaveSent) {
+      return;
+    }
+    pageleaveSent = true;
+    flushWebVitals(true);
+    capture(
+      "$pageleave",
+      {
+        time_on_page_seconds: Math.round((Date.now() - pageLoadedAt) / 1000),
+      },
+      { beacon: true },
+    );
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      sendPageleave();
+    }
+  });
+  window.addEventListener("pagehide", sendPageleave);
 
   const sentQuartiles = new Set();
 

@@ -191,6 +191,18 @@
     return stored === "A" || stored === "B" ? stored : null;
   }
 
+  function currentUtm() {
+    const params = new URLSearchParams(window.location.search);
+    const out = {};
+    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach((key) => {
+      const value = params.get(key);
+      if (value) {
+        out["$" + key] = value;
+      }
+    });
+    return out;
+  }
+
   function capture(eventName, props = {}, options = {}) {
     try {
       const variant = exp2Variant();
@@ -200,10 +212,13 @@
         distinct_id: distinctId(),
         properties: {
           ...sanitiseProps(props),
+          ...currentUtm(),
+          $referrer: document.referrer || undefined,
+          $referring_domain: (() => { try { return document.referrer ? new URL(document.referrer).hostname : undefined; } catch { return undefined; } })(),
           $session_id: sessionId(),
           page_path: pagePath(),
           page_type: pageType(pagePath()),
-          $current_url: window.location.origin + pagePath(),
+          $current_url: window.location.href,
           $process_person_profile: false,
           consent_continuity: hasContinuityConsent(),
           landing_source: "landing_site",

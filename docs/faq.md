@@ -17,7 +17,7 @@ People who need help answering loaded messages at work, in dating, or with famil
 ## Features & Usage
 
 ### What do I get with the free tier?
-You get 15 lifetime credits so you can test the full workflow before paying. Credits do not automatically reset or replenish. Style Notes are available on every plan. Verified referrals can add bonus credits.
+You get free credits so you can test the full workflow before paying. Credits do not automatically reset or replenish. Style Notes are available on every plan. Verified referrals can add bonus credits.
 
 ### What changes when I upgrade to Pro?
 Pro gives you unlimited generations for normal use, subject to fair-use protections, plus full conversation memory, linked threads, 12 rewrites per reply, and all premium personas (The Diplomat, The Charmer, The Closer, The Cool Head). Style Notes remain available on Free.
@@ -72,7 +72,7 @@ Cookie consent controls optional analytics and limited site-memory features on t
 ### Why am I getting blank or empty replies?
 Blank generations usually indicate a webhook or API issue. Try:
 1. Check that your message has content (not empty)
-2. Verify you have generation credits (the Free allowance is 15 lifetime credits, plus any verified-referral bonuses)
+2. Verify you have generation credits (the Free allowance, plus any verified-referral bonuses)
 3. Refresh and retry
 4. If blank persists, contact support with your user ID and timestamp
 

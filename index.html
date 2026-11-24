@@ -602,6 +602,14 @@
           #interactive-demo .dm-steps span{border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.45);border-radius:999px;padding:.4rem .85rem;font-size:.78rem;font-weight:700}
           #interactive-demo .dm-steps span.on{border-color:rgba(34,211,238,.6);color:#a5f3fc;background:rgba(34,211,238,.08)}
           #interactive-demo .dm-loading{display:none;text-align:center;color:rgba(255,255,255,.55);padding:44px 0;font-size:.92rem}
+          #interactive-demo .dm-steps span{cursor:pointer}
+          #interactive-demo .dm-walk-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px}
+          #interactive-demo .dm-step-note{color:rgba(255,255,255,.42);font-size:.82rem;line-height:1.55;margin:0 0 10px}
+          #interactive-demo .dm-exp{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;border:0;border-top:1px solid rgba(255,255,255,.07);margin-top:14px;padding:12px 2px;color:#fff;font-size:.86rem;font-weight:700;cursor:pointer}
+          #interactive-demo .dm-exp span:last-child{color:#22d3ee}
+          #interactive-demo .dm-review-row{display:flex;justify-content:space-between;gap:12px;width:100%;text-align:left;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:12px 14px;color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.5;cursor:pointer;margin-top:8px}
+          #interactive-demo .dm-review-row b{color:#fff;flex:0 0 auto}
+          #interactive-demo .dm-review-row span{text-align:right}
           @media (max-width:1023px){
             #interactive-demo .dm-side{width:198px}
             #interactive-demo .dm-brand-tag{display:none}
@@ -640,10 +648,10 @@
               <div class="dm-plan"><b>Liaison Reply Free</b> — credits included, no card. Verified referrals add bonus credits. Pro adds deeper memory, rewrites, and every premium persona.<a href="/pricing">See what Pro adds</a></div>
             </aside>
             <main class="dm-main">
-              <div class="dm-steps" data-dm-steps><span data-step="1" class="on">1 · Message &amp; context</span><span data-step="2">2 · Generate replies</span><span data-step="3">3 · Edit &amp; copy</span></div>
+              <div class="dm-steps" data-dm-steps><span data-step="1" class="on">1 · Their message</span><span data-step="2">2 · What do you want to say</span><span data-step="3">3 · Outcome</span><span data-step="4">4 · How you want to sound</span><span data-step="5">5 · Ready</span></div>
               <div class="dm-view on" data-dm-view="compose">
-                <div class="dm-panel">
-                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+                <div class="dm-panel" data-dm-step="1">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
                     <span class="dm-label">The message you received</span>
                     <span class="dm-paste" style="position:static;flex:none">Paste</span>
                   </div>
@@ -652,7 +660,69 @@
                   </div>
                   <div class="dm-vent"><span class="dm-mic"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-14 0m7 7v3m-4 0h8M12 11a3 3 0 003-3V5a3 3 0 10-6 0v3a3 3 0 003 3z"/></svg></span><span><b>Vent by voice</b><small>Speak freely. No typing.</small></span></div>
                   <div class="dm-fast"><b>Fastest way in</b><p>Add screenshots. We rebuild the thread, reading them on this device where possible, or through our secure reading service, which doesn't store them.</p><button class="dm-addshots" type="button">Add screenshots</button></div>
-                  <div class="dm-persona">
+                  <span class="dm-sub">Relationship context</span>
+
+                      <p class="dm-help">Required. This calibrates the strategy and risk read.</p>
+                      <div class="dm-chips" data-dm-chips="context">
+                        <button class="dm-chip" aria-pressed="false" type="button">Dating</button>
+                        <button class="dm-chip" aria-pressed="true" type="button">Work</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Client</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Family</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Friends</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Other</button>
+                      </div>
+                      <div class="dm-walk-nav"><span></span><button class="dm-pill-teal" data-dm-next type="button">Continue</button></div>
+                </div>
+                <div class="dm-panel" data-dm-step="2" style="display:none">
+                  <span class="dm-label">What do you want to say</span>
+                  <p class="dm-step-note">Optional. Add the points you want in the reply, in your own words. Leave it blank and the reply is built from their message alone.</p>
+<textarea class="dm-input" rows="3" data-dm-reality aria-label="The Reality: private context that should guide the reply" placeholder="Add private context that should guide the reply...">My manager. I sent it because the client asked for it early and she was out. I want to explain without sounding defensive.</textarea>
+                  <button class="dm-exp" data-dm-more type="button" aria-expanded="false"><span>Add more context</span><span>&#9656;</span></button>
+                  <div data-dm-more-body style="display:none">
+<span class="dm-sub" style="margin-top:14px">Earlier thread messages</span>
+                      <p class="dm-help">Optional. Paste unattributed prior messages here, then submit them so Liaison Reply can map each line to you or the contact before it drafts.</p>
+                      <textarea class="dm-input" rows="3" aria-label="Earlier messages from the thread" placeholder="Paste earlier messages from the thread..."></textarea>
+                      <div class="dm-actions-row"><button class="dm-pill-dark" type="button">Paste</button><button class="dm-pill-teal" data-dm-generate type="button">Submit context</button></div>
+                      </div>
+                  <div class="dm-walk-nav"><button class="dm-pill-dark" data-dm-back type="button">Back</button><button class="dm-pill-teal" data-dm-next type="button">Continue</button></div>
+                </div>
+                <div class="dm-panel" data-dm-step="3" style="display:none">
+                  <span class="dm-label">Outcome</span>
+                  <p class="dm-step-note">What outcome do you want?</p>
+<div class="dm-chips" data-dm-chips="direction" style="margin-bottom:6px">
+                        <button class="dm-chip" aria-pressed="true" type="button">De-escalate</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Keep momentum</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Set a boundary</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Buy time</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Get clarity</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Close the loop</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Custom</button>
+                      </div>
+                  <button class="dm-exp" data-dm-mood type="button" aria-expanded="false"><span>How you are arriving</span><span>&#9656;</span></button>
+                  <div data-dm-mood-body style="display:none">
+<div class="dm-chips" data-dm-chips="mood"><button class="dm-chip" aria-pressed="false" type="button">Angry</button><button class="dm-chip" aria-pressed="false" type="button">Frustrated</button><button class="dm-chip" aria-pressed="false" type="button">Anxious</button><button class="dm-chip" aria-pressed="false" type="button">Hurt</button><button class="dm-chip" aria-pressed="false" type="button">Overwhelmed</button><button class="dm-chip" aria-pressed="false" type="button">Defensive</button></div></div>
+                  <div class="dm-walk-nav"><button class="dm-pill-dark" data-dm-back type="button">Back</button><button class="dm-pill-teal" data-dm-next type="button">Continue</button></div>
+                </div>
+                <div class="dm-panel" data-dm-step="4" style="display:none">
+                  <span class="dm-label">How you want to sound</span>
+                  <p class="dm-step-note">Pick a register, or skip this step.</p>
+<div class="dm-chips" data-dm-chips="tone">
+                        <button class="dm-chip" aria-pressed="true" type="button">Professional</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Friendly</button><button class="dm-chip" aria-pressed="false" type="button">Calm</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Direct</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Firm</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Empathetic</button><button class="dm-chip" aria-pressed="false" type="button">Apologetic</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Authoritative</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Playful</button>
+                        <button class="dm-chip" aria-pressed="false" type="button">Custom</button>
+                      </div>
+                  <div class="dm-walk-nav"><button class="dm-pill-dark" data-dm-back type="button">Back</button><span style="display:flex;gap:10px"><button class="dm-pill-dark" data-dm-skip type="button">Skip this step</button><button class="dm-pill-teal" data-dm-next type="button">Continue</button></span></div>
+                </div>
+                <div class="dm-panel" data-dm-step="5" style="display:none">
+                  <span class="dm-label">Ready</span>
+                  <p class="dm-step-note">Check everything below, then generate your replies. Tap any row to go back and change it.</p>
+                  <div data-dm-review></div>
+<div class="dm-persona">
                     <button class="dm-persona-bar" data-dm-persona aria-expanded="false" aria-haspopup="listbox" aria-label="Selected persona: Casual, Free" type="button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h8m-8 4h5M21 12a9 9 0 01-13.2 8L3 21l1-4.8A9 9 0 1121 12z"/></svg><b>Casual</b><span class="dm-chev">▾</span></button>
                     <p class="dm-persona-cap">Relaxed and friendly conversation style</p>
                     <div class="dm-persona-menu" data-dm-persona-menu style="display:none">
@@ -663,50 +733,8 @@
                     <button class="dm-pm-row" data-dm-persona-row="cool-head" aria-pressed="false" type="button"><span>The Cool Head</span><span class="dm-pro">Pro</span></button>
                     </div>
                   </div>
-                  <div class="dm-acc">
-                    <div class="dm-acc-head"><span>Add context, tone, and intent</span><span class="dm-chev">▾</span></div>
-                    <div class="dm-acc-body">
-                      <span class="dm-sub" style="margin-top:14px">Earlier thread messages</span>
-                      <p class="dm-help">Optional. Paste unattributed prior messages here, then submit them so Liaison Reply can map each line to you or the contact before it drafts.</p>
-                      <textarea class="dm-input" rows="3" aria-label="Earlier messages from the thread" placeholder="Paste earlier messages from the thread..."></textarea>
-                      <div class="dm-actions-row"><button class="dm-pill-dark" type="button">Paste</button><button class="dm-pill-teal" data-dm-generate type="button">Submit context</button></div>
-                      <span class="dm-sub">The Reality (Raw thoughts)</span>
-                      <p class="dm-help">Optional. Add facts that were not said in the text thread but should shape the reply.</p>
-                      <textarea class="dm-input" rows="3" data-dm-reality aria-label="The Reality: private context that should guide the reply" placeholder="Add private context that should guide the reply...">My manager. I sent it because the client asked for it early and she was out. I want to explain without sounding defensive.</textarea>
-                      <span class="dm-sub">Relationship context</span>
-                      <p class="dm-help">Required. This calibrates the strategy and risk read.</p>
-                      <div class="dm-chips" data-dm-chips="context">
-                        <button class="dm-chip" aria-pressed="false" type="button">Dating</button>
-                        <button class="dm-chip" aria-pressed="true" type="button">Work</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Client</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Family</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Friends</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Other</button>
-                      </div>
-                      <span class="dm-sub">Tone of voice</span>
-                      <div class="dm-chips" data-dm-chips="tone">
-                        <button class="dm-chip" aria-pressed="true" type="button">Professional</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Friendly</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Direct</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Firm</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Empathetic</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Authoritative</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Playful</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Custom</button>
-                      </div>
-                      <span class="dm-sub">How should Liaison Reply steer this reply?</span>
-                      <div class="dm-chips" data-dm-chips="direction" style="margin-bottom:6px">
-                        <button class="dm-chip" aria-pressed="true" type="button">De-escalate</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Keep momentum</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Set a boundary</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Buy time</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Get clarity</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Close the loop</button>
-                        <button class="dm-chip" aria-pressed="false" type="button">Custom</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div style="margin-top:18px"><button class="dm-cta" data-dm-generate type="button">Generate replies</button><p class="dm-help" style="text-align:center;margin:10px 0 0">Prewritten for this conversation. Change the steering direction above and generate again to watch the strategy change.</p></div>
+                  <div style="margin-top:18px"><button class="dm-cta" data-dm-generate type="button">Generate 3 replies</button><p class="dm-help" style="text-align:center;margin:10px 0 0">Prewritten for this conversation. Tap any review row above to change an input, then generate again.</p></div>
+                  <div class="dm-walk-nav"><button class="dm-pill-dark" data-dm-back type="button">Back</button><span></span></div>
                 </div>
               </div>
               <div class="dm-loading" data-dm-loading>Reading the room and writing your replies…</div>
@@ -1037,10 +1065,63 @@
               root.querySelectorAll("[data-dm-goto]").forEach(b => {
                 if (b.classList.contains("dm-nav2") || b.classList.contains("dm-tab")) b.setAttribute("aria-current", String(b.dataset.dmGoto === name));
               });
-              const stepFor = { compose: "1", replies: "2", edit: "3" }[name];
-              steps.style.display = stepFor ? "flex" : "none";
-              if (stepFor) steps.querySelectorAll("span").forEach(s => s.classList.toggle("on", s.dataset.step === stepFor));
+              if (name === "compose") { steps.style.display = "flex"; markWalkStep(walkStep); }
+              else { steps.style.display = "none"; }
             }
+            let walkStep = 1;
+            const walkPanels = root.querySelectorAll("[data-dm-step]");
+            function markWalkStep(n) {
+              steps.querySelectorAll("span").forEach(s => s.classList.toggle("on", Number(s.dataset.step) === n));
+            }
+            function snippet(t) { const s = (t || "").trim(); return s.length > 90 ? s.slice(0, 90) + "\u2026" : s; }
+            function renderReview() {
+              const wrap = root.querySelector("[data-dm-review]");
+              if (!wrap) return;
+              const rows = [
+                { step: 1, label: "Their message", value: snippet(incomingEl.value) || "Their message" },
+                { step: 2, label: "What you want to say", value: snippet(realityEl.value) || "Nothing added" },
+                { step: 3, label: "Outcome", value: selectedLabel("direction") || "Not set" },
+                { step: 4, label: "How you want to sound", value: selectedLabel("tone") || "Not set" },
+                { step: 5, label: "Persona", value: (PERSONAS[personaId] || PERSONAS.casual).name },
+              ];
+              wrap.innerHTML = "";
+              rows.forEach(r => {
+                const b = document.createElement("button");
+                b.type = "button"; b.className = "dm-review-row";
+                b.innerHTML = "<b></b><span></span>";
+                b.querySelector("b").textContent = r.label;
+                b.querySelector("span").textContent = r.value;
+                b.addEventListener("click", () => { if (r.step <= 4) showWalkStep(r.step); });
+                wrap.appendChild(b);
+              });
+            }
+            function showWalkStep(n) {
+              walkStep = Math.min(5, Math.max(1, n));
+              walkPanels.forEach(p => { p.style.display = Number(p.dataset.dmStep) === walkStep ? "block" : "none"; });
+              markWalkStep(walkStep);
+              if (walkStep === 5) renderReview();
+            }
+            root.querySelectorAll("[data-dm-next]").forEach(b => b.addEventListener("click", () => showWalkStep(walkStep + 1)));
+            root.querySelectorAll("[data-dm-back]").forEach(b => b.addEventListener("click", () => showWalkStep(walkStep - 1)));
+            root.querySelectorAll("[data-dm-skip]").forEach(b => b.addEventListener("click", () => {
+              const g = root.querySelector('[data-dm-chips="tone"]');
+              if (g) g.querySelectorAll(".dm-chip").forEach(c => c.setAttribute("aria-pressed", "false"));
+              showWalkStep(walkStep + 1);
+            }));
+            steps.querySelectorAll("span").forEach(s => s.addEventListener("click", () => showWalkStep(Number(s.dataset.step))));
+            function toggleExpander(btnAttr, bodyAttr) {
+              const btn = root.querySelector("[" + btnAttr + "]");
+              const body = root.querySelector("[" + bodyAttr + "]");
+              if (!btn || !body) return;
+              btn.addEventListener("click", () => {
+                const open = body.style.display === "none";
+                body.style.display = open ? "block" : "none";
+                btn.setAttribute("aria-expanded", String(open));
+                btn.querySelector("span:last-child").textContent = open ? "\u25be" : "\u25b8";
+              });
+            }
+            toggleExpander("data-dm-more", "data-dm-more-body");
+            toggleExpander("data-dm-mood", "data-dm-mood-body");
             root.querySelectorAll("[data-dm-goto]").forEach(b => b.addEventListener("click", () => show(b.dataset.dmGoto)));
             function setScenario(name) {
               if (!SCENARIOS[name]) return;
@@ -1048,7 +1129,7 @@
               incomingEl.value = SCENARIOS[name].incoming;
               realityEl.value = SCENARIOS[name].reality;
               copied.style.display = "none";
-              show("compose");
+              show("compose"); showWalkStep(1);
             }
             root.querySelectorAll("[data-dm-chips]").forEach(group => {
               group.querySelectorAll(".dm-chip").forEach(chip => chip.addEventListener("click", () => {
@@ -1095,8 +1176,7 @@
                 repliesWrap.appendChild(btn);
               });
               views.forEach(v => v.classList.remove("on"));
-              steps.style.display = "flex";
-              steps.querySelectorAll("span").forEach(s => s.classList.toggle("on", s.dataset.step === "2"));
+              steps.style.display = "none";
               loading.style.display = "block";
               setTimeout(() => show("replies"), 650);
             }

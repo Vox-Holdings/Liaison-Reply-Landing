@@ -351,7 +351,7 @@
           <div class="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-sky-500/30 hover:bg-white/[0.04] transition-all duration-300">
             <span class="text-sm font-bold uppercase tracking-widest text-sky-400">Step 3</span>
             <h3 class="mt-3 text-2xl font-bold">Edit with coaching, then copy</h3>
-              <p class="mt-3 text-sm leading-relaxed text-white/60">Pick a draft and edit it with live strategic coaching. Aligned means your edits still track the strategy. Warning flags a line that could damage it. Copy the final wording yourself. Liaison Reply never sends anything for you.</p>
+              <p class="mt-3 text-sm leading-relaxed text-white/60">Pick a draft and edit it with live strategic coaching. Aligned means your edits still track the strategy. Caution flags a line that sounds defensive. Warning flags a line that could damage it. Copy the final wording yourself. Liaison Reply never sends anything for you.</p>
           </div>
         </div>
         <div class="mt-16 wf-strip" data-reveal>
@@ -573,12 +573,15 @@
           #interactive-demo .dm-badge{display:inline-block;border-radius:999px;padding:.32rem .8rem;font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
           #interactive-demo .dm-badge.ok{background:#34d399;color:#052e22}
           #interactive-demo .dm-badge.warn{background:#fda4af;color:#4c0519}
+          #interactive-demo .dm-badge.caution{background:#fcd34d;color:#451a03}
           #interactive-demo .dm-coach{margin-top:16px;border-radius:16px;padding:16px;border:1px solid rgba(52,211,153,.35);background:rgba(52,211,153,.06)}
           #interactive-demo .dm-coach.warn{border-color:rgba(251,113,133,.35);background:rgba(251,113,133,.06)}
+          #interactive-demo .dm-coach.caution{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.06)}
           #interactive-demo .dm-coach h4{margin:10px 0 0;color:#fff;font-size:.98rem;line-height:1.5}
           #interactive-demo .dm-coach ul{margin:10px 0 0;padding-left:18px;color:rgba(255,255,255,.65);line-height:1.6;font-size:.88rem}
           #interactive-demo .dm-notes{margin-top:14px;border-top:1px solid rgba(255,255,255,.09);padding-top:12px}
           #interactive-demo .dm-notes .dm-flag{color:#fda4af;font-size:.7rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-left:6px}
+          #interactive-demo .dm-notes .dm-flag.caution{color:#fcd34d}
           #interactive-demo .dm-notes p{color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.6;margin:6px 0 0}
           #interactive-demo .dm-notes .dm-try{color:rgba(255,255,255,.85);font-style:italic}
           #interactive-demo .dm-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
@@ -756,12 +759,12 @@
                   <ul data-dm-coach-list><li>The draft is staying focused, controlled, and close to the intent of the selected card.</li></ul>
                   <div class="dm-notes" data-dm-notes style="display:none">
                     <p class="dm-eyebrow">Phrase notes</p>
-                    <p><span data-dm-note-phrase>“Honestly, it's not my fault you weren't around.”</span><span class="dm-flag">Warning</span></p>
+                    <p><span data-dm-note-phrase>“Honestly, it's not my fault you weren't around.”</span><span class="dm-flag" data-dm-note-flag>Warning</span></p>
                     <p data-dm-note-why>This phrase sounds defensive and could be read as shifting blame to your manager for their absence.</p>
                     <p class="dm-try" data-dm-note-try>Try: Consider removing this sentence entirely. The original draft already explains the situation clearly and offers a solution.</p>
                   </div>
                 </div>
-                <div style="margin-top:16px;text-align:right"><button class="dm-ghost" data-dm-risk type="button">Add a risky line</button></div>
+                <div style="margin-top:16px;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px"><button class="dm-ghost" data-dm-good type="button">Add a good line</button><button class="dm-ghost" data-dm-defensive type="button">Add a defensive line</button><button class="dm-ghost" data-dm-risk type="button">Add a risky line</button></div>
                 <div class="dm-actions" style="display:block">
                   <button class="dm-cta" data-dm-copy type="button">Confirm &amp; Copy</button>
                   <button class="dm-ghost" data-dm-goto="replies" type="button" style="width:100%;margin-top:10px;padding:.85rem 1rem">Cancel</button>
@@ -836,6 +839,13 @@
                 notePhrase: "Honestly, it's not my fault you weren't around.",
                 noteWhy: "This phrase sounds defensive and could be read as shifting blame to your manager for their absence.",
                 noteTry: "Consider removing this sentence entirely. The original draft already explains the situation clearly and offers a solution.",
+                good: " I'll bring the client thread so you can see exactly what they asked for.",
+                defensive: " I just want to be clear I wasn't trying to go around you.",
+                cautionHead: "That sentence defends you before she has accused you of anything, which makes a simple fix sound like a bigger deal than it is.",
+                cautionBullets: ["It answers an accusation nobody made.", "It shifts the focus from the fix to your intentions."],
+                cautionNotePhrase: "I just want to be clear I wasn't trying to go around you.",
+                cautionNoteWhy: "It reads as self-defense. She asked for a review, not an explanation of your motives, and defending the motive makes the miss look bigger.",
+                cautionNoteTry: "Cut it. The apology and the plan already say you take it seriously; the extra sentence only adds doubt.",
                 sets: {
                   "De-escalate": S("The suggested responses aim to de-escalate the situation by taking responsibility (where appropriate), providing context, and showing a willingness to collaborate and learn, aligning with your goal to avoid sounding defensive.",
                     "Hey, absolutely. I sent it because the client asked for it early and you were out. I'm sorry it landed without your review. Can we go through it together first thing?",
@@ -872,6 +882,13 @@
                 notePhrase: "Honestly, you're overreacting about one night.",
                 noteWhy: "She is not upset about one night. She named a pattern, and this tells her the pattern is in her head.",
                 noteTry: "Consider removing this sentence entirely. Naming the pattern yourself is what makes the rest believable.",
+                good: " I'll text you by 5 on Thursday so you know it's real.",
+                defensive: " I am not trying to start a fight.",
+                cautionHead: "Adding \"I am not trying to start a fight\" might make the other person feel like you're already assuming they're looking for one, which could escalate things.",
+                cautionBullets: ["Can sound defensive", "May escalate the conversation"],
+                cautionNotePhrase: "I am not trying to start a fight.",
+                cautionNoteWhy: "It assumes she is looking for a fight before she has said anything of the kind, and that assumption is what can start one.",
+                cautionNoteTry: "Cut it and let the plan do the work. The Thursday booking is the proof, not a disclaimer about fighting.",
                 sets: {
                   "De-escalate": S("The suggested responses aim to de-escalate by answering the pattern, not just tonight: name that this has happened before, own the silence, and give her a concrete plan instead of another vague promise.",
                     "You're right, and it's not just tonight. I did the same thing last Friday. Work ran late and instead of texting you I just froze, which is worse. I'm sorry. Can I take you out Thursday and actually put it in my calendar this time?",
@@ -908,6 +925,13 @@
                 notePhrase: "it feels like the goalposts keep moving so the milestone doesn't have to be paid",
                 noteWhy: "This reads as an accusation of bad faith. A client who was merely disorganized now has something real to push back on.",
                 noteTry: "Point at the contract instead: the scope already covers two rounds, so round three is a change order. Same firmness, no accusation.",
+                good: " I'll send the change order with the revisions so finance has everything in one place.",
+                defensive: " I hope you know I'm not trying to be difficult about the money.",
+                cautionHead: "That sentence apologizes for caring about being paid, which hands the client the frame that money is an awkward subject instead of the contract.",
+                cautionBullets: ["It softens a contract point into a personal worry.", "It invites them to treat the milestone as negotiable."],
+                cautionNotePhrase: "I hope you know I'm not trying to be difficult about the money.",
+                cautionNoteWhy: "It frames a contract term as a personal failing. The milestone is due under the agreement; hoping they know you are not difficult makes it sound like you think you are.",
+                cautionNoteTry: "Cut it. The change order and the Friday date already say the same thing without the apology.",
                 sets: {
                   "De-escalate": S("The suggested responses aim to de-escalate while protecting the milestone: agree to look at the notes, and separate the revision question from the payment question so they stop travelling together.",
                     "Happy to look at the notes. One thing worth separating: the contract has the milestone releasing on the second round, and we're at three. Can we release the milestone as agreed and treat this round as a small change order? Keeps finance clean and me on Friday.",
@@ -944,6 +968,13 @@
                 notePhrase: "you always believe her version before you ask me",
                 noteWhy: "Even with some history behind it, 'always' makes it a verdict about her, and the Sunday plan gets lost.",
                 noteTry: "Correct the relay and stop there: you are coming, you will be late, you will bring dessert. Facts travel better than grievances.",
+                good: " I'll text in the family chat that morning so nobody has to relay anything.",
+                defensive: " I'm not saying you did it on purpose, I'm just saying that's how it came across.",
+                cautionHead: "'I'm not saying you did it on purpose' still says it, just with a disclaimer in front, and your mom will hear the accusation, not the disclaimer.",
+                cautionBullets: ["It reopens the blame question the rest of the draft closed.", "It makes her defend how she heard it instead of hearing the plan."],
+                cautionNotePhrase: "I'm not saying you did it on purpose, I'm just saying that's how it came across.",
+                cautionNoteWhy: "The disclaimer doesn't soften the charge; it delivers it. The Sunday plan gets lost behind a debate about intent.",
+                cautionNoteTry: "Cut it. 'I'm coming, I'll be late, I'm bringing pie' already corrects the relay without assigning blame.",
                 sets: {
                   "De-escalate": S("The suggested responses aim to de-escalate by fixing the relay error first and leading with the plan, so your mom hears 'he's coming' before anything else.",
                     "Mom, there's been a mix-up in the relay. I never said I wasn't coming. My shift changed, so I'll be there closer to 2 than 1, and I'm bringing the pie. See you Sunday.",
@@ -980,6 +1011,13 @@
                 notePhrase: "You literally never answered the poll, so that's kind of on you.",
                 noteWhy: "True and unusable. The goal is getting him to the cabin, not winning the group chat record.",
                 noteTry: "Skip the verdict and give him the practical path: there's still a seat and a bed if he wants in.",
+                good: " I'll hold the bed till tomorrow night and text you the details tonight.",
+                defensive: " I'm not trying to guilt-trip anyone, I just wish people would answer the poll.",
+                cautionHead: "That sentence answers his hurt with a counter-complaint about the poll, which turns an open door back into a score-keeping exchange.",
+                cautionBullets: ["It trades his 'you left me out' for your 'you never answered.'", "It makes him defend the poll instead of deciding whether he's coming."],
+                cautionNotePhrase: "I'm not trying to guilt-trip anyone, I just wish people would answer the poll.",
+                cautionNoteWhy: "'I'm not trying to' followed by the complaint is still the complaint. He hears the poll lecture, not the invitation.",
+                cautionNoteTry: "Cut it. The bed offer is the whole message; the poll point is already settled by the booking.",
                 sets: {
                   "De-escalate": S("The suggested responses aim to de-escalate by making room for the feeling first, then showing him the open door: the cabin still has space and he is wanted there.",
                     "Man, nobody cut you out. The poll sat there and your name was the one I kept waiting on. There's still a bed at the cabin if you want in; say the word and I'll add you to the booking.",
@@ -1016,6 +1054,13 @@
                 notePhrase: "calling this a pattern is a stretch",
                 noteWhy: "You may be right on the facts, but 'pattern' is the landlord's framing for the file, and fighting the word reads as not taking it seriously.",
                 noteTry: "Answer the prevention question directly: guest spoken to, TV moved off the shared wall, quiet hours after 10. Prevention closes files; arguments open them.",
+                good: " I'll put the prevention plan in writing today so you have it on file.",
+                defensive: " I hope this doesn't come across as me not taking it seriously.",
+                cautionHead: "That sentence worries out loud about how you look, which tells the landlord you are managing impressions instead of the problem.",
+                cautionBullets: ["It asks for reassurance instead of giving it.", "It makes a settled prevention plan sound uncertain."],
+                cautionNotePhrase: "I hope this doesn't come across as me not taking it seriously.",
+                cautionNoteWhy: "Hoping you don't look careless puts the idea in the room. The prevention plan already proves you take it seriously; the hedge only raises the question.",
+                cautionNoteTry: "Cut it. The plan and the apology already show seriousness; asking not to be misread adds nothing but doubt.",
                 sets: {
                   "De-escalate": S("The suggested responses aim to de-escalate by taking the complaint seriously, explaining the one loud night without excuses, and giving a prevention plan in writing.",
                     "Thank you for telling me directly. The loud night was my brother staying over; his TV was up while I was on a night shift, and I've spoken to him. The TV is now off the shared wall and we keep things down after 10. I take this seriously and don't want a third.",
@@ -1191,42 +1236,70 @@
             const list = root.querySelector("[data-dm-coach-list]");
             const notes = root.querySelector("[data-dm-notes]");
             const riskBtn = root.querySelector("[data-dm-risk]");
+            const goodBtn = root.querySelector("[data-dm-good]");
+            const defBtn = root.querySelector("[data-dm-defensive]");
+            const noteFlag = root.querySelector("[data-dm-note-flag]");
             const copied = root.querySelector("[data-dm-copied]");
             const editTag = root.querySelector("[data-dm-edit-tag]");
             const notePhrase = root.querySelector("[data-dm-note-phrase]");
             const noteWhy = root.querySelector("[data-dm-note-why]");
             const noteTry = root.querySelector("[data-dm-note-try]");
-            let risky = false;
+            let added = null;
             function renderCoach() {
               const sc = scenario();
-              if (risky) {
+              coach.classList.remove("warn", "caution");
+              if (added === "risky") {
                 coach.classList.add("warn"); badge.className = "dm-badge warn"; badge.textContent = "Warning";
                 head.textContent = sc.warnHead;
                 list.innerHTML = "";
                 sc.warnBullets.forEach(t => { const li = document.createElement("li"); li.textContent = t; list.appendChild(li); });
+                noteFlag.textContent = "Warning"; noteFlag.className = "dm-flag";
                 notePhrase.textContent = "“" + sc.notePhrase + "”";
                 noteWhy.textContent = sc.noteWhy;
                 noteTry.textContent = "Try: " + sc.noteTry;
-                notes.style.display = "block"; riskBtn.textContent = "Remove the risky line";
+                notes.style.display = "block";
+              } else if (added === "defensive") {
+                coach.classList.add("caution"); badge.className = "dm-badge caution"; badge.textContent = "Caution";
+                head.textContent = sc.cautionHead;
+                list.innerHTML = "";
+                sc.cautionBullets.forEach(t => { const li = document.createElement("li"); li.textContent = t; list.appendChild(li); });
+                noteFlag.textContent = "Caution"; noteFlag.className = "dm-flag caution";
+                notePhrase.textContent = "“" + sc.cautionNotePhrase + "”";
+                noteWhy.textContent = sc.cautionNoteWhy;
+                noteTry.textContent = "Try: " + sc.cautionNoteTry;
+                notes.style.display = "block";
               } else {
-                coach.classList.remove("warn"); badge.className = "dm-badge ok"; badge.textContent = "Aligned";
+                badge.className = "dm-badge ok"; badge.textContent = "Aligned";
                 head.textContent = "Your edits are still tracking with the original strategy and keeping the message tactically clean.";
                 list.innerHTML = "<li>The draft is staying focused, controlled, and close to the intent of the selected card.</li>";
-                notes.style.display = "none"; riskBtn.textContent = "Add a risky line";
+                notes.style.display = "none";
               }
+              goodBtn.textContent = added === "good" ? "Remove the good line" : "Add a good line";
+              defBtn.textContent = added === "defensive" ? "Remove the defensive line" : "Add a defensive line";
+              riskBtn.textContent = added === "risky" ? "Remove the risky line" : "Add a risky line";
             }
             function openEdit(i) {
-              draft.value = current.replies[i].text; risky = false; copied.style.display = "none";
+              draft.value = current.replies[i].text; added = null; copied.style.display = "none";
               editTag.textContent = current.replies[i].tag; renderCoach(); show("edit");
             }
-            riskBtn.addEventListener("click", () => {
-              if (!risky) { draft.value = draft.value.replace(/([.!?])\s*$/, "$1" + scenario().risky); risky = true; }
-              else { draft.value = draft.value.replace(scenario().risky, ""); risky = false; }
+            function toggleAdded(kind) {
+              const sc = scenario();
+              const line = sc[kind];
+              if (added === kind) { draft.value = draft.value.replace(line, ""); added = null; }
+              else {
+                if (added) { draft.value = draft.value.replace(sc[added], ""); }
+                draft.value = draft.value.replace(/([.!?])\s*$/, "$1" + line); added = kind;
+              }
               copied.style.display = "none"; renderCoach();
-            });
+            }
+            goodBtn.addEventListener("click", () => toggleAdded("good"));
+            defBtn.addEventListener("click", () => toggleAdded("defensive"));
+            riskBtn.addEventListener("click", () => toggleAdded("risky"));
             draft.addEventListener("input", () => {
-              const has = draft.value.includes(scenario().risky.trim());
-              if (has !== risky) { risky = has; renderCoach(); }
+              const sc = scenario();
+              const found = ["good", "defensive", "risky"].find(k => draft.value.includes(sc[k].trim()));
+              const next = found || null;
+              if (next !== added) { added = next; renderCoach(); }
             });
             root.querySelector("[data-dm-copy]").addEventListener("click", async () => {
               try { await navigator.clipboard.writeText(draft.value); } catch (e) { draft.select(); document.execCommand && document.execCommand("copy"); }
